@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>周末亲子活动发布</title>
+<style>
+  :root{
+    --green:#2f7a55;
+    --green-light:#e8f4ec;
+    --green-mid:#4fa87a;
+    --ink:#22312b;
+    --ink-soft:#5d6d66;
+    --line:#e2ece6;
+    --card:#ffffff;
+    --sun:#f0a020;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif;
+    background:linear-gradient(180deg,#f3f9f4 0%,#fbf9f2 100%);
+    background-attachment:fixed;
+    color:var(--ink);
+    line-height:1.7;
+    padding:0 0 48px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 16px;}
+
+  /* ── 页头 ── */
+  header{text-align:center;padding:44px 16px 28px;}
+  header .kicker{
+    display:inline-block;font-size:13px;letter-spacing:2px;color:var(--green-mid);
+    border:1px solid var(--green-mid);border-radius:999px;padding:3px 14px;margin-bottom:14px;
+  }
+  header h1{font-size:28px;font-weight:700;letter-spacing:1px;}
+  header p{color:var(--ink-soft);font-size:15px;margin-top:8px;}
+
+  /* ── 快速导航 ── */
+  .nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:26px;}
+  .nav a{
+    text-decoration:none;font-size:14px;color:var(--green);background:var(--green-light);
+    border-radius:999px;padding:6px 14px;transition:.2s;
+  }
+  .nav a:hover{background:var(--green);color:#fff;}
+
+  /* ── 活动卡片 ── */
+  .card{
+    background:var(--card);border-radius:18px;padding:26px 22px 24px;margin-bottom:22px;
+    box-shadow:0 2px 18px rgba(47,122,85,.08);border:1px solid var(--line);
+    scroll-margin-top:16px;
+  }
+  .card h2{font-size:21px;font-weight:700;line-height:1.45;margin-bottom:4px;}
+  .badge{
+    display:inline-block;font-size:12px;color:#fff;background:var(--green-mid);
+    border-radius:6px;padding:1px 9px;margin-bottom:10px;letter-spacing:1px;
+  }
+  .divider{height:1px;background:var(--line);margin:16px 0;}
+
+  .info{display:grid;gap:10px;}
+  .info-row{display:flex;gap:10px;font-size:15px;align-items:flex-start;}
+  .info-row .ic{flex:0 0 22px;text-align:center;line-height:1.7;}
+  .info-row .lb{flex:0 0 46px;color:var(--ink-soft);}
+  .info-row .vl{flex:1;font-weight:500;}
+
+  /* ── 地图 ── */
+  .map-box{border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  .map-box img{width:100%;display:block;background:var(--green-light);}
+  .map-addr{
+    display:flex;gap:8px;align-items:flex-start;font-size:14px;
+    padding:11px 13px;background:#f7faf8;color:var(--ink);
+  }
+  .map-addr .ic{flex:0 0 auto;}
+  .map-btns{display:flex;gap:8px;padding:0 13px 13px;background:#f7faf8;flex-wrap:wrap;}
+  .map-btns a,.map-btns button{
+    flex:1;min-width:96px;text-align:center;text-decoration:none;cursor:pointer;
+    font-size:14px;font-family:inherit;padding:9px 6px;border-radius:9px;
+    border:1px solid var(--green-mid);background:#fff;color:var(--green);transition:.2s;
+  }
+  .map-btns a.primary{background:var(--green);border-color:var(--green);color:#fff;}
+  .map-btns a:hover,.map-btns button:hover{opacity:.85;}
+
+  .weather{
+    background:#fff8ec;border:1px solid #f6e2bd;border-radius:12px;
+    padding:10px 14px;font-size:14px;color:#8a6320;margin-top:14px;
+    display:flex;gap:8px;align-items:flex-start;
+  }
+  .weather .ic{flex:0 0 auto;}
+
+  .sec-title{font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+  .sec-title::before{content:"";width:3px;height:14px;background:var(--green-mid);border-radius:2px;}
+
+  /* ── 时间轴 ── */
+  .timeline{position:relative;padding-left:6px;}
+  .tl-item{position:relative;display:flex;gap:14px;padding-bottom:14px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:"";position:absolute;left:5px;top:16px;bottom:0;width:1px;background:var(--line);
+  }
+  .tl-item:last-child::before{display:none;}
+  .tl-dot{
+    flex:0 0 11px;height:11px;width:11px;border-radius:50%;background:#fff;
+    border:2px solid var(--green-mid);margin-top:8px;position:relative;z-index:1;
+  }
+  .tl-time{flex:0 0 52px;font-weight:700;color:var(--green);font-size:15px;font-variant-numeric:tabular-nums;}
+  .tl-text{flex:1;font-size:15px;}
+
+  /* ── 照片 ── */
+  .photos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  .photos .ph{
+    position:relative;aspect-ratio:1/1;border-radius:10px;overflow:hidden;
+    background:var(--green-light);cursor:pointer;
+  }
+  .photos .ph img{width:100%;height:100%;object-fit:cover;display:block;}
+  .photos .ph.empty{
+    border:1.5px dashed #b9d6c5;background:#f6fbf8;cursor:default;
+    display:flex;align-items:center;justify-content:center;
+    color:#9dbaa9;font-size:12px;text-align:center;padding:6px;
+  }
+
+  .notes{
+    background:#f7faf8;border-radius:12px;padding:12px 14px;font-size:14px;
+    color:var(--ink-soft);white-space:pre-line;
+  }
+
+  footer{text-align:center;color:var(--ink-soft);font-size:13px;padding-top:12px;line-height:2;}
+
+  /* ── 图片放大 ── */
+  #lightbox{
+    position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;
+    align-items:center;justify-content:center;z-index:99;padding:20px;
+  }
+  #lightbox.on{display:flex;}
+  #lightbox img{max-width:100%;max-height:100%;border-radius:8px;}
+
+  @media (max-width:420px){
+    header h1{font-size:24px;}
+    .card{padding:22px 16px;}
+    .info-row .lb{flex:0 0 42px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker" id="pageKicker"></div>
+  <h1 id="pageTitle"></h1>
+  <p id="pageSubtitle"></p>
+</header>
+
+<div class="wrap">
+  <div class="nav" id="nav"></div>
+  <div id="list"></div>
+  <footer id="pageFooter"></footer>
+</div>
+
+<div id="lightbox" onclick="this.classList.remove('on')"><img id="lightboxImg" alt=""></div>
+
+<script>
+/* ==========================================================
+   ①  页面信息（改这里）
+   ========================================================== */
+const PAGE = {
+  kicker:   "周末去哪儿",
+  title:    "8月亲子户外活动",
+  subtitle: "以下几个活动任选，欢迎带娃一起来～",
+  footer:   "报名请联系：____\n最终以出发前一天群通知为准",
+
+  // 可选：高德「Web服务」Key。留空则地图区只显示地址+跳转按钮；
+  // 填上后，每个活动会多出一张静态地图缩略图（前提是该活动填了 lnglat）
+  amapKey:  ""
+};
+
+/* ==========================================================
+   ②  活动列表（照着下面这一段复制，就能加第二个、第三个活动）
+       · weather / notes 不需要就写成 ""，整块会自动隐藏
+       · photos 里写图片文件名，图片和本网页放同一个文件夹即可
+         例：["1.jpg","2.jpg","3.jpg"]；还没照片就留空数组 []
+   ========================================================== */
+const ACTIVITIES = [
+  {
+    emoji:    "🌳",
+    title:    "鹏飞公园亲子自然探索活动",
+    date:     "2026年8月8日 星期六",
+    place:    "深圳鹏飞公园",
+    audience: "3-10岁儿童家庭",
+    map: {
+      address: "深圳市大鹏新区潮歌巷19号（金沙湾国际乐园内）",
+      keyword: "鹏飞公园",          // 在高德里搜索用的名字
+      city:    "深圳",
+      lnglat:  ""                   // 可选，见文件最下方【地图说明】；填了才有精准定位和一键导航
+    },
+    weather:  "8月8日周六：多云间晴，局地有雷阵雨，27~35℃，西风3-4级。天气炎热，请备好防晒、驱蚊水和充足饮用水。",
+    schedule: [
+      ["09:00", "集合"],
+      ["09:30", "自然观察"],
+      ["11:00", "亲子游戏"],
+      ["12:00", "午餐"]
+    ],
+    // 照片放进仓库的 photos 文件夹后，这里填 ["photos/1.jpg","photos/2.jpg","photos/3.jpg"]
+    photos:   [],
+    notes:    ""
+  }
+
+  /* ── 复制下面这段，粘到上一个活动的 } 后面（记得前面加逗号）──
+  ,{
+    emoji:    "⛰️",
+    title:    "XX 公园亲子徒步活动",
+    date:     "2026年8月15日 星期六",
+    place:    "深圳 XX 公园",
+    audience: "3-10岁儿童家庭",
+    map: {
+      address: "深圳市 XX 区 XX 路 X 号",
+      keyword: "XX 公园",
+      city:    "深圳",
+      lnglat:  ""
+    },
+    weather:  "",
+    schedule: [
+      ["09:00", "集合"],
+      ["09:30", "徒步出发"],
+      ["11:00", "亲子游戏"],
+      ["12:00", "午餐"]
+    ],
+    photos:   [],
+    notes:    ""
+  }
+  ──────────────────────────────────────────────────────── */
+];
+
+/* ==========================================================
+   ③  以下为渲染逻辑，一般不用改
+   ========================================================== */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const q   = s => encodeURIComponent(s || "");
+
+/* 高德跳转链接：填了经纬度就精准打点，没填就用名称在高德里搜索 */
+function amapView(m, fallbackName){
+  const name = m.keyword || fallbackName;
+  return m.lnglat
+    ? `https://uri.amap.com/marker?position=${q(m.lnglat)}&name=${q(name)}&coordinate=gaode&callnative=1&src=活动发布`
+    : `https://uri.amap.com/search?keyword=${q(name)}&city=${q(m.city || "")}&callnative=1&src=活动发布`;
+}
+function amapNavi(m, fallbackName){
+  const name = m.keyword || fallbackName;
+  return m.lnglat
+    ? `https://uri.amap.com/navigation?to=${q(m.lnglat + "," + name)}&mode=car&policy=1&coordinate=gaode&callnative=1&src=活动发布`
+    : amapView(m, fallbackName);
+}
+function amapStatic(m){
+  if(!PAGE.amapKey || !m.lnglat) return "";
+  return `https://restapi.amap.com/v3/staticmap?location=${q(m.lnglat)}&zoom=15&size=700*300&scale=2`
+       + `&markers=large,,A:${q(m.lnglat)}&key=${q(PAGE.amapKey)}`;
+}
+function copyAddr(btn, text){
+  const done = () => { const o = btn.textContent; btn.textContent = "✅ 已复制"; setTimeout(() => btn.textContent = o, 1600); };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(() => fallback());
+  } else fallback();
+  function fallback(){
+    const t = document.createElement("textarea");
+    t.value = text; t.style.position = "fixed"; t.style.opacity = "0";
+    document.body.appendChild(t); t.select();
+    try{ document.execCommand("copy"); done(); }catch(e){ prompt("请手动复制地址：", text); }
+    document.body.removeChild(t);
+  }
+}
+
+document.getElementById("pageKicker").textContent   = PAGE.kicker;
+document.getElementById("pageTitle").textContent    = PAGE.title;
+document.getElementById("pageSubtitle").textContent = PAGE.subtitle;
+document.getElementById("pageFooter").innerHTML     = esc(PAGE.footer).replace(/\n/g, "<br>");
+
+// 只有一个活动时不显示顶部导航
+document.getElementById("nav").innerHTML = ACTIVITIES.length > 1
+  ? ACTIVITIES.map((a, i) => `<a href="#act${i}">${a.emoji} ${esc(a.title.slice(0, 10))}</a>`).join("")
+  : "";
+
+document.getElementById("list").innerHTML = ACTIVITIES.map((a, i) => `
+  <section class="card" id="act${i}">
+    ${ACTIVITIES.length > 1 ? `<div class="badge">活动 ${i + 1}</div>` : ""}
+    <h2>${a.emoji} ${esc(a.title)}</h2>
+
+    <div class="divider"></div>
+
+    <div class="info">
+      <div class="info-row"><span class="ic">📅</span><span class="lb">时间</span><span class="vl">${esc(a.date)}</span></div>
+      <div class="info-row"><span class="ic">📍</span><span class="lb">地点</span><span class="vl">${esc(a.place)}</span></div>
+      <div class="info-row"><span class="ic">👨‍👩‍👧</span><span class="lb">适合</span><span class="vl">${esc(a.audience)}</span></div>
+    </div>
+
+    ${a.map ? `
+      <div class="divider"></div>
+      <div class="sec-title">🗺 位置导航</div>
+      <div class="map-box">
+        ${amapStatic(a.map) ? `<a href="${esc(amapView(a.map, a.place))}" target="_blank" rel="noopener">
+            <img src="${esc(amapStatic(a.map))}" alt="${esc(a.place)}地图" loading="lazy"
+                 onerror="this.style.display='none'"></a>` : ""}
+        <div class="map-addr"><span class="ic">📍</span><span>${esc(a.map.address || a.place)}</span></div>
+        <div class="map-btns">
+          <a class="primary" href="${esc(amapNavi(a.map, a.place))}" target="_blank" rel="noopener">🚗 高德导航</a>
+          <a href="${esc(amapView(a.map, a.place))}" target="_blank" rel="noopener">🔍 地图查看</a>
+          <button type="button" onclick="copyAddr(this, '${esc(a.map.address || a.place).replace(/'/g, "\\'")}')">📋 复制地址</button>
+        </div>
+      </div>` : ""}
+
+    ${a.weather ? `<div class="weather"><span class="ic">☀️</span><span>${esc(a.weather)}</span></div>` : ""}
+
+    ${a.schedule && a.schedule.length ? `
+      <div class="divider"></div>
+      <div class="sec-title">活动安排</div>
+      <div class="timeline">
+        ${a.schedule.map(([t, txt]) => `
+          <div class="tl-item">
+            <span class="tl-dot"></span>
+            <span class="tl-time">${esc(t)}</span>
+            <span class="tl-text">${esc(txt)}</span>
+          </div>`).join("")}
+      </div>` : ""}
+
+    ${a.notes ? `
+      <div class="divider"></div>
+      <div class="sec-title">温馨提示</div>
+      <div class="notes">${esc(a.notes)}</div>` : ""}
+
+    <div class="divider"></div>
+    <div class="sec-title">📷 往期照片</div>
+    <div class="photos">
+      ${(a.photos && a.photos.length ? a.photos : ["", "", ""]).map(src => src
+        ? `<div class="ph"><img src="${esc(src)}" alt="往期照片" loading="lazy"
+             onclick="openImg(this.src)"
+             onerror="this.parentNode.className='ph empty';this.parentNode.textContent='未找到\n${esc(src)}'"></div>`
+        : `<div class="ph empty">待添加照片</div>`).join("")}
+    </div>
+  </section>`).join("");
+
+function openImg(src){
+  document.getElementById("lightboxImg").src = src;
+  document.getElementById("lightbox").classList.add("on");
+}
+</script>
+
+<!--
+==========================================================
+ 【地图说明】
+ 1) 默认不用做任何配置：按钮会用「名称 + 城市」在高德里搜索，
+    手机上点「高德导航」会直接唤起高德APP。
+
+ 2) 想要更精准（打点/一键路线规划），给该活动填上 lnglat：
+    · 电脑打开 https://lbs.amap.com/tools/picker （高德官方坐标拾取器）
+    · 搜索「鹏飞公园」，点地图上的位置，复制下方的经纬度
+    · 粘进 map 的 lnglat，格式：「114.540600,22.601500」（先经度后纬度，用英文逗号）
+
+ 3) 想在页面里直接显示一张地图缩略图：
+    · 到 https://console.amap.com 注册，创建应用 → 添加 Key → 服务平台选「Web服务」
+    · 把 Key 填进上面 PAGE.amapKey，并确保该活动填了 lnglat
+    （高德不允许用 iframe 内嵌完整地图，所以这里用的是官方静态地图图片）
+==========================================================
+-->
+</body>
+</html>

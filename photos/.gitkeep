@@ -1,0 +1,1 @@
+往期活动照片放这个文件夹里，然后在 index.html 的 photos 字段填 "photos/文件名.jpg"
