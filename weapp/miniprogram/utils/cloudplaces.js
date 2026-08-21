@@ -190,10 +190,20 @@ function whoami(force) {
   }
   return call('whoami').then((r) => {
     if (r && r.ok) {
-      try {
-        wx.setStorageSync(WHOAMI_KEY, r);
-      } catch (e) {
-        // 忽略
+      /**
+       * 只缓存「云函数已经配好 ADMIN_OPENID」的结果。
+       *
+       * 还没配的时候必须每次都重新问：否则作者按引导把 openid 配进云函数之后，
+       * 客户端会一直拿着旧的「未配置」结果，页面上那块引导不消失、
+       * 发布按钮也不出现，看起来像配置没生效。
+       * 这是一次性的配置阶段，多调几次云函数无所谓。
+       */
+      if (r.configured) {
+        try {
+          wx.setStorageSync(WHOAMI_KEY, r);
+        } catch (e) {
+          // 忽略
+        }
       }
       return r;
     }
