@@ -66,6 +66,15 @@
       <text class="item__right">{{checkinCount}} ›</text>
     </view>
 
+    <view class="item" bindtap="onSpots">
+      <text class="item__emoji">📍</text>
+      <view class="item__text">
+        <view class="item__title">我的地点</view>
+        <view class="item__desc">自己发现的地方，只存在这台手机上</view>
+      </view>
+      <text class="item__right">{{spotCount ? spotCount + ' ›' : '›'}}</text>
+    </view>
+
     <view class="item" bindtap="onClearData">
       <text class="item__emoji">🧹</text>
       <view class="item__text">

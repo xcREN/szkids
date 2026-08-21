@@ -6,6 +6,7 @@
  * 想上云同步时再补登录，改动集中在 utils/store.js。
  */
 const store = require('../../utils/store.js');
+const draft = require('../../utils/draft.js');
 const { groupForAge, AGE_GROUPS } = require('../../data/categories.js');
 
 /**
@@ -30,6 +31,7 @@ Page({
     favCount: 0,
     checkinCount: 0,
     planCount: 0,
+    spotCount: 0,
     contact: CONTACT,
     version: 'v1.0.1 · Phase 5'
   },
@@ -55,7 +57,8 @@ Page({
       children: children,
       favCount: store.getFavorites().length,
       checkinCount: checkins.length,
-      planCount: store.getPlans().filter((p) => p.items.length).length
+      planCount: store.getPlans().filter((p) => p.items.length).length,
+      spotCount: draft.count()
     });
   },
 
@@ -116,6 +119,10 @@ Page({
 
   onPlan() {
     wx.navigateTo({ url: '/pages/plan/plan' });
+  },
+
+  onSpots() {
+    wx.navigateTo({ url: '/pages/spots/spots' });
   },
 
   /* ---------------- 联系方式 ---------------- */

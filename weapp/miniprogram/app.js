@@ -53,6 +53,8 @@ App({
       }
     }
     this.ensureLocation();
+    // 公共地点库后台拉一次，失败也不影响：代码包里那 26 条永远可用
+    require('./utils/cloudplaces.js').sync();
   },
 
   /**

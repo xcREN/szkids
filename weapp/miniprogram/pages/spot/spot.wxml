@@ -1,0 +1,201 @@
+<view class="page" wx:if="{{d}}">
+
+  <!-- ---------- 位置：放最上面，因为这是最该在现场做的事 ---------- -->
+  <view class="sec">
+    <view class="sec__title">位置 <text class="req">必填</text></view>
+    <view class="sec__desc">在地图上点一下就是这个地点的位置。放得越大点得越准。</view>
+
+    <map
+      class="picker"
+      latitude="{{mapLat}}"
+      longitude="{{mapLng}}"
+      scale="{{mapScale}}"
+      markers="{{markers}}"
+      show-location="{{true}}"
+      enable-rotate="{{false}}"
+      bindtap="onMapTap"
+    ></map>
+
+    <view class="coord">
+      <text class="coord__v">{{coordText}}</text>
+      <text class="coord__btn" bindtap="onLocate">回到我附近</text>
+    </view>
+  </view>
+
+  <!-- ---------- 基本 ---------- -->
+  <view class="sec">
+    <view class="sec__title">基本</view>
+
+    <view class="f">
+      <text class="f__k">名称 <text class="req">必填</text></text>
+      <input class="f__in" value="{{d.name}}" data-k="name" bindinput="onInput" placeholder="比如：香蜜公园" />
+    </view>
+
+    <view class="f">
+      <text class="f__k">分类</text>
+      <picker mode="selector" range="{{categoryLabels}}" value="{{categoryIndex}}" data-k="category" bindchange="onPick">
+        <view class="f__pick">{{categoryLabels[categoryIndex]}} ▾</view>
+      </picker>
+    </view>
+
+    <view class="f">
+      <text class="f__k">行政区</text>
+      <picker mode="selector" range="{{districts}}" value="{{districtIndex}}" data-k="district" bindchange="onPick">
+        <view class="f__pick">{{districts[districtIndex]}} ▾</view>
+      </picker>
+    </view>
+
+    <view class="f">
+      <text class="f__k">地址</text>
+      <input class="f__in" value="{{d.address}}" data-k="address" bindinput="onInput" placeholder="福田区农园路" />
+    </view>
+  </view>
+
+  <!-- ---------- 现场看得到的 ---------- -->
+  <view class="sec">
+    <view class="sec__title">现场情况</view>
+    <view class="sec__desc">这些站在现场一眼就能确定，正是手机录入比查资料强的地方。</view>
+
+    <view class="f">
+      <text class="f__k">室内 / 户外</text>
+      <view class="segs">
+        <view class="seg {{d.outdoor && !d.indoor ? 'seg--on' : ''}}" data-v="outdoor" bindtap="onEnv">户外</view>
+        <view class="seg {{d.indoor && !d.outdoor ? 'seg--on' : ''}}" data-v="indoor" bindtap="onEnv">室内</view>
+        <view class="seg {{d.indoor && d.outdoor ? 'seg--on' : ''}}" data-v="both" bindtap="onEnv">都有</view>
+      </view>
+    </view>
+
+    <view class="f">
+      <text class="f__k">人均花费（元）</text>
+      <input class="f__in" type="digit" value="{{d.price}}" data-k="price" bindinput="onNumber" placeholder="0 就是免费" />
+    </view>
+
+    <view class="f">
+      <text class="f__k">建议玩多久（小时）</text>
+      <input class="f__in" type="digit" value="{{d.duration}}" data-k="duration" bindinput="onNumber" />
+    </view>
+
+    <view class="f">
+      <text class="f__k">停车</text>
+      <picker mode="selector" range="{{parkingLabels}}" value="{{parkingIndex}}" data-k="parking" bindchange="onPick">
+        <view class="f__pick">{{parkingLabels[parkingIndex]}} ▾</view>
+      </picker>
+    </view>
+
+    <view class="f">
+      <text class="f__k">周末人多吗</text>
+      <picker mode="selector" range="{{crowdLabels}}" value="{{crowdIndex}}" data-k="crowd" bindchange="onPick">
+        <view class="f__pick">{{crowdLabels[crowdIndex]}} ▾</view>
+      </picker>
+    </view>
+
+    <view class="f">
+      <text class="f__k">需要预约</text>
+      <switch checked="{{d.reservation}}" data-k="reservation" bindchange="onToggle" color="#4B7A5A" />
+    </view>
+
+    <text class="f__k" style="margin-top:20rpx">有什么设施</text>
+    <view class="chips">
+      <view
+        wx:for="{{facilities}}"
+        wx:key="key"
+        class="chip {{d[item.key] ? 'chip--on' : ''}}"
+        data-k="{{item.key}}"
+        bindtap="onToggle"
+      >{{item.label}}</view>
+    </view>
+  </view>
+
+  <!-- ---------- 推荐相关 ---------- -->
+  <view class="sec">
+    <view class="sec__title">推荐相关</view>
+    <view class="sec__desc">决定它在「今天去哪」里什么时候被推出来。</view>
+
+    <view class="f">
+      <text class="f__k">适合年龄</text>
+      <view class="age">
+        <input class="age__in" type="number" value="{{d.ageMin}}" data-k="ageMin" bindinput="onNumber" />
+        <text class="age__sep">岁 ~</text>
+        <input class="age__in" type="number" value="{{d.ageMax}}" data-k="ageMax" bindinput="onNumber" />
+        <text class="age__sep">岁</text>
+      </view>
+    </view>
+
+    <text class="f__k" style="margin-top:20rpx">什么天气适合去</text>
+    <view class="chips">
+      <view
+        wx:for="{{weatherList}}"
+        wx:key="key"
+        class="chip {{d.weatherPreset === item.key ? 'chip--on' : ''}}"
+        data-k="{{item.key}}"
+        bindtap="onWeather"
+      >{{item.label}}</view>
+    </view>
+    <view class="sec__desc">选「户外·空旷暴晒」的话，大雨天和高温天就不会推它了。</view>
+
+    <view class="f">
+      <text class="f__k">亲子推荐指数（0-5）</text>
+      <input class="f__in" type="digit" value="{{d.recommendScore}}" data-k="recommendScore" bindinput="onNumber" />
+    </view>
+  </view>
+
+  <!-- ---------- 文字 ---------- -->
+  <view class="sec">
+    <view class="sec__title">怎么描述它</view>
+
+    <view class="f f--col">
+      <text class="f__k">一句话简介</text>
+      <input class="f__in f__in--full" value="{{d.description}}" data-k="description" bindinput="onInput"
+             placeholder="福田中心的大公园，草地开阔，适合放风筝。" />
+    </view>
+
+    <view class="f f--col">
+      <text class="f__k">玩法标签（顿号分隔）</text>
+      <input class="f__in f__in--full" value="{{tagsText}}" data-k="tagsText" bindinput="onInput"
+             placeholder="草地、放风筝、有小溪" />
+    </view>
+
+    <view class="f f--col">
+      <text class="f__k">推荐理由（一行一条，最多 3 条）</text>
+      <textarea class="f__ta" value="{{reasonsText}}" data-k="reasonsText" bindinput="onInput"
+                placeholder="草地大，孩子能撒开跑。&#10;树荫多，夏天也不晒。" />
+    </view>
+
+    <view class="f f--col">
+      <text class="f__k">注意事项</text>
+      <textarea class="f__ta" value="{{d.tips}}" data-k="tips" bindinput="onInput"
+                placeholder="停车场周末容易满，建议早点去。" />
+    </view>
+  </view>
+
+  <!-- ---------- 核实 ---------- -->
+  <view class="verify {{d.verified ? 'verify--on' : ''}}" data-k="verified" bindtap="onToggle">
+    <view class="verify__box">{{d.verified ? '✓' : ''}}</view>
+    <view class="verify__text">
+      <view class="verify__title">我人在现场，以上信息是我亲眼确认的</view>
+      <view class="verify__desc">
+        勾了才会记录核实日期。不勾也能存，只是详情页会写「信息未逐条核实」。
+        <text class="verify__warn">别为了让提示消失而勾它——这行字是给别人看的。</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- ---------- 操作 ---------- -->
+  <view class="acts">
+    <button class="btn" bindtap="onSave">保存到这台手机</button>
+
+    <block wx:if="{{isAdmin}}">
+      <button class="btn btn--cloud" bindtap="onPublish" disabled="{{saving}}">
+        {{d.publishedAt ? '更新公共库' : '发布到公共库（所有人可见）'}}
+      </button>
+      <view class="acts__hint">
+        你是作者，可以把这条发到公共库。普通用户添加的地点只存在自己手机上。
+      </view>
+    </block>
+    <view wx:else class="acts__hint">
+      你添加的地点只存在这台手机上，别人看不到，也不会上传。
+    </view>
+
+    <view wx:if="{{!isNew}}" class="del" bindtap="onDelete">删掉这个地点</view>
+  </view>
+</view>

@@ -12,7 +12,9 @@
     "pages/checkin/checkin",
     "pages/share/share",
     "pages/plan/plan",
-    "pages/place/place"
+    "pages/place/place",
+    "pages/spots/spots",
+    "pages/spot/spot"
   ],
   "window": {
     "navigationBarBackgroundColor": "#FFFFFF",

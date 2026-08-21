@@ -1,0 +1,94 @@
+<view class="page">
+
+  <!-- ---------- 说明：谁能看到什么，一开始就讲清楚 ---------- -->
+  <view class="intro">
+    <view class="intro__title">你添加的地点只存在这台手机上</view>
+    <view class="intro__desc">
+      不会上传，别人看不到。加完立刻出现在地图、搜索和「今天去哪」里，
+      坐标点歪了当场就能发现。
+    </view>
+    <view wx:if="{{isAdmin}}" class="intro__admin">
+      你是作者，每条地点下面多一个「发布到公共库」——发布后所有用户都能看到。
+    </view>
+  </view>
+
+  <!-- ---------- 列表 ---------- -->
+  <view class="sec__head">
+    <text class="sec__title">我的地点 {{list.length ? '· ' + list.length : ''}}</text>
+    <text wx:if="{{list.length}}" class="sec__act" bindtap="onSeeOnMap">在地图上看 ›</text>
+  </view>
+
+  <view wx:if="{{!list.length}}" class="empty">
+    <view class="empty__emoji">📍</view>
+    <view class="empty__title">还没有添加过地点</view>
+    <view class="empty__desc">
+      带孩子出门的时候顺手记一个。站在现场填的信息，
+      比在网上查到的准得多。
+    </view>
+  </view>
+
+  <view
+    wx:for="{{list}}"
+    wx:key="id"
+    class="item"
+    data-id="{{item.id}}"
+    bindtap="onEdit"
+  >
+    <text class="item__emoji">{{item.emoji}}</text>
+    <view class="item__body">
+      <view class="item__top">
+        <text class="item__name">{{item.name}}</text>
+        <text wx:if="{{item.published}}" class="tag tag--cloud">所有人可见</text>
+        <text wx:else class="tag">只有你可见</text>
+      </view>
+      <view class="item__meta">
+        {{item.categoryLabel}} · {{item.district}}
+        <text wx:if="{{item.verified}}" class="item__ok"> · 已现场核实</text>
+        <text wx:else class="item__warn"> · 未核实</text>
+      </view>
+      <view wx:if="{{!item.located}}" class="item__warn">还没点位置，不会出现在地图上</view>
+    </view>
+    <text class="item__arrow">›</text>
+  </view>
+
+  <view class="add" bindtap="onAdd">＋ 添加一个地点</view>
+
+  <!-- ---------- 作者工具 ---------- -->
+  <view wx:if="{{isAdmin}}" class="tools">
+    <view class="tools__title">作者工具</view>
+
+    <view class="tools__row">
+      <view class="tools__k">公共库里的地点</view>
+      <view class="tools__v">{{cloudCount}} 条</view>
+    </view>
+    <view wx:if="{{cloudTip}}" class="tools__tip">{{cloudTip}}</view>
+
+    <view class="tools__btns">
+      <view class="tbtn" bindtap="onRefreshCloud">从云端同步</view>
+      <view class="tbtn" bindtap="onExport">导出成代码</view>
+    </view>
+    <view class="tools__tip">
+      「导出成代码」是把地点沉淀进代码包用的。云环境哪天没了、或者用户没网，
+      代码包里的地点还在——这是兜底，值得定期做一次。
+    </view>
+  </view>
+
+  <!-- ---------- 还没配作者身份时的引导（只在云函数说没配时出现） ---------- -->
+  <view wx:if="{{!configured}}" class="setup">
+    <view class="setup__title">云函数还没配作者 openid</view>
+    <view class="setup__desc">
+      现在谁都发布不了（这是安全的默认值）。把下面这串填进
+      cloudfunctions/places 的 ADMIN_OPENID，或者在云开发控制台给这个云函数
+      配一个同名环境变量，然后重新部署。
+    </view>
+    <view class="setup__id" bindtap="onToggleId">
+      {{showId ? openid : '点这里显示我的 openid'}}
+    </view>
+    <view wx:if="{{showId}}" class="tbtn tbtn--full" bindtap="onCopyId">复制 openid</view>
+  </view>
+
+  <view class="foot">
+    公共库里的地点全部由作者发布，普通用户添加的地点不会公开——
+    所以这个小程序不含用户生成内容。
+  </view>
+</view>

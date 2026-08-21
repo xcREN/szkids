@@ -144,14 +144,54 @@ function sort(list, by) {
   return arr.sort((a, b) => b.recommendScore - a.recommendScore);
 }
 
-/** 取全部原始数据（以后换成云函数请求，只改这一个函数） */
+/**
+ * 取全部地点。三层合并，**同步返回**（九个页面都在同步调它，不能变异步）。
+ *
+ *   1. 内置    代码包里的 26 条，所有人都有，永远可用
+ *   2. 云端    作者发布的公共地点，所有人可见（utils/cloudplaces.js 的本地缓存，
+ *              真正的网络请求由 sync() 在后台做，拿不到就用上次的）
+ *   3. 本地草稿 用户自己在手机上录的（utils/draft.js），**只有本机看得到**
+ *
+ * 后面的覆盖前面的同 id 记录，这带来一个有用的副作用：
+ * **作者用同一个 id 往云端发一条，就能覆盖掉代码包里那条**——
+ * 内置 26 条里哪条信息错了，不用发版就能改。
+ *
+ * 任何一层坏掉都不能连累其他层，所以两处都包了 try。
+ */
 function getAll() {
-  return PLACES;
+  const merged = PLACES.slice();
+  const index = {};
+  merged.forEach((p, i) => { index[p.id] = i; });
+
+  function overlay(list) {
+    list.forEach((p) => {
+      if (!p || !p.id) return;
+      if (index[p.id] === undefined) {
+        index[p.id] = merged.length;
+        merged.push(p);
+      } else {
+        merged[index[p.id]] = p;
+      }
+    });
+  }
+
+  try {
+    overlay(require('./cloudplaces.js').cached());
+  } catch (e) {
+    console.warn('读取云端地点缓存失败', e);
+  }
+  try {
+    const draft = require('./draft.js');
+    overlay(draft.list().map(draft.toPlace));
+  } catch (e) {
+    console.warn('读取本地草稿失败', e);
+  }
+  return merged;
 }
 
 /** 按 id 取一条 */
 function getById(id) {
-  return PLACES.filter((p) => p.id === id)[0] || null;
+  return getAll().filter((p) => p.id === id)[0] || null;
 }
 
 /** 年龄段评分转成星星文案，详情页用 */

@@ -1,0 +1,9 @@
+{
+  "name": "places",
+  "version": "1.0.0",
+  "description": "地点发布：只允许作者本人写入公共地点库",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

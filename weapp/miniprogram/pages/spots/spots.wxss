@@ -1,0 +1,264 @@
+page {
+  background: #F3F1EC;
+}
+
+.page {
+  padding: 24rpx 24rpx 60rpx;
+}
+
+/* ---------------- 说明 ---------------- */
+.intro {
+  padding: 26rpx;
+  border-radius: 20rpx;
+  background: linear-gradient(160deg, #4B7A5A 0%, #3A6248 100%);
+  box-shadow: 0 8rpx 24rpx rgba(58, 98, 72, 0.20);
+}
+
+.intro__title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #fff;
+}
+
+.intro__desc {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.intro__admin {
+  margin-top: 16rpx;
+  padding-top: 14rpx;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.22);
+  font-size: 23rpx;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* ---------------- 分区标题 ---------------- */
+.sec__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 36rpx 0 16rpx;
+}
+
+.sec__title {
+  font-size: 29rpx;
+  font-weight: 600;
+  color: #1E241F;
+}
+
+.sec__act {
+  font-size: 25rpx;
+  color: #3A6248;
+}
+
+/* ---------------- 空状态 ---------------- */
+.empty {
+  padding: 60rpx 40rpx;
+  text-align: center;
+  background: #fff;
+  border-radius: 20rpx;
+}
+
+.empty__emoji {
+  font-size: 64rpx;
+}
+
+.empty__title {
+  margin-top: 16rpx;
+  font-size: 28rpx;
+  color: #555C53;
+}
+
+.empty__desc {
+  margin-top: 10rpx;
+  font-size: 23rpx;
+  line-height: 1.7;
+  color: #9AA096;
+}
+
+/* ---------------- 列表项 ---------------- */
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+  padding: 22rpx;
+  background: #fff;
+  border-radius: 18rpx;
+  box-shadow: 0 4rpx 14rpx rgba(45, 40, 32, 0.06);
+}
+
+.item__emoji {
+  flex: none;
+  width: 64rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+  font-size: 34rpx;
+  background: #F0EEE8;
+  border-radius: 16rpx;
+}
+
+.item__body {
+  flex: 1;
+  min-width: 0;
+  margin-left: 20rpx;
+}
+
+.item__top {
+  display: flex;
+  align-items: center;
+}
+
+.item__name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1E241F;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tag {
+  flex: none;
+  margin-left: 14rpx;
+  padding: 3rpx 14rpx;
+  border-radius: 999rpx;
+  font-size: 20rpx;
+  color: #6C736B;
+  background: #F0EEE8;
+}
+
+.tag--cloud {
+  color: #96593A;
+  background: #F7E9DE;
+}
+
+.item__meta {
+  margin-top: 8rpx;
+  font-size: 23rpx;
+  color: #9AA096;
+}
+
+.item__ok {
+  color: #4B7A5A;
+}
+
+.item__warn {
+  color: #B4503F;
+}
+
+.item__arrow {
+  flex: none;
+  margin-left: 12rpx;
+  font-size: 30rpx;
+  color: #C9CEC6;
+}
+
+/* ---------------- 添加 ---------------- */
+.add {
+  margin-top: 8rpx;
+  height: 96rpx;
+  line-height: 96rpx;
+  text-align: center;
+  border-radius: 18rpx;
+  font-size: 29rpx;
+  font-weight: 600;
+  color: #fff;
+  background: #4B7A5A;
+  box-shadow: 0 6rpx 18rpx rgba(58, 98, 72, 0.22);
+}
+
+/* ---------------- 作者工具 ---------------- */
+.tools,
+.setup {
+  margin-top: 36rpx;
+  padding: 24rpx;
+  background: #fff;
+  border-radius: 20rpx;
+}
+
+.tools__title,
+.setup__title {
+  font-size: 27rpx;
+  font-weight: 600;
+  color: #1E241F;
+}
+
+.tools__row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16rpx;
+  font-size: 25rpx;
+  color: #555C53;
+}
+
+.tools__v {
+  color: #1E241F;
+  font-weight: 600;
+}
+
+.tools__tip,
+.setup__desc {
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  line-height: 1.65;
+  color: #9AA096;
+}
+
+.tools__btns {
+  display: flex;
+  margin-top: 18rpx;
+}
+
+.tools__btns .tbtn + .tbtn {
+  margin-left: 16rpx;
+}
+
+.tbtn {
+  flex: 1;
+  height: 76rpx;
+  line-height: 76rpx;
+  text-align: center;
+  border-radius: 14rpx;
+  font-size: 25rpx;
+  color: #3A6248;
+  background: #E6EDE6;
+}
+
+.tbtn--full {
+  margin-top: 14rpx;
+}
+
+/* ---------------- 首次配置引导 ---------------- */
+.setup {
+  background: #FBF1E2;
+}
+
+.setup__desc {
+  color: #8A7A5E;
+}
+
+.setup__id {
+  margin-top: 14rpx;
+  padding: 16rpx 18rpx;
+  background: #fff;
+  border-radius: 12rpx;
+  font-size: 22rpx;
+  line-height: 1.5;
+  color: #55503F;
+  word-break: break-all;
+  font-family: ui-monospace, Consolas, monospace;
+}
+
+/* ---------------- 页脚 ---------------- */
+.foot {
+  margin-top: 40rpx;
+  font-size: 21rpx;
+  line-height: 1.7;
+  color: #B9BCB2;
+  text-align: center;
+}
