@@ -1,0 +1,115 @@
+.fp {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 200;
+}
+
+.fp__mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(45, 40, 32, 0.45);
+}
+
+.fp__sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 28rpx 28rpx 0 0;
+}
+
+.fp__head {
+  position: relative;
+  padding: 30rpx 28rpx 12rpx;
+  text-align: center;
+}
+
+.fp__title {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.fp__close {
+  position: absolute;
+  right: 28rpx;
+  top: 28rpx;
+  color: #9AA096;
+  font-size: 28rpx;
+}
+
+.fp__body {
+  flex: 1;
+  max-height: 58vh;
+  padding: 0 28rpx;
+}
+
+.fp__sec {
+  padding-top: 28rpx;
+}
+
+.fp__sectitle {
+  font-size: 27rpx;
+  font-weight: 600;
+  color: #1E241F;
+  margin-bottom: 16rpx;
+}
+
+.fp__opts {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fp__opt {
+  margin: 0 16rpx 16rpx 0;
+  padding: 14rpx 26rpx;
+  border-radius: 14rpx;
+  font-size: 25rpx;
+  color: #555C53;
+  background: #F1EFE8;
+}
+
+.fp__opt--on {
+  color: #fff;
+  background: #4B7A5A;
+}
+
+.fp__bodypad {
+  height: 20rpx;
+}
+
+.fp__foot {
+  display: flex;
+  padding: 18rpx 28rpx calc(18rpx + env(safe-area-inset-bottom));
+  border-top: 1rpx solid #EFEDE6;
+}
+
+.fp__btn {
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  border-radius: 999rpx;
+  font-size: 29rpx;
+}
+
+.fp__btn--ghost {
+  width: 200rpx;
+  color: #555C53;
+  background: #F1EFE8;
+  margin-right: 20rpx;
+}
+
+.fp__btn--primary {
+  flex: 1;
+  color: #fff;
+  background: #4B7A5A;
+}

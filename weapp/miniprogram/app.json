@@ -1,0 +1,67 @@
+{
+  "pages": [
+    "pages/map/map",
+    "pages/today/today",
+    "pages/discover/discover",
+    "pages/timeline/timeline",
+    "pages/mine/mine",
+    "pages/search/search",
+    "pages/topic/topic",
+    "pages/child/child",
+    "pages/favorite/favorite",
+    "pages/checkin/checkin",
+    "pages/share/share",
+    "pages/plan/plan",
+    "pages/place/place",
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "深圳亲子地图",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F3F1EC",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#9AA096",
+    "selectedColor": "#3A6248",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/map/map",
+        "text": "地图",
+        "iconPath": "images/tabbar/map.png",
+        "selectedIconPath": "images/tabbar/map-active.png"
+      },
+      {
+        "pagePath": "pages/discover/discover",
+        "text": "发现",
+        "iconPath": "images/tabbar/discover.png",
+        "selectedIconPath": "images/tabbar/discover-active.png"
+      },
+      {
+        "pagePath": "pages/timeline/timeline",
+        "text": "童年地图",
+        "iconPath": "images/tabbar/timeline.png",
+        "selectedIconPath": "images/tabbar/timeline-active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/tabbar/mine.png",
+        "selectedIconPath": "images/tabbar/mine-active.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于计算地点与你的距离，推荐附近适合孩子的去处"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation"
+  ],
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,95 @@
+<view wx:if="{{place}}" class="detail">
+  <!-- 顶部大图；没有实拍图时用分类色块兜底，不放假图 -->
+  <swiper wx:if="{{place.images.length}}" class="hero" indicator-dots="{{place.images.length > 1}}"
+          indicator-color="rgba(255,255,255,.4)" indicator-active-color="#fff" circular>
+    <swiper-item wx:for="{{place.images}}" wx:key="*this">
+      <image class="hero__img" src="{{item}}" mode="aspectFill" />
+    </swiper-item>
+  </swiper>
+  <view wx:else class="hero hero--empty" style="background: {{place.categoryColor}}18">
+    <text class="hero__emoji">{{place.categoryEmoji}}</text>
+    <text class="hero__note">暂无实拍图</text>
+  </view>
+
+  <!-- 名称 + 亲子指数 -->
+  <view class="block">
+    <view class="title">{{place.name}}</view>
+    <view class="subtitle">{{place.district}} · {{place.categoryLabel}}{{place.distanceText ? ' · 直线' + place.distanceText : ''}}</view>
+
+    <view class="score">
+      <text class="score__num">{{place.scoreText}}</text>
+      <text class="score__unit">/ 5</text>
+      <text class="score__label">亲子推荐指数</text>
+    </view>
+
+    <view class="agebox">
+      <text class="agebox__label">👶 推荐年龄</text>
+      <text class="agebox__val">{{place.ageText}}</text>
+    </view>
+
+    <view wx:if="{{visitCount}}" class="visited">
+      🚩 我们来过 {{visitCount}} 次{{lastVisit ? ' · 最近 ' + lastVisit : ''}}
+    </view>
+
+    <view class="tags">
+      <text wx:for="{{place.tags}}" wx:key="*this" class="chip">{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 推荐理由：最多三句 -->
+  <view class="block">
+    <view class="h2">推荐理由</view>
+    <view wx:for="{{place.reasons}}" wx:key="*this" class="reason">· {{item}}</view>
+  </view>
+
+  <!-- 家长最关心的信息：5 秒完成判断 -->
+  <view class="block">
+    <view class="h2">家长最关心的</view>
+    <view class="facts">
+      <view wx:for="{{facts}}" wx:key="text" class="fact">
+        <text class="fact__emoji">{{item.emoji}}</text>
+        <text class="fact__text">{{item.text}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 不同年龄体验 -->
+  <view class="block">
+    <view class="h2">不同年龄体验</view>
+    <view wx:for="{{ageRows}}" wx:key="key" class="row">
+      <text class="row__label">{{item.label}}</text>
+      <text class="row__stars">{{item.stars}}</text>
+    </view>
+  </view>
+
+  <!-- 天气适配 -->
+  <view class="block">
+    <view class="h2">天气适配</view>
+    <view wx:for="{{weatherRows}}" wx:key="label" class="row">
+      <text class="row__label">{{item.label}}</text>
+      <text class="row__stars {{item.bad ? 'row__stars--bad' : ''}}">{{item.stars}}</text>
+    </view>
+  </view>
+
+  <!-- 地址与提醒 -->
+  <view class="block">
+    <view class="h2">地址</view>
+    <view class="addr">{{place.address}}</view>
+    <view class="addr__actions">
+      <view class="btn btn--ghost" bindtap="onNavigate">地图导航</view>
+      <view class="btn btn--ghost" bindtap="onCopyAddress">复制地址</view>
+    </view>
+
+    <view wx:if="{{place.tips}}" class="tips">⚠️ {{place.tips}}</view>
+    <view class="meta">{{place.crowdText}} · 数据来源：{{place.source}} · 最后核实 {{place.lastVerifiedAt}}</view>
+  </view>
+
+  <!-- 底部操作条 -->
+  <view class="bar">
+    <view class="btn {{favorited ? 'btn--on' : 'btn--ghost'}} bar__btn" bindtap="onFavorite">
+      {{favorited ? '已收藏 ♥' : '收藏 ♡'}}
+    </view>
+    <view class="btn btn--primary bar__btn" bindtap="onCheckIn">{{visitCount ? '再记一次' : '我们来过'}}</view>
+  </view>
+  <view class="bar__pad"></view>
+</view>

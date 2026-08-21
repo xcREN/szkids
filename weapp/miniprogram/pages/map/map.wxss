@@ -1,0 +1,196 @@
+page,
+.page {
+  height: 100%;
+}
+
+.map {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------------- 顶部 ---------------- */
+.top {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 20rpx 24rpx 16rpx;
+  /* 顶部渐变，保证地图深色区域上文字也看得清 */
+  background: linear-gradient(180deg, rgba(243, 241, 236, 0.96) 62%, rgba(243, 241, 236, 0));
+}
+
+.top__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76rpx;
+  /* 右上角是微信胶囊按钮，留出空间免得被压住 */
+  padding: 0 200rpx 0 8rpx;
+}
+
+.top__city {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1E241F;
+}
+
+.top__weather {
+  font-size: 24rpx;
+  color: #9AA096;
+}
+
+.search {
+  margin-top: 16rpx;
+  height: 76rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 24rpx;
+  background: #fff;
+  border-radius: 999rpx;
+  box-shadow: 0 6rpx 20rpx rgba(45, 40, 32, 0.10);
+}
+
+.search__icon {
+  font-size: 26rpx;
+  margin-right: 12rpx;
+}
+
+.search__ph {
+  font-size: 27rpx;
+  color: #9AA096;
+}
+
+.chips {
+  margin-top: 16rpx;
+  white-space: nowrap;
+}
+
+.chips__inner {
+  display: inline-flex;
+  padding: 4rpx 2rpx 8rpx;
+}
+
+.chips__inner .fchip + .fchip {
+  margin-left: 14rpx;
+}
+
+.fchip {
+  padding: 12rpx 26rpx;
+  border-radius: 999rpx;
+  font-size: 25rpx;
+  color: #555C53;
+  background: #fff;
+  box-shadow: 0 4rpx 14rpx rgba(45, 40, 32, 0.08);
+}
+
+.fchip--on {
+  background: #4B7A5A;
+  color: #fff;
+}
+
+/* ---------------- 悬浮按钮 ---------------- */
+.fabs {
+  position: absolute;
+  right: 24rpx;
+  bottom: 200rpx;
+  transition: bottom 0.2s ease;
+}
+
+.fabs--up {
+  bottom: 520rpx;
+}
+
+.fab {
+  width: 84rpx;
+  height: 84rpx;
+  line-height: 84rpx;
+  text-align: center;
+  font-size: 36rpx;
+  color: #3A6248;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 6rpx 20rpx rgba(45, 40, 32, 0.16);
+}
+
+/* ---------------- 今天去哪 ---------------- */
+.today {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 116rpx;
+  padding: 18rpx 40rpx;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  color: #fff;
+  background: #4B7A5A;
+  box-shadow: 0 8rpx 24rpx rgba(58, 98, 72, 0.28);
+}
+
+.today--hide {
+  display: none;
+}
+
+/* ---------------- 底部 ---------------- */
+.summary {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 32rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #6C736B;
+}
+
+.summary__tip {
+  color: #9AA096;
+}
+
+.sheet {
+  position: absolute;
+  left: 20rpx;
+  right: 20rpx;
+  bottom: 24rpx;
+}
+
+/* ---------------- 专题 / 搜索横幅 ---------------- */
+.banner {
+  margin-top: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12rpx 24rpx;
+  background: rgba(58, 98, 72, 0.10);
+  border-radius: 999rpx;
+}
+
+.banner__text {
+  flex: 1;
+  font-size: 24rpx;
+  color: #3A6248;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.banner__clear {
+  margin-left: 16rpx;
+  font-size: 23rpx;
+  color: #6C736B;
+}
+
+/* ---------------- 搜索这片区域 ---------------- */
+.region {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 340rpx;
+  padding: 14rpx 32rpx;
+  border-radius: 999rpx;
+  font-size: 25rpx;
+  color: #3A6248;
+  background: #fff;
+  box-shadow: 0 6rpx 20rpx rgba(45, 40, 32, 0.16);
+}

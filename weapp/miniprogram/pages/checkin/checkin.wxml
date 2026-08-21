@@ -1,0 +1,82 @@
+<view wx:if="{{place}}" class="page">
+  <!-- 地点 -->
+  <view class="head">
+    <text class="head__emoji">{{place.categoryEmoji}}</text>
+    <view class="head__text">
+      <view class="head__name">{{place.name}}</view>
+      <view class="head__sub">{{place.district}} · {{place.categoryLabel}}</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="row">
+      <text class="row__label">日期</text>
+      <picker class="row__value" mode="date" value="{{date}}" end="{{today}}" bindchange="onDateChange">
+        <text>{{date}}</text>
+      </picker>
+    </view>
+
+    <view class="row">
+      <text class="row__label">待了多久</text>
+      <picker class="row__value" mode="selector" range="{{hourOptions}}" range-key="label"
+              value="{{hourIndex}}" bindchange="onHourChange">
+        <text>{{hourOptions[hourIndex].label}}</text>
+      </picker>
+    </view>
+
+    <view class="row row--top">
+      <text class="row__label">谁去了</text>
+      <view class="row__value">
+        <view wx:if="{{children.length}}" class="chips">
+          <view wx:for="{{children}}" wx:key="id" class="opt {{item.on ? 'opt--on' : ''}}"
+                data-id="{{item.id}}" bindtap="onChildTap">{{item.name}}</view>
+        </view>
+        <text wx:else class="link" bindtap="onAddChild">还没有孩子资料，点这里添加 ›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 评分 -->
+  <view class="card">
+    <view class="row">
+      <text class="row__label">孩子评分</text>
+      <view class="row__value stars">
+        <text wx:for="{{stars}}" wx:key="*this" class="star {{item <= childRating ? 'star--on' : ''}}"
+              data-n="{{item}}" data-key="childRating" bindtap="onRate">★</text>
+      </view>
+    </view>
+    <view class="row">
+      <text class="row__label">家长评分</text>
+      <view class="row__value stars">
+        <text wx:for="{{stars}}" wx:key="*this" class="star {{item <= parentRating ? 'star--on' : ''}}"
+              data-n="{{item}}" data-key="parentRating" bindtap="onRate">★</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 一句话 -->
+  <view class="card">
+    <view class="h2">今天这一句</view>
+    <textarea class="note" value="{{note}}" maxlength="60" bindinput="onNoteInput"
+              placeholder="比如：今天第一次自己爬上最高的攀爬架。"
+              placeholder-class="ph" auto-height />
+    <view class="counter">{{note.length}}/60</view>
+  </view>
+
+  <!-- 照片 -->
+  <view class="card">
+    <view class="h2">照片</view>
+    <view class="photos">
+      <view wx:for="{{photos}}" wx:key="*this" class="photo">
+        <image class="photo__img" src="{{item}}" mode="aspectFill"
+               data-src="{{item}}" bindtap="onPreviewPhoto" />
+        <view class="photo__del" data-i="{{index}}" catchtap="onRemovePhoto">✕</view>
+      </view>
+      <view wx:if="{{photos.length < 3}}" class="photo photo--add" bindtap="onAddPhoto">＋</view>
+    </view>
+    <view class="muted">最多 3 张，存在本机（小程序本地空间一共 10MB）。</view>
+  </view>
+
+  <view class="btn btn--primary" bindtap="onSave">保存</view>
+  <view wx:if="{{editing}}" class="btn btn--danger" bindtap="onDelete">删除这条记录</view>
+</view>

@@ -1,0 +1,211 @@
+.page {
+  padding: 24rpx 24rpx 40rpx;
+}
+
+/* ---------------- 头像昵称 ---------------- */
+.profile {
+  display: flex;
+  align-items: center;
+  padding: 32rpx 28rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+}
+
+.avatar-btn {
+  width: 112rpx;
+  height: 112rpx;
+  padding: 0;
+  margin: 0 24rpx 0 0;
+  background: transparent;
+  line-height: 1;
+}
+
+.avatar-btn::after {
+  border: none;
+}
+
+.avatar {
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
+  background: #E6EDE6;
+}
+
+.avatar--empty {
+  line-height: 112rpx;
+  text-align: center;
+  font-size: 40rpx;
+  color: #4B7A5A;
+}
+
+.profile__text {
+  flex: 1;
+}
+
+.profile__nick {
+  font-size: 32rpx;
+  font-weight: 600;
+  height: 48rpx;
+}
+
+.ph {
+  color: #9AA096;
+  font-weight: 400;
+}
+
+.profile__desc {
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  color: #B9BCB2;
+}
+
+/* ---------------- 孩子 ---------------- */
+.sec {
+  margin-top: 32rpx;
+}
+
+.sec__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8rpx 16rpx;
+}
+
+.sec__title {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.sec__action {
+  font-size: 26rpx;
+  color: #3A6248;
+}
+
+.kids {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.kid {
+  position: relative;
+  width: 47%;
+  margin: 0 3% 20rpx 0;
+  padding: 24rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  border: 2rpx solid transparent;
+  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+}
+
+.kid--on {
+  border-color: #4B7A5A;
+  background: #E6EDE6;
+}
+
+.kid__row {
+  display: flex;
+  align-items: center;
+}
+
+.kid__name {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.kid__badge {
+  margin-left: 12rpx;
+  padding: 2rpx 12rpx;
+  border-radius: 999rpx;
+  font-size: 20rpx;
+  color: #fff;
+  background: #4B7A5A;
+}
+
+.kid__age {
+  margin-top: 6rpx;
+  font-size: 23rpx;
+  color: #6C736B;
+}
+
+.kid__edit {
+  position: absolute;
+  right: 20rpx;
+  bottom: 20rpx;
+  font-size: 23rpx;
+  color: #3A6248;
+}
+
+.addcard {
+  padding: 32rpx 28rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+}
+
+.addcard__title {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.addcard__desc {
+  margin-top: 8rpx;
+  font-size: 23rpx;
+  color: #9AA096;
+  line-height: 1.7;
+}
+
+/* ---------------- 入口列表 ---------------- */
+.list {
+  margin-top: 32rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 24rpx;
+  border-bottom: 1rpx solid #EFEDE6;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.item__emoji {
+  width: 56rpx;
+  font-size: 32rpx;
+}
+
+.item__text {
+  flex: 1;
+}
+
+.item__title {
+  font-size: 28rpx;
+}
+
+.item__desc {
+  font-size: 23rpx;
+  color: #9AA096;
+}
+
+.item__right {
+  font-size: 25rpx;
+  color: #9AA096;
+}
+
+.item__phase {
+  font-size: 22rpx;
+  color: #B9BCB2;
+}
+
+.foot {
+  margin-top: 40rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #B9BCB2;
+}

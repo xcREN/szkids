@@ -1,310 +1,800 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>周末亲子活动发布</title>
-<style>
-  :root{
-    --green:#2f7a55;
-    --green-light:#e8f4ec;
-    --green-mid:#4fa87a;
-    --ink:#22312b;
-    --ink-soft:#5d6d66;
-    --line:#e2ece6;
-    --card:#ffffff;
-    --sun:#f0a020;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{
-    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif;
-    background:linear-gradient(180deg,#f3f9f4 0%,#fbf9f2 100%);
-    background-attachment:fixed;
-    color:var(--ink);
-    line-height:1.7;
-    padding:0 0 48px;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:680px;margin:0 auto;padding:0 16px;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>周末亲子活动发布</title>
+  <style>
+    :root {
+      --green: #2f7a55;
+      --green-light: #e8f4ec;
+      --green-mid: #4fa87a;
+      --ink: #22312b;
+      --ink-soft: #5d6d66;
+      --line: #e2ece6;
+      --card: #ffffff;
+      --sun: #f0a020;
+    }
 
-  /* ── 页头 ── */
-  header{text-align:center;padding:44px 16px 28px;}
-  header .kicker{
-    display:inline-block;font-size:13px;letter-spacing:2px;color:var(--green-mid);
-    border:1px solid var(--green-mid);border-radius:999px;padding:3px 14px;margin-bottom:14px;
-  }
-  header h1{font-size:28px;font-weight:700;letter-spacing:1px;}
-  header p{color:var(--ink-soft);font-size:15px;margin-top:8px;}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  /* ── 快速导航 ── */
-  .nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:26px;}
-  .nav a{
-    text-decoration:none;font-size:14px;color:var(--green);background:var(--green-light);
-    border-radius:999px;padding:6px 14px;transition:.2s;
-  }
-  .nav a:hover{background:var(--green);color:#fff;}
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      background: linear-gradient(180deg, #f3f9f4 0%, #fbf9f2 100%);
+      background-attachment: fixed;
+      color: var(--ink);
+      line-height: 1.7;
+      padding: 0 0 48px;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  /* ── 活动卡片 ── */
-  .card{
-    background:var(--card);border-radius:18px;padding:26px 22px 24px;margin-bottom:22px;
-    box-shadow:0 2px 18px rgba(47,122,85,.08);border:1px solid var(--line);
-    scroll-margin-top:16px;
-  }
-  .card h2{font-size:21px;font-weight:700;line-height:1.45;margin-bottom:4px;}
-  .badge{
-    display:inline-block;font-size:12px;color:#fff;background:var(--green-mid);
-    border-radius:6px;padding:1px 9px;margin-bottom:10px;letter-spacing:1px;
-  }
-  .divider{height:1px;background:var(--line);margin:16px 0;}
+    .wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
 
-  .info{display:grid;gap:10px;}
-  .info-row{display:flex;gap:10px;font-size:15px;align-items:flex-start;}
-  .info-row .ic{flex:0 0 22px;text-align:center;line-height:1.7;}
-  .info-row .lb{flex:0 0 46px;color:var(--ink-soft);}
-  .info-row .vl{flex:1;font-weight:500;}
+    /* ── 页头 ── */
+    header {
+      text-align: center;
+      padding: 44px 16px 28px;
+    }
 
-  /* ── 地图 ── */
-  .map-box{border:1px solid var(--line);border-radius:12px;overflow:hidden;}
-  .map-box img{width:100%;display:block;background:var(--green-light);}
-  .map-addr{
-    display:flex;gap:8px;align-items:flex-start;font-size:14px;
-    padding:11px 13px;background:#f7faf8;color:var(--ink);
-  }
-  .map-addr .ic{flex:0 0 auto;}
-  .map-btns{display:flex;gap:8px;padding:0 13px 13px;background:#f7faf8;flex-wrap:wrap;}
-  .map-btns a,.map-btns button{
-    flex:1;min-width:96px;text-align:center;text-decoration:none;cursor:pointer;
-    font-size:14px;font-family:inherit;padding:9px 6px;border-radius:9px;
-    border:1px solid var(--green-mid);background:#fff;color:var(--green);transition:.2s;
-  }
-  .map-btns a.primary{background:var(--green);border-color:var(--green);color:#fff;}
-  .map-btns a:hover,.map-btns button:hover{opacity:.85;}
+    header .kicker {
+      display: inline-block;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: var(--green-mid);
+      border: 1px solid var(--green-mid);
+      border-radius: 999px;
+      padding: 3px 14px;
+      margin-bottom: 14px;
+    }
 
-  .weather{
-    background:#fff8ec;border:1px solid #f6e2bd;border-radius:12px;
-    padding:10px 14px;font-size:14px;color:#8a6320;margin-top:14px;
-    display:flex;gap:8px;align-items:flex-start;
-  }
-  .weather .ic{flex:0 0 auto;}
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
 
-  .sec-title{font-size:15px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
-  .sec-title::before{content:"";width:3px;height:14px;background:var(--green-mid);border-radius:2px;}
+    header p {
+      color: var(--ink-soft);
+      font-size: 15px;
+      margin-top: 8px;
+    }
 
-  /* ── 时间轴 ── */
-  .timeline{position:relative;padding-left:6px;}
-  .tl-item{position:relative;display:flex;gap:14px;padding-bottom:14px;}
-  .tl-item:last-child{padding-bottom:0;}
-  .tl-item::before{
-    content:"";position:absolute;left:5px;top:16px;bottom:0;width:1px;background:var(--line);
-  }
-  .tl-item:last-child::before{display:none;}
-  .tl-dot{
-    flex:0 0 11px;height:11px;width:11px;border-radius:50%;background:#fff;
-    border:2px solid var(--green-mid);margin-top:8px;position:relative;z-index:1;
-  }
-  .tl-time{flex:0 0 52px;font-weight:700;color:var(--green);font-size:15px;font-variant-numeric:tabular-nums;}
-  .tl-text{flex:1;font-size:15px;}
+    /* ── 快速导航 ── */
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 26px;
+    }
 
-  /* ── 照片 ── */
-  .photos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-  .photos .ph{
-    position:relative;aspect-ratio:1/1;border-radius:10px;overflow:hidden;
-    background:var(--green-light);cursor:pointer;
-  }
-  .photos .ph img{width:100%;height:100%;object-fit:cover;display:block;}
-  .photos .ph.empty{
-    border:1.5px dashed #b9d6c5;background:#f6fbf8;cursor:default;
-    display:flex;align-items:center;justify-content:center;
-    color:#9dbaa9;font-size:12px;text-align:center;padding:6px;
-  }
+    .nav a {
+      text-decoration: none;
+      font-size: 14px;
+      color: var(--green);
+      background: var(--green-light);
+      border-radius: 999px;
+      padding: 6px 14px;
+      transition: .2s;
+    }
 
-  .notes{
-    background:#f7faf8;border-radius:12px;padding:12px 14px;font-size:14px;
-    color:var(--ink-soft);white-space:pre-line;
-  }
+    .nav a:hover {
+      background: var(--green);
+      color: #fff;
+    }
 
-  footer{text-align:center;color:var(--ink-soft);font-size:13px;padding-top:12px;line-height:2;}
+    /* ── 顶部公共信息（时间 / 天气，三个活动共用） ── */
+    .page-meta {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 18px rgba(47, 122, 85, .08);
+    }
 
-  /* ── 图片放大 ── */
-  #lightbox{
-    position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;
-    align-items:center;justify-content:center;z-index:99;padding:20px;
-  }
-  #lightbox.on{display:flex;}
-  #lightbox img{max-width:100%;max-height:100%;border-radius:8px;}
+    .page-meta .pm-date {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 16px;
+      font-weight: 700;
+    }
 
-  @media (max-width:420px){
-    header h1{font-size:24px;}
-    .card{padding:22px 16px;}
-    .info-row .lb{flex:0 0 42px;}
-  }
-</style>
+    .page-meta .pm-tip {
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin-top: 6px;
+    }
+
+    .page-meta .weather {
+      margin-top: 12px;
+    }
+
+    /* ── 活动卡片 ── */
+    .card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 26px 22px 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 2px 18px rgba(47, 122, 85, .08);
+      border: 1px solid var(--line);
+      scroll-margin-top: 16px;
+    }
+
+    .card h2 {
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin-bottom: 4px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      color: #fff;
+      background: var(--green-mid);
+      border-radius: 6px;
+      padding: 1px 9px;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--line);
+      margin: 16px 0;
+    }
+
+    .info {
+      display: grid;
+      gap: 10px;
+    }
+
+    .info-row {
+      display: flex;
+      gap: 10px;
+      font-size: 15px;
+      align-items: flex-start;
+    }
+
+    .info-row .lb {
+      flex: 0 0 46px;
+      color: var(--ink-soft);
+    }
+
+    .info-row .vl {
+      flex: 1;
+      font-weight: 500;
+    }
+
+    /* ── 地图 ── */
+    .map-box {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .map-box img {
+      width: 100%;
+      display: block;
+      background: var(--green-light);
+    }
+
+    .map-addr {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      font-size: 14px;
+      padding: 11px 13px;
+      background: #f7faf8;
+      color: var(--ink);
+    }
+
+    .map-btns {
+      display: flex;
+      gap: 8px;
+      padding: 0 13px 13px;
+      background: #f7faf8;
+      flex-wrap: wrap;
+    }
+
+    .map-btns a,
+    .map-btns button {
+      flex: 1;
+      min-width: 96px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: inherit;
+      padding: 9px 6px;
+      border-radius: 9px;
+      border: 1px solid var(--green-mid);
+      background: #fff;
+      color: var(--green);
+      transition: .2s;
+    }
+
+    .map-btns a.primary {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+
+    .map-btns a:hover,
+    .map-btns button:hover {
+      opacity: .85;
+    }
+
+    .weather {
+      background: #fff8ec;
+      border: 1px solid #f6e2bd;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: #8a6320;
+      margin-top: 14px;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .sec-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sec-title::before {
+      content: "";
+      width: 3px;
+      height: 14px;
+      background: var(--green-mid);
+      border-radius: 2px;
+    }
+
+    /* ── 时间轴 ── */
+    .timeline {
+      position: relative;
+      padding-left: 6px;
+    }
+
+    .tl-item {
+      position: relative;
+      display: flex;
+      gap: 14px;
+      padding-bottom: 14px;
+    }
+
+    .tl-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .tl-item::before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 16px;
+      bottom: 0;
+      width: 1px;
+      background: var(--line);
+    }
+
+    .tl-item:last-child::before {
+      display: none;
+    }
+
+    .tl-dot {
+      flex: 0 0 11px;
+      height: 11px;
+      width: 11px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid var(--green-mid);
+      margin-top: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tl-time {
+      flex: 0 0 52px;
+      font-weight: 700;
+      color: var(--green);
+      font-size: 15px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .tl-text {
+      flex: 1;
+      font-size: 15px;
+    }
+
+    /* ── 投票 ── */
+    .vote {
+      background: var(--green-light);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      transition: .2s;
+    }
+
+    .vote.mine {
+      border-color: var(--green-mid);
+      box-shadow: 0 0 0 2px rgba(79, 168, 122, .18);
+    }
+
+    .vote-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .vote-count {
+      flex: 1;
+      min-width: 0;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .vote-btn {
+      flex: 0 0 auto;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 7px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: inherit;
+      color: #fff;
+      background: var(--green);
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .vote-btn:hover {
+      background: var(--green-mid);
+    }
+
+    .vote-btn[disabled] {
+      opacity: .5;
+      cursor: default;
+    }
+
+    .vote.mine .vote-btn {
+      background: #fff;
+      color: var(--green);
+      border-color: var(--green-mid);
+    }
+
+    .vote-bar {
+      height: 6px;
+      border-radius: 999px;
+      background: #fff;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .vote-bar>span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--green-mid);
+      border-radius: 999px;
+      transition: width .35s;
+    }
+
+    .vote-names {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      word-break: break-word;
+    }
+
+    /* 首次投票时出现的昵称输入行 */
+    .vote-ask {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .vote-ask input {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 14px;
+      font-family: inherit;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .vote-ask input:focus {
+      outline: none;
+      border-color: var(--green-mid);
+    }
+
+    .vote-err {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #b4432a;
+    }
+
+    /* 投票区顶部的一行状态：总人数 + 刷新 + 改昵称 */
+    .vote-status {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--ink-soft);
+      margin-bottom: 14px;
+    }
+
+    .vote-status button {
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 999px;
+      padding: 3px 12px;
+      font-size: 13px;
+      font-family: inherit;
+      color: var(--green);
+      cursor: pointer;
+    }
+
+    /* ── 照片 ── */
+    .photos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .photos .ph {
+      position: relative;
+      aspect-ratio: 1/1;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--green-light);
+      cursor: pointer;
+    }
+
+    .photos .ph img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 图片来源标注，压在照片底部 */
+    .photos .ph .credit {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 8px 6px 4px;
+      font-size: 11px;
+      line-height: 1.4;
+      color: #fff;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .55) 100%);
+      pointer-events: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .photos .ph.empty {
+      border: 1.5px dashed #b9d6c5;
+      background: #f6fbf8;
+      cursor: default;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9dbaa9;
+      font-size: 12px;
+      text-align: center;
+      padding: 6px;
+    }
+
+    .notes {
+      background: #f7faf8;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 14px;
+      color: var(--ink-soft);
+      white-space: pre-line;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: 13px;
+      padding-top: 12px;
+      line-height: 2;
+    }
+
+    /* ── 图片放大 ── */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .88);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99;
+      padding: 20px;
+    }
+
+    #lightbox.on {
+      display: flex;
+    }
+
+    #lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 8px;
+    }
+
+    @media (max-width:420px) {
+      header h1 {
+        font-size: 24px;
+      }
+
+      .card {
+        padding: 22px 16px;
+      }
+
+      .info-row .lb {
+        flex: 0 0 42px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header>
-  <div class="kicker" id="pageKicker"></div>
-  <h1 id="pageTitle"></h1>
-  <p id="pageSubtitle"></p>
-</header>
+  <header>
+    <div class="kicker" id="pageKicker"></div>
+    <h1 id="pageTitle"></h1>
+    <p id="pageSubtitle"></p>
+  </header>
 
-<div class="wrap">
-  <div class="nav" id="nav"></div>
-  <div id="list"></div>
-  <footer id="pageFooter"></footer>
-</div>
+  <div class="wrap">
+    <div class="page-meta" id="pageMeta"></div>
+    <div class="vote-status" id="voteStatus"></div>
+    <div class="nav" id="nav"></div>
+    <div id="list"></div>
+    <footer id="pageFooter"></footer>
+  </div>
 
-<div id="lightbox" onclick="this.classList.remove('on')"><img id="lightboxImg" alt=""></div>
+  <div id="lightbox" onclick="this.classList.remove('on')"><img id="lightboxImg" alt=""></div>
 
-<script>
-/* ==========================================================
-   ①  页面信息（改这里）
-   ========================================================== */
-const PAGE = {
-  kicker:   "周末去哪儿",
-  title:    "8月亲子户外活动",
-  subtitle: "以下几个活动任选，欢迎带娃一起来～",
-  footer:   "报名请联系：____\n最终以出发前一天群通知为准",
+  <script>
+    /* ==========================================================
+       ①  页面信息（改这里）
+       ========================================================== */
+    const PAGE = {
+      kicker: "周末育儿群友",
+      title: "8月亲子户外活动",
+      subtitle: "以下几个活动任选",
+      footer: "\n最终以出发前一天群通知为准\n本站为个人自建的非商业家庭亲子活动信息页面",
 
-  // 可选：高德「Web服务」Key。留空则地图区只显示地址+跳转按钮；
-  // 填上后，每个活动会多出一张静态地图缩略图（前提是该活动填了 lnglat）
-  amapKey:  ""
-};
+      // 三个活动都是同一天、同样的天气，所以时间和天气写在这里，只在页面顶部显示一次
+      // （活动卡片里就不再重复了；某个活动如果日期不一样，在它自己的 date 里单独写就会照常显示）
+      date: "2026年8月8日 星期六",
+      dateTip: "以下地点任选其一，请在页面投票",
+      weather: "8月8日周六：多云间晴，局地有雷阵雨，27~35℃，西风3-4级。天气炎热，请备好防晒、驱蚊水和充足饮用水。",
 
-/* ==========================================================
-   ②  活动列表（照着下面这一段复制，就能加第二个、第三个活动）
-       · weather / notes 不需要就写成 ""，整块会自动隐藏
-       · photos 里写图片文件名，图片和本网页放同一个文件夹即可
-         例：["1.jpg","2.jpg","3.jpg"]；还没照片就留空数组 []
-   ========================================================== */
-const ACTIVITIES = [
-  {
-    emoji:    "🌳",
-    title:    "鹏飞公园亲子自然探索活动",
-    date:     "2026年8月8日 星期六",
-    place:    "深圳鹏飞公园",
-    audience: "3-10岁儿童家庭",
-    map: {
-      address: "深圳市大鹏新区潮歌巷19号（金沙湾国际乐园内）",
-      keyword: "鹏飞公园",          // 在高德里搜索用的名字
-      city:    "深圳",
-      lnglat:  ""                   // 可选，见文件最下方【地图说明】；填了才有精准定位和一键导航
-    },
-    weather:  "8月8日周六：多云间晴，局地有雷阵雨，27~35℃，西风3-4级。天气炎热，请备好防晒、驱蚊水和充足饮用水。",
-    schedule: [
-      ["09:00", "集合"],
-      ["09:30", "自然观察"],
-      ["11:00", "亲子游戏"],
-      ["12:00", "午餐"]
-    ],
-    // 照片放进仓库的 photos 文件夹后，这里填 ["photos/1.jpg","photos/2.jpg","photos/3.jpg"]
-    photos:   [],
-    notes:    ""
-  }
+      // 可选：高德「Web服务」Key。留空则地图区只显示地址+跳转按钮；
+      // 填上后，每个活动会多出一张静态地图缩略图（前提是该活动填了 lnglat）
+      amapKey: "",
 
-  /* ── 复制下面这段，粘到上一个活动的 } 后面（记得前面加逗号）──
-  ,{
-    emoji:    "⛰️",
-    title:    "XX 公园亲子徒步活动",
-    date:     "2026年8月15日 星期六",
-    place:    "深圳 XX 公园",
-    audience: "3-10岁儿童家庭",
-    map: {
-      address: "深圳市 XX 区 XX 路 X 号",
-      keyword: "XX 公园",
-      city:    "深圳",
-      lnglat:  ""
-    },
-    weather:  "",
-    schedule: [
-      ["09:00", "集合"],
-      ["09:30", "徒步出发"],
-      ["11:00", "亲子游戏"],
-      ["12:00", "午餐"]
-    ],
-    photos:   [],
-    notes:    ""
-  }
-  ──────────────────────────────────────────────────────── */
-];
+      // 投票开关。想关掉投票就改成 false
+      vote: true,
+      voteTitle: "投票选地点",
+      voteApi: "/api"          // 投票接口地址，正常不用改
+    };
 
-/* ==========================================================
-   ③  以下为渲染逻辑，一般不用改
-   ========================================================== */
-const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const q   = s => encodeURIComponent(s || "");
+    /* ==========================================================
+       ②  活动列表（照着下面这一段复制，就能加第二个、第三个活动）
+           · weather / notes 不需要就写成 ""，整块会自动隐藏
+           · photos 里写图片文件名，图片和本网页放同一个文件夹即可
+             例：["1.jpg","2.jpg","3.jpg"]；还没照片就留空数组 []
+       ========================================================== */
+    const ACTIVITIES = [
+      {
+        // voteId：投票用的编号，每个活动必须不一样，只能用小写字母/数字/短横线
+        // 定下来之后就别再改了，改了这个选项已有的票会对不上
+        voteId: "pengfei",
+        title: "深圳鹏飞公园",
+        date: "2026年8月8日 星期六",
+        place: "无",
+        audience: "亲子自然探索活动",
+        map: {
+          address: "深圳市大鹏新区潮歌巷19号（金沙湾国际乐园内）",
+          keyword: "鹏飞公园",          // 在高德里搜索用的名字
+          city: "深圳",
+          lnglat: ""                   // 可选，见文件最下方【地图说明】；填了才有精准定位和一键导航
+        },
+        schedule: [
+          ["时段一", "09:30-10:00 出发（从龙岗前往大鹏，车程约1小时）"],
+          ["时段二", "10:00-11:00 出发（从龙岗前往大鹏，车程约1小时）"],
+          ["12:00", "午餐"]
+        ],
+        // 注：以下是金沙湾片区的照片（鹏飞公园就在金沙湾国际乐园里），不是公园内部实景
+        photos: [
+          { src: "photos/jinshawan-1.jpg", credit: "图：大鹏新区政府在线" },
+          { src: "photos/jinshawan-2.jpg", credit: "图：大鹏新区政府在线" },
+          { src: "photos/jinshawan-3.jpg", credit: "图：大鹏新区政府在线" }
+        ],
+        notes: ""
+      },
+      {
+        voteId: "pingshan",
+        title: "深圳坪山自然博物馆",
+        date: "2026年8月8日 星期六",
+        place: "80元/人（儿童票）",
+        audience: "博物馆亲子参观活动",
+        map: {
+          address: "广东省深圳市坪山区燕子湖片区龙翔学校斜对面",
+          keyword: "坪山自然博物馆",          // 在高德里搜索用的名字
+          city: "深圳",
+          lnglat: ""                   // 可选，见文件最下方【地图说明】；填了才有精准定位和一键导航
+        },
 
-/* 高德跳转链接：填了经纬度就精准打点，没填就用名称在高德里搜索 */
-function amapView(m, fallbackName){
-  const name = m.keyword || fallbackName;
-  return m.lnglat
-    ? `https://uri.amap.com/marker?position=${q(m.lnglat)}&name=${q(name)}&coordinate=gaode&callnative=1&src=活动发布`
-    : `https://uri.amap.com/search?keyword=${q(name)}&city=${q(m.city || "")}&callnative=1&src=活动发布`;
-}
-function amapNavi(m, fallbackName){
-  const name = m.keyword || fallbackName;
-  return m.lnglat
-    ? `https://uri.amap.com/navigation?to=${q(m.lnglat + "," + name)}&mode=car&policy=1&coordinate=gaode&callnative=1&src=活动发布`
-    : amapView(m, fallbackName);
-}
-function amapStatic(m){
-  if(!PAGE.amapKey || !m.lnglat) return "";
-  return `https://restapi.amap.com/v3/staticmap?location=${q(m.lnglat)}&zoom=15&size=700*300&scale=2`
-       + `&markers=large,,A:${q(m.lnglat)}&key=${q(PAGE.amapKey)}`;
-}
-function copyAddr(btn, text){
-  const done = () => { const o = btn.textContent; btn.textContent = "✅ 已复制"; setTimeout(() => btn.textContent = o, 1600); };
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(text).then(done).catch(() => fallback());
-  } else fallback();
-  function fallback(){
-    const t = document.createElement("textarea");
-    t.value = text; t.style.position = "fixed"; t.style.opacity = "0";
-    document.body.appendChild(t); t.select();
-    try{ document.execCommand("copy"); done(); }catch(e){ prompt("请手动复制地址：", text); }
-    document.body.removeChild(t);
-  }
-}
+        photos: [
+          { src: "photos/pingshan-1.jpg", credit: "图：新华社" },
+          { src: "photos/pingshan-2.jpg", credit: "图：新华社" },
+          { src: "photos/pingshan-3.jpg", credit: "图：新华社" }
+        ],
+        notes: "深圳自然博物馆 2026年7月28日刚开馆，开放初期大概率需要提前预约，出发前请先在官方渠道确认票务和预约方式。"
+      },
+      {
+        voteId: "third",
+        title: "深圳鹏飞公园",
+        date: "2026年8月8日 星期六",
+        place: "无",
+        audience: "亲子自然探索活动",
+        map: {
+          address: "深圳市大鹏新区潮歌巷19号（金沙湾国际乐园内）",
+          keyword: "鹏飞公园",          // 在高德里搜索用的名字
+          city: "深圳",
+          lnglat: ""                   // 可选，见文件最下方【地图说明】；填了才有精准定位和一键导航
+        },
 
-document.getElementById("pageKicker").textContent   = PAGE.kicker;
-document.getElementById("pageTitle").textContent    = PAGE.title;
-document.getElementById("pageSubtitle").textContent = PAGE.subtitle;
-document.getElementById("pageFooter").innerHTML     = esc(PAGE.footer).replace(/\n/g, "<br>");
+        // 照片放进仓库的 photos 文件夹后，这里填 ["photos/1.jpg","photos/2.jpg","photos/3.jpg"]
+        photos: [],
+        notes: ""
+      }
 
-// 只有一个活动时不显示顶部导航
-document.getElementById("nav").innerHTML = ACTIVITIES.length > 1
-  ? ACTIVITIES.map((a, i) => `<a href="#act${i}">${a.emoji} ${esc(a.title.slice(0, 10))}</a>`).join("")
-  : "";
+      /* ── 复制下面这段，粘到上一个活动的 } 后面（记得前面加逗号）──
+      ,{
+        title:    "XX 公园亲子徒步活动",
+        date:     "2026年8月15日 星期六",
+        place:    "深圳 XX 公园",
+        audience: "3-10岁儿童家庭",
+        map: {
+          address: "深圳市 XX 区 XX 路 X 号",
+          keyword: "XX 公园",
+          city:    "深圳",
+          lnglat:  ""
+        },
+        weather:  "",
+        schedule: [
+          ["09:00", "集合"],
+          ["09:30", "徒步出发"],
+          ["11:00", "亲子游戏"],
+          ["12:00", "午餐"]
+        ],
+        photos:   [],
+        notes:    ""
+      }
+      ──────────────────────────────────────────────────────── */
+    ];
 
-document.getElementById("list").innerHTML = ACTIVITIES.map((a, i) => `
+    /* ==========================================================
+       ③  以下为渲染逻辑，一般不用改
+       ========================================================== */
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const q = s => encodeURIComponent(s || "");
+
+    /* 高德跳转链接：填了经纬度就精准打点，没填就用名称在高德里搜索 */
+    function amapView(m, fallbackName) {
+      const name = m.keyword || fallbackName;
+      return m.lnglat
+        ? `https://uri.amap.com/marker?position=${q(m.lnglat)}&name=${q(name)}&coordinate=gaode&callnative=1&src=活动发布`
+        : `https://uri.amap.com/search?keyword=${q(name)}&city=${q(m.city || "")}&callnative=1&src=活动发布`;
+    }
+    function amapNavi(m, fallbackName) {
+      const name = m.keyword || fallbackName;
+      return m.lnglat
+        ? `https://uri.amap.com/navigation?to=${q(m.lnglat + "," + name)}&mode=car&policy=1&coordinate=gaode&callnative=1&src=活动发布`
+        : amapView(m, fallbackName);
+    }
+    function amapStatic(m) {
+      if (!PAGE.amapKey || !m.lnglat) return "";
+      return `https://restapi.amap.com/v3/staticmap?location=${q(m.lnglat)}&zoom=15&size=700*300&scale=2`
+        + `&markers=large,,A:${q(m.lnglat)}&key=${q(PAGE.amapKey)}`;
+    }
+    function copyAddr(btn, text) {
+      const done = () => { const o = btn.textContent; btn.textContent = "已复制"; setTimeout(() => btn.textContent = o, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(() => fallback());
+      } else fallback();
+      function fallback() {
+        const t = document.createElement("textarea");
+        t.value = text; t.style.position = "fixed"; t.style.opacity = "0";
+        document.body.appendChild(t); t.select();
+        try { document.execCommand("copy"); done(); } catch (e) { prompt("请手动复制地址：", text); }
+        document.body.removeChild(t);
+      }
+    }
+
+    document.getElementById("pageKicker").textContent = PAGE.kicker;
+    document.getElementById("pageTitle").textContent = PAGE.title;
+    document.getElementById("pageSubtitle").textContent = PAGE.subtitle;
+    document.getElementById("pageFooter").innerHTML = esc(PAGE.footer).replace(/\n/g, "<br>");
+
+    // 顶部公共信息：时间 + 天气（三个活动共用，只显示一次）；都没填就整块隐藏
+    const pmEl = document.getElementById("pageMeta");
+    if (PAGE.date || PAGE.weather) {
+      pmEl.innerHTML = `
+      ${PAGE.date ? `<div class="pm-date"><span>${esc(PAGE.date)}</span></div>` : ""}
+      ${PAGE.dateTip ? `<div class="pm-tip">${esc(PAGE.dateTip)}</div>` : ""}
+      ${PAGE.weather ? `<div class="weather"><span>${esc(PAGE.weather)}</span></div>` : ""}`;
+    } else {
+      pmEl.style.display = "none";
+    }
+
+    // 只有一个活动时不显示顶部导航
+    document.getElementById("nav").innerHTML = ACTIVITIES.length > 1
+      ? ACTIVITIES.map((a, i) => `<a href="#act${i}">${esc(a.title.slice(0, 10))}</a>`).join("")
+      : "";
+
+    document.getElementById("list").innerHTML = ACTIVITIES.map((a, i) => `
   <section class="card" id="act${i}">
     ${ACTIVITIES.length > 1 ? `<div class="badge">活动 ${i + 1}</div>` : ""}
-    <h2>${a.emoji} ${esc(a.title)}</h2>
+    <h2>${esc(a.title)}</h2>
 
     <div class="divider"></div>
 
     <div class="info">
-      <div class="info-row"><span class="ic">📅</span><span class="lb">时间</span><span class="vl">${esc(a.date)}</span></div>
-      <div class="info-row"><span class="ic">📍</span><span class="lb">地点</span><span class="vl">${esc(a.place)}</span></div>
-      <div class="info-row"><span class="ic">👨‍👩‍👧</span><span class="lb">适合</span><span class="vl">${esc(a.audience)}</span></div>
+      ${a.date && a.date !== PAGE.date
+        ? `<div class="info-row"><span class="lb">时间</span><span class="vl">${esc(a.date)}</span></div>` : ""}
+      <div class="info-row"><span class="lb">门票</span><span class="vl">${esc(a.place)}</span></div>
+      <div class="info-row"><span class="lb">适合</span><span class="vl">${esc(a.audience)}</span></div>
     </div>
 
     ${a.map ? `
       <div class="divider"></div>
-      <div class="sec-title">🗺 位置导航</div>
+      <div class="sec-title">位置导航</div>
       <div class="map-box">
         ${amapStatic(a.map) ? `<a href="${esc(amapView(a.map, a.place))}" target="_blank" rel="noopener">
             <img src="${esc(amapStatic(a.map))}" alt="${esc(a.place)}地图" loading="lazy"
                  onerror="this.style.display='none'"></a>` : ""}
-        <div class="map-addr"><span class="ic">📍</span><span>${esc(a.map.address || a.place)}</span></div>
+        <div class="map-addr"><span>${esc(a.map.address || a.place)}</span></div>
         <div class="map-btns">
-          <a class="primary" href="${esc(amapNavi(a.map, a.place))}" target="_blank" rel="noopener">🚗 高德导航</a>
-          <a href="${esc(amapView(a.map, a.place))}" target="_blank" rel="noopener">🔍 地图查看</a>
-          <button type="button" onclick="copyAddr(this, '${esc(a.map.address || a.place).replace(/'/g, "\\'")}')">📋 复制地址</button>
+          <a class="primary" href="${esc(amapNavi(a.map, a.place))}" target="_blank" rel="noopener">高德导航</a>
+          <button type="button" onclick="copyAddr(this, '${esc(a.map.address || a.place).replace(/'/g, "\\'")}')">复制地址</button>
         </div>
       </div>` : ""}
 
-    ${a.weather ? `<div class="weather"><span class="ic">☀️</span><span>${esc(a.weather)}</span></div>` : ""}
+    ${a.weather && a.weather !== PAGE.weather
+        ? `<div class="weather"><span>${esc(a.weather)}</span></div>` : ""}
 
     ${a.schedule && a.schedule.length ? `
       <div class="divider"></div>
@@ -323,24 +813,212 @@ document.getElementById("list").innerHTML = ACTIVITIES.map((a, i) => `
       <div class="sec-title">温馨提示</div>
       <div class="notes">${esc(a.notes)}</div>` : ""}
 
+    ${PAGE.vote && a.voteId ? `
+      <div class="divider"></div>
+      <div class="sec-title">${esc(PAGE.voteTitle || "投票选地点")}</div>
+      <div class="vote" data-vote="${esc(a.voteId)}">
+        <div class="vote-head">
+          <span class="vote-count">加载中…</span>
+          <button type="button" class="vote-btn" onclick="onVoteClick('${esc(a.voteId)}')">我选这个</button>
+        </div>
+        <div class="vote-bar"><span></span></div>
+        <div class="vote-names"></div>
+      </div>` : ""}
+
     <div class="divider"></div>
-    <div class="sec-title">📷 往期照片</div>
+    <div class="sec-title">目的地照片</div>
     <div class="photos">
-      ${(a.photos && a.photos.length ? a.photos : ["", "", ""]).map(src => src
-        ? `<div class="ph"><img src="${esc(src)}" alt="往期照片" loading="lazy"
+      ${(a.photos && a.photos.length ? a.photos : ["", "", ""]).map(p => {
+      // photos 里既可以写 "photos/x.jpg"，也可以写 { src: "...", credit: "图：来源" }
+      const src = typeof p === "string" ? p : (p && p.src) || "";
+      const credit = typeof p === "string" ? "" : (p && p.credit) || "";
+      if (!src) return `<div class="ph empty">待添加照片</div>`;
+      return `<div class="ph"><img src="${esc(src)}" alt="目的地照片" loading="lazy"
              onclick="openImg(this.src)"
-             onerror="this.parentNode.className='ph empty';this.parentNode.textContent='未找到\n${esc(src)}'"></div>`
-        : `<div class="ph empty">待添加照片</div>`).join("")}
+             onerror="this.parentNode.className='ph empty';this.parentNode.textContent='未找到\n${esc(src)}'">${credit ? `<span class="credit">${esc(credit)}</span>` : ""}</div>`;
+    }).join("")}
     </div>
   </section>`).join("");
 
-function openImg(src){
-  document.getElementById("lightboxImg").src = src;
-  document.getElementById("lightbox").classList.add("on");
-}
-</script>
+    function openImg(src) {
+      document.getElementById("lightboxImg").src = src;
+      document.getElementById("lightbox").classList.add("on");
+    }
 
-<!--
+    /* ==========================================================
+       ④  投票（票存在 Cloudflare 上，和这台电脑无关，关机也能投）
+           后端代码在 vote-worker/ 文件夹里
+       ========================================================== */
+    const VOTE_API = PAGE.voteApi || "/api";
+    const LS_VOTER = "szkids_voter";   // 本机身份，用来认出"哪票是你投的"
+    const LS_MINE = "szkids_mine";     // 本机投了哪个 + 昵称
+
+    // localStorage 在某些浏览器的无痕模式下会直接抛异常，全部包一层
+    function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+    function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) { } }
+    function lsDel(k) { try { localStorage.removeItem(k); } catch (e) { } }
+
+    function voterId() {
+      let v = lsGet(LS_VOTER);
+      if (!v || !/^[A-Za-z0-9_-]{6,64}$/.test(v)) {
+        v = "v" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+        lsSet(LS_VOTER, v);
+      }
+      return v;
+    }
+    function myVote() {
+      try { return JSON.parse(lsGet(LS_MINE) || "null"); } catch (e) { return null; }
+    }
+
+    let voteList = [];       // [{o:选项, n:昵称, t:时间, me:是不是你投的}]
+    let voteLoaded = false;
+    let voting = false;
+
+    /* 把本机刚投的那一票先画上去。KV 在全球同步最多要几十秒，
+       不这么做的话点完按钮票数半天不变，会以为没投上 */
+    function withMine(list) {
+      const mine = myVote();
+      if (!mine || !mine.o) return list;
+      const out = list.filter(x => !x.me);
+      out.push({ o: mine.o, n: mine.n, t: mine.t || 0, me: true });
+      return out;
+    }
+
+    function renderVotes(err) {
+      const list = withMine(voteList);
+      const byOpt = {};
+      list.forEach(x => { (byOpt[x.o] = byOpt[x.o] || []).push(x); });
+      const total = list.length;
+      const mine = myVote();
+
+      document.querySelectorAll(".vote").forEach(box => {
+        const picked = byOpt[box.dataset.vote] || [];
+        const isMine = !!(mine && mine.o === box.dataset.vote);
+        box.classList.toggle("mine", isMine);
+
+        box.querySelector(".vote-count").textContent =
+          voteLoaded ? `${picked.length} 票` : (err ? "—" : "加载中…");
+        box.querySelector(".vote-bar > span").style.width =
+          total ? (picked.length / total * 100).toFixed(1) + "%" : "0";
+        box.querySelector(".vote-names").textContent =
+          picked.length ? picked.map(x => x.n).join("、") : (voteLoaded ? "还没有人选" : "");
+
+        const btn = box.querySelector(".vote-btn");
+        btn.textContent = isMine ? "已选（点此取消）" : "我选这个";
+        btn.disabled = voting;
+      });
+
+      const st = document.getElementById("voteStatus");
+      if (!st) return;
+      st.innerHTML = err
+        ? `<span class="vote-err">${esc(err)}</span><button type="button" onclick="loadVotes()">重试</button>`
+        : `<span>${voteLoaded ? `已有 <b>${total}</b> 人投票` : "投票加载中…"}</span>
+           <button type="button" onclick="loadVotes()">刷新</button>
+           ${mine && mine.n ? `<span>你的昵称：${esc(mine.n)}</span>
+           <button type="button" onclick="renameVoter()">改昵称</button>` : ""}`;
+    }
+
+    async function loadVotes() {
+      try {
+        const r = await fetch(`${VOTE_API}/votes?v=${encodeURIComponent(voterId())}`, { cache: "no-store" });
+        const d = await r.json();
+        if (!d.ok) throw new Error(d.error || "读取失败");
+        voteList = d.list || [];
+        voteLoaded = true;
+        // 服务端记录比本机新（比如你在另一台手机上改过票），就以服务端为准
+        const svr = voteList.find(x => x.me);
+        const mine = myVote();
+        if (svr && (!mine || (svr.t || 0) >= (mine.t || 0))) {
+          lsSet(LS_MINE, JSON.stringify({ o: svr.o, n: svr.n, t: svr.t }));
+        }
+        renderVotes();
+      } catch (e) {
+        renderVotes("投票功能暂时连不上，稍后再试");
+      }
+    }
+
+    function onVoteClick(id) {
+      const mine = myVote();
+      if (mine && mine.o === id) return cancelVote();      // 再点一次 = 取消
+      if (mine && mine.n) return submitVote(id, mine.n);   // 已经填过昵称 = 直接改票
+      askName(id);                                          // 第一次投票，先问昵称
+    }
+
+    /* 用页面内嵌的输入框问昵称，不用 prompt()——微信内置浏览器里 prompt 表现不稳定 */
+    function askName(id) {
+      const box = document.querySelector(`.vote[data-vote="${id}"]`);
+      if (!box || box.querySelector(".vote-ask")) return;
+      const mine = myVote();
+      const row = document.createElement("div");
+      row.className = "vote-ask";
+      row.innerHTML = `<input type="text" maxlength="12" placeholder="填个昵称，比如：豆豆妈">
+                       <button type="button" class="vote-btn">确定</button>`;
+      box.appendChild(row);
+      const input = row.querySelector("input");
+      if (mine && mine.n) input.value = mine.n;
+      const ok = () => {
+        const n = input.value.trim();
+        if (!n) { input.focus(); return; }
+        row.remove();
+        submitVote(id, n);
+      };
+      row.querySelector("button").onclick = ok;
+      input.onkeydown = e => { if (e.key === "Enter") ok(); };
+      input.focus();
+    }
+
+    function renameVoter() {
+      const mine = myVote();
+      if (mine && mine.o) askName(mine.o);
+    }
+
+    async function post(path, body) {
+      const r = await fetch(VOTE_API + path, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
+      const d = await r.json();
+      if (!d.ok) throw new Error(d.error || "操作失败");
+      return d;
+    }
+
+    async function submitVote(id, name) {
+      if (voting) return;
+      voting = true; renderVotes();
+      try {
+        await post("/vote", { v: voterId(), o: id, n: name });
+        lsSet(LS_MINE, JSON.stringify({ o: id, n: name, t: Date.now() }));
+        voting = false; renderVotes(); loadVotes();
+      } catch (e) {
+        voting = false; renderVotes(e.message || "投票失败");
+      }
+    }
+
+    async function cancelVote() {
+      if (voting) return;
+      voting = true; renderVotes();
+      try {
+        await post("/unvote", { v: voterId() });
+        lsDel(LS_MINE);
+        voteList = voteList.filter(x => !x.me);
+        voting = false; renderVotes(); loadVotes();
+      } catch (e) {
+        voting = false; renderVotes(e.message || "取消失败");
+      }
+    }
+
+    if (PAGE.vote) {
+      renderVotes();
+      loadVotes();
+      // 从别的页面切回来时刷新一下，能看到期间新增的票
+      document.addEventListener("visibilitychange", () => { if (!document.hidden) loadVotes(); });
+    } else {
+      document.getElementById("voteStatus").style.display = "none";
+    }
+  </script>
+
+  <!--
 ==========================================================
  【地图说明】
  1) 默认不用做任何配置：按钮会用「名称 + 城市」在高德里搜索，
@@ -358,4 +1036,5 @@ function openImg(src){
 ==========================================================
 -->
 </body>
+
 </html>

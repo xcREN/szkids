@@ -1,0 +1,109 @@
+.page {
+  padding: 0 24rpx 40rpx;
+}
+
+/* ---------------- 搜索条 ---------------- */
+.bar {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0 8rpx;
+}
+
+.bar__box {
+  flex: 1;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  background: #EFEDE6;
+  border-radius: 999rpx;
+}
+
+.bar__icon {
+  font-size: 24rpx;
+  margin-right: 10rpx;
+}
+
+.bar__input {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.bar__ph {
+  color: #9AA096;
+}
+
+.bar__clear {
+  padding: 0 6rpx;
+  color: #9AA096;
+  font-size: 26rpx;
+}
+
+.bar__cancel {
+  margin-left: 20rpx;
+  font-size: 28rpx;
+  color: #555C53;
+}
+
+/* ---------------- 初始态 ---------------- */
+.sec {
+  margin-top: 32rpx;
+}
+
+.sec__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sec__title {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.sec__action {
+  font-size: 24rpx;
+  color: #9AA096;
+}
+
+.cats {
+  margin-top: 18rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cat {
+  margin: 0 16rpx 16rpx 0;
+  padding: 14rpx 24rpx;
+  border-radius: 14rpx;
+  font-size: 25rpx;
+  color: #555C53;
+  background: #F1EFE8;
+}
+
+.cat--on {
+  color: #fff;
+  background: #4B7A5A;
+}
+
+/* ---------------- 结果 ---------------- */
+.rhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 8rpx 12rpx;
+}
+
+.rhead__count {
+  font-size: 26rpx;
+  color: #6C736B;
+}
+
+.rhead__map {
+  font-size: 26rpx;
+  color: #3A6248;
+}
+
+.ritem {
+  margin-bottom: 20rpx;
+}

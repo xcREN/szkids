@@ -1,0 +1,84 @@
+.page {
+  padding: 16rpx 24rpx 40rpx;
+}
+
+.tabs {
+  white-space: nowrap;
+}
+
+.tabs__inner {
+  display: inline-flex;
+  padding: 8rpx 0;
+}
+
+.tab {
+  margin-right: 14rpx;
+  padding: 12rpx 26rpx;
+  border-radius: 999rpx;
+  font-size: 25rpx;
+  color: #555C53;
+  background: #F1EFE8;
+}
+
+.tab--on {
+  color: #fff;
+  background: #4B7A5A;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 8rpx 12rpx;
+}
+
+.bar__count {
+  font-size: 25rpx;
+  color: #9AA096;
+}
+
+.bar__map {
+  font-size: 26rpx;
+  color: #3A6248;
+}
+
+.item {
+  margin-bottom: 24rpx;
+}
+
+.folder {
+  display: flex;
+  align-items: center;
+  margin: -6rpx 8rpx 0;
+  padding: 14rpx 20rpx;
+  background: #EFEDE6;
+  border-radius: 0 0 20rpx 20rpx;
+}
+
+.folder__label {
+  font-size: 23rpx;
+  color: #9AA096;
+}
+
+.folder__name {
+  flex: 1;
+  margin-left: 16rpx;
+  font-size: 25rpx;
+  color: #555C53;
+}
+
+.folder__arrow {
+  color: #B9BCB2;
+  font-size: 30rpx;
+}
+
+.btn {
+  margin: 36rpx auto 0;
+  width: 320rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  color: #fff;
+  background: #4B7A5A;
+}

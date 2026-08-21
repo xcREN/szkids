@@ -1,0 +1,46 @@
+.page {
+  padding: 24rpx 24rpx 40rpx;
+}
+
+.hd {
+  padding: 12rpx 8rpx 20rpx;
+}
+
+.hd__emoji {
+  font-size: 56rpx;
+  line-height: 1.2;
+}
+
+.hd__title {
+  margin-top: 10rpx;
+  font-size: 40rpx;
+  font-weight: 600;
+}
+
+.hd__desc {
+  margin-top: 8rpx;
+  font-size: 25rpx;
+  color: #6C736B;
+  line-height: 1.7;
+}
+
+.hd__row {
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hd__count {
+  font-size: 25rpx;
+  color: #9AA096;
+}
+
+.hd__map {
+  font-size: 26rpx;
+  color: #3A6248;
+}
+
+.item {
+  margin-bottom: 20rpx;
+}

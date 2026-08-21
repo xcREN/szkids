@@ -1,0 +1,170 @@
+.page {
+  padding: 24rpx 24rpx 60rpx;
+}
+
+.dates {
+  display: flex;
+  align-items: center;
+}
+
+.date {
+  margin-right: 14rpx;
+  padding: 12rpx 26rpx;
+  border-radius: 999rpx;
+  font-size: 25rpx;
+  color: #555C53;
+  background: #F1EFE8;
+}
+
+.date--on {
+  color: #fff;
+  background: #4B7A5A;
+}
+
+.dateText {
+  padding: 20rpx 8rpx 8rpx;
+  font-size: 34rpx;
+  font-weight: 600;
+}
+
+/* ---------------- 时段 ---------------- */
+.slot {
+  margin-top: 20rpx;
+  padding: 24rpx 24rpx 8rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+}
+
+.slot__label {
+  font-size: 26rpx;
+  color: #3A6248;
+  font-weight: 600;
+}
+
+.slot__empty {
+  padding: 16rpx 0 20rpx;
+  font-size: 24rpx;
+  color: #B9BCB2;
+}
+
+.pitem {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #EFEDE6;
+}
+
+.pitem:last-child {
+  border-bottom: none;
+}
+
+.pitem__main {
+  flex: 1;
+}
+
+.pitem__name {
+  font-size: 28rpx;
+}
+
+.pitem__meta {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: #9AA096;
+}
+
+.pitem__del {
+  padding: 8rpx 20rpx;
+  font-size: 23rpx;
+  color: #B4503F;
+  background: #F7ECE9;
+  border-radius: 999rpx;
+}
+
+/* ---------------- 汇总 ---------------- */
+.sum {
+  margin-top: 24rpx;
+  padding: 24rpx;
+  background: #E6EDE6;
+  border-radius: 20rpx;
+}
+
+.sum__row {
+  display: flex;
+  align-items: baseline;
+}
+
+.sum__label {
+  font-size: 23rpx;
+  color: #6C736B;
+  margin-right: 10rpx;
+}
+
+.sum__value {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #3A6248;
+  margin-right: 28rpx;
+}
+
+.sum__note {
+  margin-top: 8rpx;
+  font-size: 21rpx;
+  color: #9AA096;
+}
+
+.sum__map {
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  color: #3A6248;
+}
+
+/* ---------------- 收藏 ---------------- */
+.sec__title {
+  padding: 36rpx 8rpx 12rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.fav {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+}
+
+.fav__main {
+  flex: 1;
+}
+
+.fav__name {
+  font-size: 28rpx;
+}
+
+.fav__meta {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: #9AA096;
+}
+
+.fav__add {
+  padding: 12rpx 24rpx;
+  font-size: 25rpx;
+  color: #fff;
+  background: #4B7A5A;
+  border-radius: 999rpx;
+}
+
+.fav__empty {
+  padding: 24rpx 8rpx;
+  font-size: 25rpx;
+  color: #9AA096;
+  line-height: 1.8;
+}
+
+.link {
+  color: #3A6248;
+}

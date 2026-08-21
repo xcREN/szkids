@@ -1,0 +1,53 @@
+<view class="page">
+  <!-- 日期 -->
+  <view class="dates">
+    <view wx:for="{{quick}}" wx:key="date" class="date {{item.on ? 'date--on' : ''}}"
+          data-date="{{item.date}}" bindtap="onQuickTap">{{item.label}}</view>
+    <picker class="date date--picker" mode="date" value="{{date}}" bindchange="onDateChange">
+      <text>其他日期 ▾</text>
+    </picker>
+  </view>
+  <view class="dateText">{{dateText}}</view>
+
+  <!-- 时段 -->
+  <view wx:for="{{slots}}" wx:key="key" class="slot">
+    <view class="slot__label">{{item.label}}</view>
+    <view wx:if="{{item.places.length}}" class="slot__body">
+      <view wx:for="{{item.places}}" wx:for-item="p" wx:key="id" class="pitem">
+        <view class="pitem__main" data-id="{{p.id}}" bindtap="onDetail">
+          <view class="pitem__name">{{p.categoryEmoji}} {{p.name}}</view>
+          <view class="pitem__meta">{{p.district}} · {{p.durationText}} · {{p.priceText}}{{p.driveText ? ' · ' + p.driveText : ''}}</view>
+        </view>
+        <view class="pitem__del" data-id="{{p.id}}" catchtap="onRemove">移出</view>
+      </view>
+    </view>
+    <view wx:else class="slot__empty">还没安排</view>
+  </view>
+
+  <!-- 汇总 -->
+  <view wx:if="{{!isEmpty}}" class="sum">
+    <view class="sum__row">
+      <text class="sum__label">预计</text>
+      <text class="sum__value">{{totalHours}} 小时</text>
+      <text wx:if="{{totalKm}}" class="sum__label">路线约</text>
+      <text wx:if="{{totalKm}}" class="sum__value">{{totalKm}} km</text>
+    </view>
+    <view class="sum__note">距离是直线距离累加，只作量级参考</view>
+    <view class="sum__map" bindtap="onViewOnMap">在地图上看这一天 ›</view>
+  </view>
+
+  <!-- 从收藏里加 -->
+  <view class="sec__title">从收藏里添加</view>
+  <block wx:if="{{favorites.length}}">
+    <view wx:for="{{favorites}}" wx:key="id" class="fav">
+      <view class="fav__main" data-id="{{item.id}}" bindtap="onDetail">
+        <view class="fav__name">{{item.categoryEmoji}} {{item.name}}</view>
+        <view class="fav__meta">{{item.district}} · {{item.durationText}}{{item.driveText ? ' · ' + item.driveText : ''}}</view>
+      </view>
+      <view class="fav__add" data-id="{{item.id}}" catchtap="onAdd">+ 加入</view>
+    </view>
+  </block>
+  <view wx:else class="fav__empty">
+    收藏里没有可加的地点了。<text class="link" bindtap="onGoFavorite">去收藏页看看 ›</text>
+  </view>
+</view>

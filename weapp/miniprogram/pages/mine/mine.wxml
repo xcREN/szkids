@@ -1,0 +1,80 @@
+<view class="page">
+  <!-- 头像昵称：用微信开放能力直接填，不需要登录 -->
+  <view class="profile">
+    <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+      <image wx:if="{{profile.avatarUrl}}" class="avatar" src="{{profile.avatarUrl}}" mode="aspectFill" />
+      <view wx:else class="avatar avatar--empty">＋</view>
+    </button>
+    <view class="profile__text">
+      <input class="profile__nick" type="nickname" value="{{profile.nickName}}"
+             placeholder="点这里填昵称" placeholder-class="ph" bindblur="onNickInput" bindinput="onNickInput" />
+      <view class="profile__desc">头像昵称只存在本机，没有上传</view>
+    </view>
+  </view>
+
+  <!-- 孩子 -->
+  <view class="sec">
+    <view class="sec__head">
+      <text class="sec__title">孩子</text>
+      <text class="sec__action" bindtap="onAddChild">+ 添加</text>
+    </view>
+
+    <view wx:if="{{children.length}}" class="kids">
+      <view wx:for="{{children}}" wx:key="id" class="kid {{item.on ? 'kid--on' : ''}}"
+            data-id="{{item.id}}" bindtap="onPickChild">
+        <view class="kid__row">
+          <text class="kid__name">{{item.name}}</text>
+          <text wx:if="{{item.on}}" class="kid__badge">当前</text>
+        </view>
+        <view class="kid__age">{{item.ageText}} · 按{{item.groupText}}推荐</view>
+        <view class="kid__edit" data-id="{{item.id}}" catchtap="onEditChild">编辑</view>
+      </view>
+    </view>
+
+    <view wx:else class="addcard" bindtap="onAddChild">
+      <view class="addcard__title">添加孩子资料</view>
+      <view class="addcard__desc">填了出生年份，地图就会按孩子的年龄推荐，每年自动长一岁。</view>
+    </view>
+  </view>
+
+  <!-- 功能入口 -->
+  <view class="list">
+    <view class="item" bindtap="onFavorite">
+      <text class="item__emoji">♡</text>
+      <view class="item__text">
+        <view class="item__title">我的收藏</view>
+        <view class="item__desc">想去的地方，按收藏夹分类</view>
+      </view>
+      <text class="item__right">{{favCount}} ›</text>
+    </view>
+
+    <view class="item" bindtap="onPlan">
+      <text class="item__emoji">📅</text>
+      <view class="item__text">
+        <view class="item__title">周末计划</view>
+        <view class="item__desc">把收藏排进这个周末</view>
+      </view>
+      <text class="item__right">{{planCount ? planCount + ' ›' : '›'}}</text>
+    </view>
+
+    <view class="item" bindtap="onCheckin">
+      <text class="item__emoji">🚩</text>
+      <view class="item__text">
+        <view class="item__title">打卡记录</view>
+        <view class="item__desc">我们去过的地方</view>
+      </view>
+      <text class="item__right">{{checkinCount}} ›</text>
+    </view>
+
+    <view class="item" bindtap="onClearData">
+      <text class="item__emoji">🧹</text>
+      <view class="item__text">
+        <view class="item__title">清空本地数据</view>
+        <view class="item__desc">孩子资料、收藏、头像昵称</view>
+      </view>
+      <text class="item__right">›</text>
+    </view>
+  </view>
+
+  <view class="foot">深圳亲子地图 {{version}}</view>
+</view>

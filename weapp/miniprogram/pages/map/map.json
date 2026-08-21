@@ -1,0 +1,7 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "place-card": "/components/place-card/index",
+    "filter-panel": "/components/filter-panel/index"
+  }
+}

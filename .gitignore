@@ -3,3 +3,18 @@
 *.tmp
 Thumbs.db
 desktop.ini
+
+# Worker 相关
+node_modules/
+.wrangler/
+.dev.vars
+
+# 微信开发者工具的本地私有配置，每台机器不一样，不该进仓库
+project.private.config.json
+
+# Python 缓存
+__pycache__/
+*.pyc
+
+# 域名归属验证文件，属于站点凭证性质，不公开
+4d99fe0d30affa48ec0f59e255bd80e7.txt

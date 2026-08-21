@@ -1,0 +1,144 @@
+.pcard {
+  position: relative;
+  background: #fff;
+  border-radius: 28rpx;
+  padding: 32rpx 28rpx 28rpx;
+  box-shadow: 0 8rpx 32rpx rgba(45, 40, 32, 0.12);
+}
+
+/* 列表模式：更紧凑，阴影更轻 */
+.pcard--list {
+  padding: 28rpx 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.06);
+}
+
+.pcard__close {
+  position: absolute;
+  top: 18rpx;
+  right: 22rpx;
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  color: #9AA096;
+  font-size: 28rpx;
+}
+
+.pcard__head {
+  display: flex;
+  align-items: center;
+}
+
+.pcard__emoji {
+  font-size: 36rpx;
+  margin-right: 12rpx;
+}
+
+.pcard__name {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #1E241F;
+}
+
+.pcard__score {
+  margin-top: 6rpx;
+  display: flex;
+  align-items: center;
+}
+
+.pcard__stars {
+  color: #D9A441;
+  font-size: 24rpx;
+  letter-spacing: 2rpx;
+}
+
+.pcard__scorenum {
+  margin-left: 10rpx;
+  font-size: 24rpx;
+  color: #6C736B;
+}
+
+.pcard__district {
+  margin-left: 10rpx;
+  font-size: 24rpx;
+  color: #9AA096;
+}
+
+.pcard__age {
+  margin-top: 20rpx;
+  display: flex;
+  align-items: baseline;
+}
+
+.pcard__agelabel {
+  font-size: 24rpx;
+  color: #6C736B;
+}
+
+.pcard__ageval {
+  margin-left: 14rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #3A6248;
+}
+
+.pcard__tags {
+  margin-top: 18rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* 用 margin 代替 flex gap：部分安卓微信 WebView 不支持 gap */
+.pcard__tags .chip {
+  margin: 0 12rpx 12rpx 0;
+}
+
+.pcard__facts {
+  margin-top: 20rpx;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 26rpx;
+  color: #555C53;
+}
+
+.pcard__fact {
+  margin: 0 24rpx 4rpx 0;
+}
+
+.pcard__actions {
+  margin-top: 28rpx;
+  display: flex;
+}
+
+.pcard__actions .pcard__btn + .pcard__btn {
+  margin-left: 20rpx;
+}
+
+.pcard__btn {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  color: #3A6248;
+  background: #E6EDE6;
+}
+
+.pcard__btn--primary {
+  color: #fff;
+  background: #4B7A5A;
+}
+
+/* .chip 在 app.wxss 里定义过，组件内再写一份，
+   免得样式隔离策略变化时标签样式丢失 */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8rpx 22rpx;
+  border-radius: 999rpx;
+  font-size: 24rpx;
+  color: #6C736B;
+  background: #EFEDE6;
+  white-space: nowrap;
+}

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "place-card": "/components/place-card/index"
+  },
+  "navigationBarTitleText": "地图专题"
+}

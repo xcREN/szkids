@@ -1,0 +1,17 @@
+<view class="page">
+  <view class="tip">{{summary}}</view>
+
+  <!-- 画布始终存在但盖在下面，用户看到的是导出后的图片 -->
+  <view class="stage">
+    <canvas id="card" class="card" type="2d"></canvas>
+    <image wx:if="{{imagePath}}" class="card card--img" src="{{imagePath}}" mode="widthFix"
+           show-menu-by-longpress="{{true}}" />
+    <view wx:if="{{drawing}}" class="loading">生成中…</view>
+  </view>
+
+  <view class="acts">
+    <view class="btn btn--primary" bindtap="onShareImage">发给微信好友</view>
+    <view class="btn btn--ghost" bindtap="onSave">保存到相册</view>
+  </view>
+  <view class="foot">长按图片也可以直接转发或保存</view>
+</view>

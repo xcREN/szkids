@@ -1,0 +1,22 @@
+<view wx:if="{{topic}}" class="page">
+  <view class="hd">
+    <view class="hd__emoji">{{topic.emoji}}</view>
+    <view class="hd__title">{{topic.title}}</view>
+    <view class="hd__desc">{{topic.desc}}</view>
+    <view class="hd__row">
+      <text class="hd__count">共 {{places.length}} 个地点</text>
+      <text wx:if="{{places.length}}" class="hd__map" bindtap="onViewOnMap">在地图上看 ›</text>
+    </view>
+  </view>
+
+  <view wx:for="{{places}}" wx:key="id" class="item">
+    <place-card place="{{item}}" mode="list" favorited="{{item.favorited}}"
+                bind:detail="onDetail" bind:favorite="onFavorite" />
+  </view>
+
+  <view wx:if="{{!places.length}}" class="placeholder">
+    <view class="placeholder__emoji">🗺️</view>
+    <view class="placeholder__title">这个专题还没有地点</view>
+    <view class="placeholder__desc">数据还在补充，换个专题看看。</view>
+  </view>
+</view>

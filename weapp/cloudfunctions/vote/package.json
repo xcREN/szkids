@@ -1,0 +1,9 @@
+{
+  "name": "vote",
+  "version": "1.0.0",
+  "description": "活动召集：提交和查询自己的选择",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

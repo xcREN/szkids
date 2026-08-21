@@ -1,0 +1,93 @@
+/**
+ * 全局样式与设计变量
+ * ------------------------------------------------------------
+ * 视觉方向：Apple Maps × 生活方式 × 户外自然感
+ *
+ * 配色（2026 自然暖白）：
+ *   底色走暖白（Cloud Dancer 那一挂），不用冷灰白；
+ *   主色是低饱和森林绿 #4B7A5A，比亮草绿更耐看、也更像户外；
+ *   点缀色是陶土 #B5714C，只用在需要跳出来的地方，别铺开。
+ *   —— 不用母婴粉、不用高饱和儿童卡通色。
+ *
+ * 页面里尽量用这里的 var()，改主题只改这一处；
+ * 地图 Marker 和 TabBar 图标的颜色在 tools/gen_assets.py 里，改完要重新生成。
+ */
+page {
+  --brand: #4B7A5A;
+  --brand-dark: #3A6248;
+  --brand-soft: #E6EDE6;
+  --blue: #3F7F8C;      /* 分类·玩水海边 */
+  --clay: #B5714C;      /* 分类·文化室内，也是全局点缀色 */
+  --plum: #7E6A92;      /* 分类·游乐运动 */
+  --gold: #D9A441;      /* 星级 */
+  --bg: #F3F1EC;
+  --card: #FFFFFF;
+  --text: #1E241F;
+  --sub: #6C736B;
+  --faint: #9AA096;
+  --line: #E8E4DC;
+  --shadow: 0 8rpx 32rpx rgba(45, 40, 32, 0.10);
+  --radius: 24rpx;
+
+  background: var(--bg);
+  color: var(--text);
+  font-size: 28rpx;
+  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+/* ---------- 通用小组件 ---------- */
+
+/* 卡片 */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* 胶囊标签 */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8rpx 22rpx;
+  border-radius: 999rpx;
+  font-size: 24rpx;
+  color: var(--sub);
+  background: #EFEDE6;
+  white-space: nowrap;
+}
+
+.chip--on {
+  background: var(--brand);
+  color: #fff;
+}
+
+/* 次要说明文字 */
+.muted {
+  color: var(--sub);
+  font-size: 24rpx;
+}
+
+/* 页面级空状态 / 占位 */
+.placeholder {
+  padding: 120rpx 60rpx;
+  text-align: center;
+  color: var(--faint);
+}
+
+.placeholder__emoji {
+  font-size: 88rpx;
+  line-height: 1.2;
+}
+
+.placeholder__title {
+  margin-top: 24rpx;
+  font-size: 32rpx;
+  color: var(--text);
+}
+
+.placeholder__desc {
+  margin-top: 12rpx;
+  font-size: 26rpx;
+  line-height: 1.8;
+}

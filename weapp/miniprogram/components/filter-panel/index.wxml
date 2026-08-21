@@ -1,0 +1,37 @@
+<view wx:if="{{show}}" class="fp">
+  <!-- 遮罩：点一下关掉 -->
+  <view class="fp__mask" bindtap="onClose" catchtouchmove="noop"></view>
+
+  <view class="fp__sheet">
+    <view class="fp__head">
+      <text class="fp__title">筛选</text>
+      <text class="fp__close" bindtap="onClose">✕</text>
+    </view>
+
+    <scroll-view class="fp__body" scroll-y="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+      <view wx:for="{{sections}}" wx:for-index="si" wx:for-item="sec" wx:key="key" class="fp__sec">
+        <view class="fp__sectitle">{{sec.title}}</view>
+        <view class="fp__opts">
+          <view
+            wx:for="{{sec.options}}"
+            wx:for-index="oi"
+            wx:for-item="opt"
+            wx:key="label"
+            class="fp__opt {{opt.on ? 'fp__opt--on' : ''}}"
+            data-si="{{si}}"
+            data-oi="{{oi}}"
+            bindtap="onOptionTap"
+          >{{opt.label}}</view>
+        </view>
+      </view>
+      <view class="fp__bodypad"></view>
+    </scroll-view>
+
+    <view class="fp__foot">
+      <view class="fp__btn fp__btn--ghost" bindtap="onReset">重置</view>
+      <view class="fp__btn fp__btn--primary" bindtap="onConfirm">
+        {{count > 0 ? '查看 ' + count + ' 个地点' : '没有符合的地点'}}
+      </view>
+    </view>
+  </view>
+</view>

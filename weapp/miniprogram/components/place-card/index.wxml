@@ -1,0 +1,51 @@
+<wxs module="u">
+/* 卡片里用到的小工具：星级取整、条件拼接 */
+module.exports = {
+  stars: function (score) {
+    var full = Math.round(score);
+    var s = '';
+    for (var i = 0; i < 5; i++) { s += i < full ? '★' : '☆'; }
+    return s;
+  }
+};
+</wxs>
+
+<view wx:if="{{place}}" class="pcard pcard--{{mode}}" bindtap="onCardTap">
+  <!-- 地图模式右上角的关闭按钮 -->
+  <view wx:if="{{mode === 'map'}}" class="pcard__close" catchtap="onClose">✕</view>
+
+  <!-- 标题行：分类 emoji + 名称 + 推荐指数 -->
+  <view class="pcard__head">
+    <text class="pcard__emoji">{{place.categoryEmoji}}</text>
+    <text class="pcard__name">{{place.name}}</text>
+  </view>
+
+  <view class="pcard__score">
+    <text class="pcard__stars">{{u.stars(place.recommendScore)}}</text>
+    <text class="pcard__scorenum">{{place.scoreText}}</text>
+    <text class="pcard__district">· {{place.district}}</text>
+  </view>
+
+  <!-- 推荐年龄：产品的第一判断依据 -->
+  <view class="pcard__age">
+    <text class="pcard__agelabel">👶 推荐年龄</text>
+    <text class="pcard__ageval">{{place.ageText}}</text>
+  </view>
+
+  <!-- 玩法标签 -->
+  <view class="pcard__tags">
+    <text wx:for="{{place.topTags}}" wx:key="*this" class="chip">{{item}}</text>
+  </view>
+
+  <!-- 三个最影响决定的事实：多远、多少钱、玩多久 -->
+  <view class="pcard__facts">
+    <text wx:if="{{place.driveText}}" class="pcard__fact">🚗 {{place.driveText}}</text>
+    <text class="pcard__fact">💰 {{place.priceText}}</text>
+    <text class="pcard__fact">⏱ {{place.durationText}}</text>
+  </view>
+
+  <view class="pcard__actions">
+    <view class="pcard__btn pcard__btn--primary" catchtap="onDetail">查看详情</view>
+    <view class="pcard__btn" catchtap="onFavorite">{{favorited ? '已收藏 ♥' : '收藏 ♡'}}</view>
+  </view>
+</view>

@@ -1,0 +1,19 @@
+# szkids 投票 Worker 配置
+# 部署步骤见同目录 部署说明.md
+
+name = "szkids-vote"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# 不生成 xxx.workers.dev 地址（国内经常连不上，也没必要多一个入口）
+workers_dev = false
+
+# API 挂在自己的域名下，和网页同源，微信里不会有跨域问题
+routes = [
+  { pattern = "szkids.dpdns.org/api/*", zone_name = "szkids.dpdns.org" }
+]
+
+# 由 `npx wrangler kv namespace create VOTES` 创建，别随便改——改了旧票就读不到了
+[[kv_namespaces]]
+binding = "VOTES"
+id = "ebae9d6945ac4354a10d47382d5801bf"

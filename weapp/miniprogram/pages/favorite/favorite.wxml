@@ -1,0 +1,32 @@
+<view class="page">
+  <block wx:if="{{!empty}}">
+    <scroll-view class="tabs" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+      <view class="tabs__inner">
+        <view wx:for="{{tabs}}" wx:key="label" class="tab {{item.on ? 'tab--on' : ''}}"
+              data-name="{{item.name}}" bindtap="onTabTap">{{item.label}} {{item.count}}</view>
+      </view>
+    </scroll-view>
+
+    <view class="bar">
+      <text class="bar__count">{{list.length}} 个地点</text>
+      <text wx:if="{{list.length}}" class="bar__map" bindtap="onViewOnMap">在地图上看 ›</text>
+    </view>
+
+    <view wx:for="{{list}}" wx:key="id" class="item">
+      <place-card place="{{item}}" mode="list" favorited="{{true}}"
+                  bind:detail="onDetail" bind:favorite="onUnfavorite" />
+      <view class="folder" data-id="{{item.id}}" bindtap="onFolderTap">
+        <text class="folder__label">收藏夹</text>
+        <text class="folder__name">{{item.folder}}</text>
+        <text class="folder__arrow">›</text>
+      </view>
+    </view>
+  </block>
+
+  <view wx:else class="placeholder">
+    <view class="placeholder__emoji">♡</view>
+    <view class="placeholder__title">还没有收藏任何地方</view>
+    <view class="placeholder__desc">在地图或详情页点「收藏」，可以放进「这个周末」「下雨天备用」这样的收藏夹。</view>
+    <view class="btn" bindtap="onGoMap">去地图看看</view>
+  </view>
+</view>

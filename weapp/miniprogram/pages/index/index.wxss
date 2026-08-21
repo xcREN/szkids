@@ -1,0 +1,243 @@
+.page {
+  padding: 24rpx 24rpx 60rpx;
+}
+
+.card {
+  background: #fff;
+  border: 1rpx solid #e2ece6;
+  border-radius: 24rpx;
+  padding: 32rpx 28rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 18rpx rgba(47, 122, 85, .06);
+}
+
+.title {
+  font-size: 38rpx;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 20rpx;
+}
+
+.row {
+  display: flex;
+  font-size: 28rpx;
+  margin-top: 10rpx;
+}
+
+.row .lb {
+  flex: 0 0 84rpx;
+  color: #5d6d66;
+}
+
+.row .vl {
+  flex: 1;
+}
+
+.copy {
+  color: #2f7a55;
+  font-size: 24rpx;
+}
+
+.weather {
+  margin-top: 20rpx;
+  background: #fff8ec;
+  border: 1rpx solid #f6e2bd;
+  border-radius: 16rpx;
+  padding: 16rpx 20rpx;
+  font-size: 26rpx;
+  color: #8a6320;
+}
+
+.intro {
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  color: #5d6d66;
+}
+
+/* ── 位置导航 ── */
+.addr {
+  font-size: 27rpx;
+  color: #22312b;
+  background: #f6fbf8;
+  border: 1rpx solid #e2ece6;
+  border-radius: 16rpx;
+  padding: 18rpx 20rpx;
+}
+
+.map-btns {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 18rpx;
+}
+
+.map-btns .btn {
+  flex: 1;
+  margin-top: 0;
+}
+
+.btn.small {
+  font-size: 27rpx;
+  line-height: 2.3;
+}
+
+.hint {
+  margin-top: 14rpx;
+  font-size: 23rpx;
+  color: #9dbaa9;
+  line-height: 1.6;
+}
+
+/* ── 照片 ── */
+.photos {
+  display: flex;
+  gap: 12rpx;
+}
+
+.photos .ph {
+  flex: 1;
+  position: relative;
+  height: 190rpx;
+  border-radius: 14rpx;
+  overflow: hidden;
+  background: #e8f4ec;
+}
+
+.photos .ph image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ph-credit {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 14rpx 6rpx 6rpx;
+  font-size: 18rpx;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .6));
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* ── 照片全屏查看 ── */
+.lightbox {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  background: rgba(0, 0, 0, .92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-img {
+  width: 100%;
+}
+
+.lightbox-tip {
+  position: absolute;
+  bottom: 80rpx;
+  color: rgba(255, 255, 255, .6);
+  font-size: 24rpx;
+}
+
+.q-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 20rpx;
+  padding-left: 16rpx;
+  border-left: 6rpx solid #4fa87a;
+  line-height: 1.3;
+}
+
+.opt {
+  display: flex;
+  align-items: flex-start;
+  padding: 20rpx;
+  margin-bottom: 14rpx;
+  background: #f6fbf8;
+  border: 1rpx solid #e2ece6;
+  border-radius: 16rpx;
+}
+
+.opt-body {
+  flex: 1;
+  margin-left: 10rpx;
+  min-width: 0;
+}
+
+.opt-label {
+  font-size: 28rpx;
+  line-height: 1.5;
+}
+
+.opt-names {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #2f7a55;
+}
+
+.opt-names.empty {
+  color: #9dbaa9;
+}
+
+/* 选了"自己填"之后出现的输入框，缩进对齐选项文字 */
+.custom-input {
+  margin: -4rpx 0 14rpx 62rpx;
+  border: 1rpx solid #4fa87a;
+  border-radius: 14rpx;
+  padding: 16rpx 20rpx;
+  font-size: 27rpx;
+  background: #fff;
+}
+
+.name-input {
+  border: 1rpx solid #e2ece6;
+  border-radius: 16rpx;
+  padding: 18rpx 20rpx;
+  font-size: 28rpx;
+  background: #f6fbf8;
+}
+
+.ph {
+  color: #9dbaa9;
+}
+
+.btn {
+  margin-top: 24rpx;
+  border-radius: 999rpx;
+  font-size: 30rpx;
+  line-height: 2.6;
+}
+
+.btn.primary {
+  background: #2f7a55;
+  color: #fff;
+}
+
+.btn.plain {
+  background: #fff;
+  color: #5d6d66;
+  border: 1rpx solid #e2ece6;
+}
+
+.status {
+  margin-top: 22rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #5d6d66;
+}
+
+.foot {
+  text-align: center;
+  font-size: 24rpx;
+  color: #9dbaa9;
+  margin-top: 10rpx;
+}

@@ -1,0 +1,252 @@
+.page {
+  padding: 24rpx 24rpx 40rpx;
+}
+
+.hd {
+  padding: 8rpx;
+}
+
+.hd__title {
+  font-size: 40rpx;
+  font-weight: 600;
+}
+
+.hd__sub {
+  margin-top: 6rpx;
+  font-size: 25rpx;
+  color: #9AA096;
+}
+
+/* ---------------- 探索度 ---------------- */
+.explore {
+  margin-top: 24rpx;
+  padding: 28rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+}
+
+.explore__row {
+  display: flex;
+  align-items: baseline;
+}
+
+.explore__num {
+  font-size: 56rpx;
+  font-weight: 600;
+  color: #3A6248;
+  line-height: 1;
+}
+
+.explore__unit {
+  margin-left: 10rpx;
+  font-size: 26rpx;
+  color: #6C736B;
+}
+
+.explore__pct {
+  margin-left: auto;
+  font-size: 25rpx;
+  color: #6C736B;
+}
+
+.bar {
+  margin-top: 20rpx;
+  height: 14rpx;
+  border-radius: 999rpx;
+  background: #EFEDE6;
+  overflow: hidden;
+}
+
+.bar__fill {
+  height: 14rpx;
+  border-radius: 999rpx;
+  background: #4B7A5A;
+}
+
+.explore__note {
+  margin-top: 12rpx;
+  font-size: 21rpx;
+  color: #B9BCB2;
+}
+
+/* ---------------- 地图 ---------------- */
+.mapbox {
+  position: relative;
+  margin-top: 24rpx;
+  height: 460rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+
+.map {
+  width: 100%;
+  height: 460rpx;
+}
+
+.legend {
+  position: absolute;
+  left: 20rpx;
+  bottom: 20rpx;
+  display: flex;
+  padding: 8rpx 18rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.legend__item {
+  font-size: 21rpx;
+  color: #3A6248;
+}
+
+.legend__item--off {
+  margin-left: 16rpx;
+  color: #9AA096;
+}
+
+/* ---------------- 年份 + 统计 ---------------- */
+.years {
+  display: flex;
+  padding: 28rpx 4rpx 16rpx;
+}
+
+.year {
+  margin-right: 14rpx;
+  padding: 10rpx 24rpx;
+  border-radius: 999rpx;
+  font-size: 25rpx;
+  color: #555C53;
+  background: #F1EFE8;
+}
+
+.year--on {
+  color: #fff;
+  background: #4B7A5A;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 20rpx 0;
+  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+}
+
+.stat {
+  width: 33.33%;
+  text-align: center;
+  padding: 20rpx 0;
+}
+
+.stat__value {
+  font-size: 44rpx;
+  font-weight: 600;
+  color: #3A6248;
+  line-height: 1.2;
+}
+
+.stat__unit {
+  font-size: 22rpx;
+  margin-left: 4rpx;
+  color: #6C736B;
+}
+
+.stat__label {
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  color: #6C736B;
+}
+
+.share {
+  margin-top: 20rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  color: #3A6248;
+  background: #E6EDE6;
+}
+
+/* ---------------- 记录 ---------------- */
+.sec__title {
+  padding: 36rpx 8rpx 16rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.rec {
+  padding: 28rpx 24rpx;
+  margin-bottom: 20rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+}
+
+.rec__head {
+  display: flex;
+  align-items: baseline;
+}
+
+.rec__date {
+  width: 150rpx;
+  font-size: 24rpx;
+  color: #9AA096;
+}
+
+.rec__name {
+  flex: 1;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.rec__meta {
+  display: flex;
+  align-items: center;
+  padding-left: 150rpx;
+  margin-top: 6rpx;
+}
+
+.rec__kid {
+  font-size: 23rpx;
+  color: #6C736B;
+}
+
+.rec__stars {
+  margin-left: 14rpx;
+  font-size: 22rpx;
+  color: #D9A441;
+  letter-spacing: 2rpx;
+}
+
+.rec__note {
+  margin: 14rpx 0 0 150rpx;
+  font-size: 26rpx;
+  color: #555C53;
+  line-height: 1.7;
+}
+
+.rec__photos {
+  display: flex;
+  margin: 16rpx 0 0 150rpx;
+}
+
+.rec__photo {
+  width: 140rpx;
+  height: 140rpx;
+  margin-right: 12rpx;
+  border-radius: 12rpx;
+}
+
+.btn {
+  margin: 36rpx auto 0;
+  width: 320rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  color: #fff;
+  background: #4B7A5A;
+}

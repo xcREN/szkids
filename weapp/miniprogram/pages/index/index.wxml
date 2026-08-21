@@ -1,0 +1,85 @@
+<view class="page">
+
+  <!-- 活动信息 -->
+  <view class="card">
+    <view class="title">{{activity.title}}</view>
+    <view class="row"><text class="lb">时间</text><text class="vl">{{activity.date}}</text></view>
+    <view class="row" bindtap="copyPlace">
+      <text class="lb">地点</text>
+      <text class="vl">{{activity.place}}<text class="copy">（点此复制）</text></text>
+    </view>
+    <view class="weather" wx:if="{{activity.weather}}">{{activity.weather}}</view>
+    <view class="intro" wx:if="{{activity.intro}}">{{activity.intro}}</view>
+  </view>
+
+  <!-- 位置导航 -->
+  <view class="card" wx:if="{{map.address}}">
+    <view class="q-title">位置导航</view>
+    <view class="addr">{{map.address}}</view>
+    <view class="map-btns">
+      <button class="btn primary small" wx:if="{{hasLnglat}}" bindtap="openMap">地图导航</button>
+      <button class="btn plain small" bindtap="copyAddr">复制地址</button>
+    </view>
+    <view class="hint" wx:if="{{!hasLnglat}}">复制地址后到地图 App 里搜索即可</view>
+  </view>
+
+  <!-- 目的地照片 -->
+  <view class="card" wx:if="{{photos.length}}">
+    <view class="q-title">目的地照片</view>
+    <view class="photos">
+      <view class="ph" wx:for="{{photos}}" wx:key="src" data-index="{{index}}" bindtap="openPhoto">
+        <image src="{{item.src}}" mode="aspectFill" lazy-load />
+        <view class="ph-credit">{{item.credit}}</view>
+      </view>
+    </view>
+    <view class="hint" wx:if="{{photoNote}}">{{photoNote}}</view>
+  </view>
+
+  <!-- 每道选择题 -->
+  <view class="card" wx:for="{{display}}" wx:key="key" wx:for-item="q">
+    <view class="q-title">{{q.title}}</view>
+
+    <radio-group data-key="{{q.key}}" bindchange="onPick">
+      <block wx:for="{{q.options}}" wx:key="key" wx:for-item="opt">
+        <label class="opt">
+          <radio value="{{opt.key}}" checked="{{answers[q.key] === opt.key}}" color="#2f7a55" />
+          <view class="opt-body">
+            <view class="opt-label">{{opt.label}}</view>
+            <view class="opt-names" wx:if="{{opt.count > 0}}">{{opt.count}} 人：{{opt.names}}</view>
+            <view class="opt-names empty" wx:else>还没人选</view>
+          </view>
+        </label>
+        <!-- 选中"自己填"才出现输入框；放在 label 外面，免得点输入框被当成点选项 -->
+        <input wx:if="{{opt.custom && answers[q.key] === opt.key}}"
+               class="custom-input" data-key="{{q.key}}" bindinput="onCustom"
+               value="{{customs[q.key]}}" maxlength="20"
+               placeholder="{{opt.placeholder}}" placeholder-class="ph" />
+      </block>
+    </radio-group>
+  </view>
+
+  <!-- 称呼 + 提交 -->
+  <view class="card">
+    <view class="q-title">你的称呼</view>
+    <input class="name-input" value="{{name}}" bindinput="onName" maxlength="12"
+           placeholder="比如：豆豆妈" placeholder-class="ph" />
+
+    <button class="btn primary" bindtap="submit" loading="{{submitting}}" disabled="{{submitting}}">
+      {{voted ? '修改我的选择' : '提交'}}
+    </button>
+    <button class="btn plain" wx:if="{{voted}}" bindtap="cancel">撤回我的选择</button>
+
+    <view class="status">
+      <text wx:if="{{loading}}">加载中…</text>
+      <text wx:else>已有 {{joined}} 人填写 · 下拉可刷新</text>
+    </view>
+  </view>
+
+  <view class="foot">最终以出发前一天群通知为准</view>
+
+  <!-- 点照片后的全屏查看层。没用 wx.previewImage：那个接口对小程序包内的图片支持不稳 -->
+  <view class="lightbox" wx:if="{{lightbox}}" bindtap="closePhoto">
+    <image src="{{lightbox}}" mode="widthFix" class="lightbox-img" />
+    <view class="lightbox-tip">点击任意位置关闭</view>
+  </view>
+</view>

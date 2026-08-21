@@ -1,0 +1,87 @@
+<view class="page">
+  <!-- 地图占满整个可视区域，其余元素浮在上面（同层渲染，普通 view 即可） -->
+  <map
+    id="szmap"
+    class="map"
+    latitude="{{latitude}}"
+    longitude="{{longitude}}"
+    scale="{{scale}}"
+    markers="{{markers}}"
+    show-location="{{true}}"
+    enable-rotate="{{false}}"
+    enable-overlooking="{{false}}"
+    bindmarkertap="onMarkerTap"
+    bindtap="onMapTap"
+    bindregionchange="onRegionChange"
+  ></map>
+
+  <!-- ---------- 顶部：城市 / 天气 / 搜索 / 快捷筛选 ---------- -->
+  <view class="top" style="padding-top: {{statusBarHeight + 6}}px">
+    <view class="top__row">
+      <view class="top__city">{{city}} ▾</view>
+      <view class="top__weather" bindtap="onWeatherTap">{{weatherLine}}</view>
+    </view>
+
+    <view class="search" bindtap="onSearchTap">
+      <text class="search__icon">🔍</text>
+      <text class="search__ph">{{filters.keyword || '搜索公园、博物馆、玩水……'}}</text>
+    </view>
+
+    <scroll-view class="chips" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+      <view class="chips__inner">
+        <view class="fchip {{chip.nearby ? 'fchip--on' : ''}}" data-key="nearby" bindtap="onQuickTap">附近10km</view>
+        <view class="fchip {{chip.age !== '孩子年龄' ? 'fchip--on' : ''}}" bindtap="onAgeTap">{{chip.age}} ▾</view>
+        <view class="fchip {{chip.free ? 'fchip--on' : ''}}" data-key="free" bindtap="onQuickTap">免费</view>
+        <view class="fchip {{chip.outdoor ? 'fchip--on' : ''}}" data-key="outdoor" bindtap="onQuickTap">户外</view>
+        <view class="fchip {{chip.more > 0 ? 'fchip--on' : ''}}" bindtap="onMoreFilterTap">
+          更多筛选{{chip.more > 0 ? ' · ' + chip.more : ''}}
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 从专题 / 搜索进来时，说明当前在看什么，并给一个退出口 -->
+    <view wx:if="{{bannerText}}" class="banner">
+      <text class="banner__text">{{bannerText}}</text>
+      <text class="banner__clear" bindtap="onClearAll">清除 ✕</text>
+    </view>
+  </view>
+
+  <!-- ---------- 搜索这片区域 ---------- -->
+  <view wx:if="{{canSearchRegion}}" class="region" bindtap="onSearchRegion">搜索这片区域</view>
+
+  <!-- ---------- 右侧悬浮按钮 ---------- -->
+  <view class="fabs {{selected ? 'fabs--up' : ''}}">
+    <view class="fab" bindtap="onLocateTap">◎</view>
+  </view>
+
+  <!-- ---------- 今天去哪 ---------- -->
+  <view class="today {{selected ? 'today--hide' : ''}}" bindtap="onTodayTap">🎲 今天去哪？</view>
+
+  <!-- ---------- 底部：结果数 / 地点卡片 ---------- -->
+  <view wx:if="{{!selected}}" class="summary">
+    <text wx:if="{{total > 0}}">符合条件的地点 {{total}} 个</text>
+    <text wx:else>没有符合条件的地点，试着少选几个条件</text>
+    <text wx:if="{{!locatedOk}}" class="summary__tip">（未定位，按深圳市中心估算距离）</text>
+  </view>
+
+  <view wx:if="{{selected}}" class="sheet">
+    <place-card
+      place="{{selected}}"
+      mode="map"
+      favorited="{{selected.favorited}}"
+      bind:detail="onDetail"
+      bind:favorite="onFavorite"
+      bind:close="onCloseCard"
+    />
+  </view>
+
+  <!-- ---------- 完整筛选面板 ---------- -->
+  <filter-panel
+    show="{{showFilter}}"
+    value="{{filters}}"
+    count="{{draftCount}}"
+    bind:change="onFilterChange"
+    bind:confirm="onFilterConfirm"
+    bind:close="onFilterClose"
+  />
+</view>

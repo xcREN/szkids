@@ -1,0 +1,72 @@
+<view class="page">
+  <!-- 搜索条 -->
+  <view class="bar">
+    <view class="bar__box">
+      <text class="bar__icon">🔍</text>
+      <input
+        class="bar__input"
+        value="{{keyword}}"
+        placeholder="搜索公园、博物馆、玩水……"
+        placeholder-class="bar__ph"
+        confirm-type="search"
+        focus="{{true}}"
+        bindinput="onInput"
+        bindconfirm="onConfirm"
+      />
+      <text wx:if="{{keyword}}" class="bar__clear" bindtap="onClearInput">✕</text>
+    </view>
+    <text class="bar__cancel" bindtap="onCancel">取消</text>
+  </view>
+
+  <!-- 初始态：分类入口 + 搜索历史 -->
+  <block wx:if="{{!searched}}">
+    <view class="sec">
+      <view class="sec__title">按玩法找</view>
+      <view class="cats">
+        <view
+          wx:for="{{categories}}"
+          wx:key="key"
+          class="cat {{category === item.key ? 'cat--on' : ''}}"
+          data-key="{{item.key}}"
+          bindtap="onCategoryTap"
+        >{{item.emoji}} {{item.label}}</view>
+      </view>
+    </view>
+
+    <view wx:if="{{history.length}}" class="sec">
+      <view class="sec__head">
+        <text class="sec__title">搜索历史</text>
+        <text class="sec__action" bindtap="onClearHistory">清空</text>
+      </view>
+      <view class="cats">
+        <view
+          wx:for="{{history}}"
+          wx:key="*this"
+          class="cat"
+          data-word="{{item}}"
+          bindtap="onHistoryTap"
+        >{{item}}</view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 结果 -->
+  <block wx:else>
+    <view class="rhead">
+      <text class="rhead__count">找到 {{results.length}} 个地点</text>
+      <text wx:if="{{results.length}}" class="rhead__map" bindtap="onViewOnMap">在地图上看 ›</text>
+    </view>
+
+    <view wx:for="{{results}}" wx:key="id" class="ritem">
+      <place-card place="{{item}}" mode="list" favorited="{{item.favorited}}"
+                  bind:detail="onDetail" bind:favorite="onFavorite" />
+    </view>
+
+    <view wx:if="{{!results.length}}" class="placeholder">
+      <view class="placeholder__emoji">🔍</view>
+      <view class="placeholder__title">没有找到相关地点</view>
+      <view class="placeholder__desc">换个说法试试，比如「玩水」「博物馆」「大鹏」。</view>
+      <view class="placeholder__desc">目前收录了 {{totalPlaces}} 个深圳地点，还在持续补充。</view>
+    </view>
+  </block>
+</view>

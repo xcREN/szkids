@@ -1,0 +1,45 @@
+<view class="page">
+  <view class="card">
+    <view class="row">
+      <text class="row__label">昵称</text>
+      <input class="row__input" value="{{name}}" placeholder="怎么称呼这个小朋友"
+             placeholder-class="ph" maxlength="12" bindinput="onNameInput" />
+    </view>
+
+    <view class="row">
+      <text class="row__label">出生年份</text>
+      <picker class="row__picker" mode="selector" range="{{yearOptions}}"
+              value="{{yearIndex}}" bindchange="onYearChange">
+        <text class="{{yearIndex > -1 ? '' : 'ph'}}">
+          {{yearIndex > -1 ? yearOptions[yearIndex] + ' 年' : '请选择'}}
+        </text>
+      </picker>
+    </view>
+
+    <view wx:if="{{ageText}}" class="agehint">{{ageText}}</view>
+
+    <view class="row">
+      <text class="row__label">性别</text>
+      <view class="opts">
+        <view class="opt {{gender === 'girl' ? 'opt--on' : ''}}" data-g="girl" bindtap="onGenderTap">女孩</view>
+        <view class="opt {{gender === 'boy' ? 'opt--on' : ''}}" data-g="boy" bindtap="onGenderTap">男孩</view>
+        <text class="opt__note">可不填</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="h2">兴趣</view>
+    <view class="muted">选了以后，发现页和推荐会往这些方向偏。可以先跳过。</view>
+    <view class="opts opts--wrap">
+      <view wx:for="{{interestOptions}}" wx:key="key"
+            class="opt {{item.on ? 'opt--on' : ''}}"
+            data-key="{{item.key}}" bindtap="onInterestTap">{{item.emoji}} {{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="btn btn--primary {{canSave ? '' : 'btn--off'}}" bindtap="onSave">保存</view>
+  <view wx:if="{{editing}}" class="btn btn--danger" bindtap="onDelete">删除这个孩子</view>
+
+  <view class="foot">资料只存在你自己的手机上，没有上传到任何服务器。</view>
+</view>

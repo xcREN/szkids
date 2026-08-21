@@ -1,0 +1,81 @@
+<view class="page">
+  <view class="hd">
+    <view class="hd__title">童年地图</view>
+    <view class="hd__sub">把陪伴孩子的每个周末，留在地图上</view>
+  </view>
+
+  <!-- 探索度 -->
+  <view class="explore">
+    <view class="explore__row">
+      <text class="explore__num">{{exploration.visited}}</text>
+      <text class="explore__unit">个地方</text>
+      <text class="explore__pct">深圳探索度 {{exploration.percent}}%</text>
+    </view>
+    <view class="bar">
+      <view class="bar__fill" style="width: {{exploration.percent}}%"></view>
+    </view>
+    <view class="explore__note">分母是当前收录的 {{exploration.total}} 个地点，还在持续补充</view>
+  </view>
+
+  <!-- 地图：去过的点亮 -->
+  <view class="mapbox">
+    <map
+      id="growthmap"
+      class="map"
+      latitude="{{latitude}}"
+      longitude="{{longitude}}"
+      scale="{{scale}}"
+      markers="{{markers}}"
+      enable-rotate="{{false}}"
+      enable-overlooking="{{false}}"
+      bindmarkertap="onMarkerTap"
+    ></map>
+    <view class="legend">
+      <text class="legend__item">彩色 = 去过</text>
+      <text class="legend__item legend__item--off">灰色 = 还没去</text>
+    </view>
+  </view>
+
+  <!-- 年份 + 统计 -->
+  <view class="years">
+    <view wx:for="{{years}}" wx:key="value" class="year {{item.on ? 'year--on' : ''}}"
+          data-year="{{item.value}}" bindtap="onYearTap">{{item.label}}</view>
+  </view>
+
+  <view class="stats">
+    <view wx:for="{{statRows}}" wx:key="key" class="stat">
+      <view class="stat__value">{{item.value}}<text class="stat__unit">{{item.unit || ''}}</text></view>
+      <view class="stat__label">{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="share" bindtap="onShareCard">生成足迹卡片 ›</view>
+
+  <!-- 打卡记录 -->
+  <block wx:if="{{records.length}}">
+    <view class="sec__title">打卡记录</view>
+    <view wx:for="{{records}}" wx:key="id" class="rec" data-id="{{item.id}}" bindtap="onRecordTap">
+      <view class="rec__head">
+        <text class="rec__date">{{item.dateText}}</text>
+        <text class="rec__name">{{item.emoji}} {{item.name}}</text>
+      </view>
+      <view class="rec__meta">
+        <text wx:if="{{item.childNames}}" class="rec__kid">{{item.childNames}}</text>
+        <text wx:if="{{item.stars}}" class="rec__stars">{{item.stars}}</text>
+      </view>
+      <view wx:if="{{item.note}}" class="rec__note">「{{item.note}}」</view>
+      <view wx:if="{{item.photos.length}}" class="rec__photos">
+        <image wx:for="{{item.photos}}" wx:for-item="ph" wx:key="*this" class="rec__photo"
+               src="{{ph}}" mode="aspectFill"
+               data-src="{{ph}}" data-urls="{{item.photos}}" catchtap="onPreviewPhoto" />
+      </view>
+    </view>
+  </block>
+
+  <view wx:if="{{empty}}" class="placeholder">
+    <view class="placeholder__emoji">🚩</view>
+    <view class="placeholder__title">还没有点亮任何地方</view>
+    <view class="placeholder__desc">去过一个地方后，在详情页点「我们来过」，这里会记下日期、照片和孩子的评分，地图上的灰针会一个个亮起来。</view>
+    <view class="btn" bindtap="onGoMap">先去地图看看</view>
+  </view>
+</view>

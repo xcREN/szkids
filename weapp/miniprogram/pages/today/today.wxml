@@ -1,0 +1,94 @@
+<view class="page">
+
+  <!-- ---------- 今天什么天气：推荐的前提，放最上面 ---------- -->
+  <view class="hero" bindtap="onWeatherTap">
+    <view class="hero__row">
+      <text class="hero__weather">{{weatherLine}}</text>
+      <text class="hero__refresh">{{weatherOk ? '刷新' : '重试'}} ↻</text>
+    </view>
+    <view class="hero__advice">{{advice}}</view>
+    <view wx:if="{{weatherStale}}" class="hero__stale">网络不通，显示的是上次拿到的天气</view>
+    <view wx:if="{{childLine}}" class="hero__child">{{childLine}}</view>
+  </view>
+
+  <!-- ---------- 三个候选 ---------- -->
+  <view class="sec">
+    <view class="sec__head">
+      <text class="sec__title">给你挑了 3 个</text>
+      <text class="sec__more" bindtap="onRefresh">换一批 ⟳</text>
+    </view>
+
+    <view wx:if="{{loading}}" class="tip">正在看今天的天气…</view>
+    <view wx:elif="{{empty}}" class="tip">今天这天气不太适合出门，明天再看看吧。</view>
+
+    <view
+      wx:for="{{list}}"
+      wx:key="id"
+      class="card"
+      data-id="{{item.id}}"
+      bindtap="onCardTap"
+    >
+      <view class="card__rank">{{index + 1}}</view>
+
+      <image
+        wx:if="{{item.image}}"
+        class="card__img"
+        src="{{item.image}}"
+        mode="aspectFill"
+        lazy-load="{{true}}"
+      />
+      <view wx:else class="card__img card__img--ph" style="background: {{item.color}}">
+        <text class="card__phemoji">{{item.emoji}}</text>
+      </view>
+
+      <view class="card__body">
+        <view class="card__top">
+          <text class="card__name">{{item.name}}</text>
+          <text
+            class="card__fav {{item.favorited ? 'card__fav--on' : ''}}"
+            catchtap="onFavorite"
+            data-id="{{item.id}}"
+          >{{item.favorited ? '♥' : '♡'}}</text>
+        </view>
+
+        <view class="card__meta">
+          <text>{{item.emoji}} {{item.categoryLabel}}</text>
+          <text wx:if="{{item.distanceText}}"> · {{item.distanceText}}</text>
+          <text wx:if="{{item.driveText}}"> · {{item.driveText}}</text>
+        </view>
+        <view class="card__meta card__meta--sub">{{item.priceText}} · {{item.durationText}}</view>
+
+        <!-- 每个推荐都必须说得出为什么是它，不然等于随机排序 -->
+        <view class="reasons">
+          <text wx:for="{{item.reasons}}" wx:for-item="r" wx:key="*this" class="reason">{{r}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- ---------- 还是选不出来：摇一摇 ---------- -->
+  <view class="sec">
+    <view class="sec__head">
+      <text class="sec__title">选不出来？</text>
+    </view>
+
+    <view class="dice {{shaking ? 'dice--on' : ''}}" bindtap="onLuckyTap">
+      <text class="dice__emoji">🎲</text>
+      <text class="dice__text">{{shaking ? '摇一摇…' : '帮我决定'}}</text>
+    </view>
+    <view class="dice__hint">也可以直接摇一摇手机</view>
+
+    <view wx:if="{{lucky}}" class="lucky" data-id="{{lucky.id}}" bindtap="onCardTap">
+      <view class="lucky__tag">就它了</view>
+      <view class="lucky__name">{{lucky.emoji}} {{lucky.name}}</view>
+      <view class="lucky__meta">
+        {{lucky.district}} · {{lucky.distanceText}} {{lucky.driveText}} · {{lucky.priceText}}
+      </view>
+      <view class="reasons">
+        <text wx:for="{{lucky.reasons}}" wx:for-item="r" wx:key="*this" class="reason reason--light">{{r}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="foot">推荐只看天气、年龄、兴趣、距离和你去过没有，不收任何推广。</view>
+</view>
