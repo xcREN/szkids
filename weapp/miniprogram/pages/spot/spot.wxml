@@ -186,10 +186,10 @@
 
     <block wx:if="{{isAdmin}}">
       <button class="btn btn--cloud" bindtap="onPublish" disabled="{{saving}}">
-        {{d.publishedAt ? '更新公共库' : '发布到公共库（所有人可见）'}}
+        {{d.publishedAt ? '更新公共库' : '发布到公共库'}}
       </button>
       <view class="acts__hint">
-        你是作者，可以把这条发到公共库。普通用户添加的地点只存在自己手机上。
+        发布后<text class="acts__em">所有用户都能看到</text>。普通用户添加的地点只存在自己手机上。
       </view>
     </block>
     <view wx:else class="acts__hint">
