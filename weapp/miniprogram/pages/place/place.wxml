@@ -3,7 +3,8 @@
   <swiper wx:if="{{place.images.length}}" class="hero" indicator-dots="{{place.images.length > 1}}"
           indicator-color="rgba(255,255,255,.4)" indicator-active-color="#fff" circular>
     <swiper-item wx:for="{{place.images}}" wx:key="*this">
-      <image class="hero__img" src="{{item}}" mode="aspectFill" />
+      <image class="hero__img" src="{{item}}" mode="aspectFill"
+             data-src="{{item}}" bindtap="onPreviewImage" />
     </swiper-item>
   </swiper>
   <view wx:else class="hero hero--empty" style="background: {{place.categoryColor}}18">

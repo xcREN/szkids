@@ -141,9 +141,25 @@ page,
   margin-top: 16rpx;
 }
 
-.fab--text {
-  font-size: 25rpx;
-  font-weight: 600;
+/* ---------------- 悬浮按钮图标 ---------------- */
+/* 内联 SVG 的 data URI：不新增图片文件，不占包体积，改颜色改这里就行 */
+.fab--icon {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 40rpx 40rpx;
+  font-size: 0;
+}
+
+.fab--list {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%233A6248%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9%206h11M9%2012h11M9%2018h11%22%2F%3E%3Ccircle%20cx%3D%224.5%22%20cy%3D%226%22%20r%3D%221.2%22%20fill%3D%22%233A6248%22%2F%3E%3Ccircle%20cx%3D%224.5%22%20cy%3D%2212%22%20r%3D%221.2%22%20fill%3D%22%233A6248%22%2F%3E%3Ccircle%20cx%3D%224.5%22%20cy%3D%2218%22%20r%3D%221.2%22%20fill%3D%22%233A6248%22%2F%3E%3C%2Fsvg%3E");
+}
+
+.fab--map {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%233A6248%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9%204.5L3.5%206.8v12.7L9%2017.2l6%202.3%205.5-2.3V4.5L15%206.8%209%204.5z%22%2F%3E%3Cpath%20d%3D%22M9%204.5v12.7M15%206.8v12.7%22%2F%3E%3C%2Fsvg%3E");
+}
+
+.fab--locate {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%233A6248%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%226.5%22%2F%3E%3Cpath%20d%3D%22M12%202.2v3.2M12%2018.6v3.2M2.2%2012h3.2M18.6%2012h3.2%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%222.4%22%20fill%3D%22%233A6248%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E");
 }
 
 .fab {

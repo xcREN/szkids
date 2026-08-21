@@ -187,6 +187,57 @@ page {
   color: #9AA096;
 }
 
+/* ---------------- 照片 ---------------- */
+.sec__em {
+  color: #96593A;
+  font-weight: 600;
+}
+
+.photos {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 18rpx;
+}
+
+.photo {
+  position: relative;
+  width: 180rpx;
+  height: 180rpx;
+  margin: 0 16rpx 16rpx 0;
+  border-radius: 14rpx;
+  overflow: hidden;
+  background: #F0EEE8;
+}
+
+.photo__img {
+  width: 100%;
+  height: 100%;
+}
+
+.photo__del {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 44rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+  background: rgba(30, 36, 31, 0.55);
+  border-radius: 0 14rpx 0 14rpx;
+}
+
+.photo--add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 52rpx;
+  color: #9AA096;
+  border: 2rpx dashed #D6D2C6;
+  background: transparent;
+}
+
 /* ---------------- 核实 ---------------- */
 .verify {
   display: flex;

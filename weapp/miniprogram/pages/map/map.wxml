@@ -74,8 +74,17 @@
 
   <!-- ---------- 右侧悬浮按钮 ---------- -->
   <view class="fabs {{selected ? 'fabs--up' : ''}}">
-    <view class="fab fab--text" bindtap="onToggleView">{{viewMode === 'map' ? '列表' : '地图'}}</view>
-    <view wx:if="{{viewMode === 'map'}}" class="fab" bindtap="onLocateTap">◎</view>
+    <view
+      class="fab fab--icon fab--{{viewMode === 'map' ? 'list' : 'map'}}"
+      aria-label="{{viewMode === 'map' ? '切换到列表' : '切换到地图'}}"
+      bindtap="onToggleView"
+    ></view>
+    <view
+      wx:if="{{viewMode === 'map'}}"
+      class="fab fab--icon fab--locate"
+      aria-label="回到我的位置"
+      bindtap="onLocateTap"
+    ></view>
   </view>
 
   <!-- ---------- 今天去哪 ---------- -->

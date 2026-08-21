@@ -95,6 +95,13 @@ Page({
     });
   },
 
+  /** 点大图看原图。图少的时候这是唯一能看清细节的途径 */
+  onPreviewImage(e) {
+    const imgs = (this.data.place && this.data.place.images) || [];
+    if (!imgs.length) return;
+    wx.previewImage({ current: e.currentTarget.dataset.src, urls: imgs });
+  },
+
   /** 打开微信内置地图，可直接一键导航 */
   onNavigate() {
     const p = this.data.place;

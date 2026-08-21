@@ -180,6 +180,24 @@
     </view>
   </view>
 
+  <!-- ---------- 照片 ---------- -->
+  <view class="sec">
+    <view class="sec__title">照片</view>
+    <view class="sec__desc">
+      现场随手拍两张。<text class="sec__em">照片只存在这台手机上，不会上传</text>；
+      只有点「发布到公共库」时才会传到云端。最多 {{maxPhotos}} 张。
+    </view>
+
+    <view class="photos">
+      <view wx:for="{{d.images}}" wx:key="*this" class="photo">
+        <image class="photo__img" src="{{item}}" mode="aspectFill"
+               data-src="{{item}}" bindtap="onPreviewPhoto" />
+        <view class="photo__del" data-i="{{index}}" catchtap="onRemovePhoto">✕</view>
+      </view>
+      <view wx:if="{{d.images.length < maxPhotos}}" class="photo photo--add" bindtap="onAddPhoto">＋</view>
+    </view>
+  </view>
+
   <!-- ---------- 核实 ---------- -->
   <view class="verify {{d.verified ? 'verify--on' : ''}}" data-k="verified" bindtap="onToggle">
     <view class="verify__box">{{d.verified ? '✓' : ''}}</view>

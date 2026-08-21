@@ -82,6 +82,16 @@ function count() {
 }
 
 /** 发布成功后记一笔，列表页据此区分「已发布」和「只有你看得到」 */
+/** 照片传完云存储后把 fileID 记下来，下次更新就不用重传 */
+function setCloudImages(id, fileIds) {
+  const all = readAll();
+  const item = all.filter((d) => d.id === id)[0];
+  if (!item) return null;
+  item.cloudImages = fileIds || [];
+  writeAll(all);
+  return item;
+}
+
 function markPublished(id) {
   const all = readAll();
   const item = all.filter((d) => d.id === id)[0];
@@ -128,6 +138,14 @@ function blank() {
     description: '',
     reasons: [],
     tips: '',
+    /**
+     * 照片。两份是有意的：
+     *   images       本机永久文件路径。**不出设备**，普通用户只有这一份。
+     *   cloudImages  发布到公共库时上传到云存储拿到的 fileID。
+     * 只有作者点「发布」才会产生 cloudImages —— 普通用户的照片永远不上云。
+     */
+    images: [],
+    cloudImages: [],
     verified: false,      // 我人在现场核实过
     publishedAt: 0,       // 发布到云端公共库的时间；0 = 还没发布过
     createdAt: Date.now(),
@@ -167,8 +185,13 @@ function ratingsFor(ageMin, ageMax) {
   return out;
 }
 
-/** 草稿 -> 和 places.js 里一条数据完全同构的对象（给地图/推荐直接用） */
-function toPlace(d) {
+/**
+ * 草稿 -> 和 places.js 里一条数据完全同构的对象。
+ * @param {object} opts {forCloud: true 时 images 用云存储的 fileID，
+ *   给发布用；默认用本机路径，给本机显示用（本机路径别人打不开）}
+ */
+function toPlace(d, opts) {
+  const forCloud = !!(opts && opts.forCloud);
   const w = (WEATHER_PRESETS[d.weatherPreset] || WEATHER_PRESETS.outdoorShade).v;
   const p = {
     id: d.id,
@@ -200,7 +223,7 @@ function toPlace(d) {
     description: d.description || '',
     reasons: d.reasons || [],
     tips: d.tips || '',
-    images: [],
+    images: forCloud ? (d.cloudImages || []) : (d.images || []),
     source: d.verified ? '现场核实' : '我自己添加',
     lastVerifiedAt: d.verified ? dateOf(d.updatedAt) : '',
     compiledAt: dateOf(d.createdAt),
@@ -275,7 +298,8 @@ function toCode(d) {
   L.push("    description: '" + esc(p.description) + "',");
   L.push('    reasons: ' + arr(p.reasons) + ',');
   L.push("    tips: '" + esc(p.tips) + "',");
-  L.push('    images: [],');
+  // 导出到 places.js 用云存储地址：本机路径换台设备就打不开了
+  L.push('    images: ' + arr(d.cloudImages || []) + ',');
   L.push("    source: '现场核实', lastVerifiedAt: '" + p.lastVerifiedAt + "', compiledAt: '" + p.compiledAt + "'");
   L.push('  },');
   return L.join('\n');
@@ -299,6 +323,7 @@ module.exports = {
   remove,
   count,
   markPublished,
+  setCloudImages,
   blank,
   toPlace,
   ratingsFor,

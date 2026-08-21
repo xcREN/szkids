@@ -22,6 +22,13 @@ const PARKING = [
   { key: 'hard', label: '停车较难' },
   { key: 'none', label: '无停车场' }
 ];
+/**
+ * 最多 3 张。
+ * 小程序本机文件空间总共只有 10MB，打卡照片也在占同一份空间，
+ * 所以数量要限、上传要压（sizeType: compressed）。
+ */
+const MAX_PHOTOS = 3;
+
 const CROWD = [
   { key: 'low', label: '人少' },
   { key: 'mid', label: '周末人中等' },
@@ -62,6 +69,7 @@ Page({
     // 文本域用的中间态（数组字段在表单里是多行文本）
     tagsText: '',
     reasonsText: '',
+    maxPhotos: MAX_PHOTOS,
     saving: false
   },
 
@@ -207,6 +215,63 @@ Page({
     this.patch({ weatherPreset: e.currentTarget.dataset.k });
   },
 
+  /* ---------------- 照片 ---------------- */
+
+  /**
+   * 选照片。和打卡页同一套做法：chooseMedia 给的是临时路径，
+   * 必须 saveFile 存成本地永久文件，否则下次启动就失效了。
+   * 存的是**本机**文件 —— 不上传，别人看不到。
+   */
+  onAddPhoto() {
+    const cur = (this.data.d.images || []).slice();
+    const left = MAX_PHOTOS - cur.length;
+    if (left <= 0) {
+      wx.showToast({ title: '最多 ' + MAX_PHOTOS + ' 张', icon: 'none' });
+      return;
+    }
+    wx.chooseMedia({
+      count: left,
+      mediaType: ['image'],
+      sizeType: ['compressed'],
+      success: (res) => {
+        const fs = wx.getFileSystemManager();
+        const saved = [];
+        let done = 0;
+        res.tempFiles.forEach((f) => {
+          fs.saveFile({
+            tempFilePath: f.tempFilePath,
+            success: (r) => saved.push(r.savedFilePath),
+            // 存不下就先用临时路径，至少这次能看到
+            fail: () => saved.push(f.tempFilePath),
+            complete: () => {
+              done++;
+              if (done === res.tempFiles.length) this.patch({ images: cur.concat(saved) });
+            }
+          });
+        });
+      },
+      fail: () => {}
+    });
+  },
+
+  onPreviewPhoto(e) {
+    wx.previewImage({
+      current: e.currentTarget.dataset.src,
+      urls: this.data.d.images || []
+    });
+  },
+
+  /**
+   * 删一张。已经发布过的话，云端那份不会跟着删 ——
+   * 下次点「更新公共库」时会按当前这几张重新传。
+   */
+  onRemovePhoto(e) {
+    const i = Number(e.currentTarget.dataset.i);
+    const images = (this.data.d.images || []).slice();
+    images.splice(i, 1);
+    this.patch({ images: images });
+  },
+
   /* ---------------- 保存 / 删除 / 发布 ---------------- */
 
   onSave() {
@@ -258,17 +323,36 @@ Page({
     this.doPublish();
   },
 
+  /**
+   * 发布：先把本机照片传到云存储，再把地点写进公共库。
+   * 顺序不能反 —— 公共库里存的必须是云地址，本机路径换台设备就打不开。
+   */
   doPublish() {
     const item = draft.save(this.data.d);
+    const photos = item.images || [];
     this.setData({ saving: true });
-    wx.showLoading({ title: '发布中', mask: true });
-    cloudPlaces.publish(draft.toPlace(item)).then((r) => {
+    wx.showLoading({ title: photos.length ? '上传照片…' : '发布中', mask: true });
+
+    cloudPlaces.uploadPhotos(item.id, photos).then((fileIds) => {
+      const withCloud = draft.setCloudImages(item.id, fileIds) || item;
+      const lost = photos.length - fileIds.length;
+      wx.showLoading({ title: '发布中', mask: true });
+      return cloudPlaces
+        .publish(draft.toPlace(withCloud, { forCloud: true }))
+        .then((r) => ({ r: r, lost: lost }));
+    }).then(({ r, lost }) => {
       wx.hideLoading();
       this.setData({ saving: false });
       if (r && r.ok) {
         draft.markPublished(item.id);
         this.setData({ d: draft.get(item.id) });
-        wx.showToast({ title: r.mode === 'created' ? '已发布，所有人可见' : '已更新公共库', icon: 'none' });
+        wx.showToast({
+          title: lost > 0
+            ? '已发布，但有 ' + lost + ' 张图没传上去'
+            : (r.mode === 'created' ? '已发布，所有人可见' : '已更新公共库'),
+          icon: 'none',
+          duration: lost > 0 ? 2600 : 1800
+        });
         return;
       }
       wx.showModal({

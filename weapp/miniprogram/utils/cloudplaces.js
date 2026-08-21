@@ -214,6 +214,35 @@ function whoami(force) {
   });
 }
 
+/**
+ * 把本机照片传到云存储，返回 fileID 列表。
+ *
+ * 只在作者发布地点时调用 —— 普通用户加的地点，照片一直待在他自己手机上。
+ * 已经是 cloud:// 的直接复用，避免更新地点时重复上传同一张。
+ * 单张失败不影响其他张：宁可少一张图也别让整次发布失败。
+ */
+function uploadPhotos(placeId, paths) {
+  if (!paths || !paths.length) return Promise.resolve([]);
+  if (!wx.cloud || !wx.cloud.uploadFile) return Promise.resolve([]);
+
+  const jobs = paths.map((p, i) => {
+    if (/^cloud:\/\//.test(p)) return Promise.resolve(p);
+    const m = /\.(\w+)$/.exec(p);
+    const ext = m ? m[1] : 'jpg';
+    return wx.cloud
+      .uploadFile({
+        cloudPath: 'places/' + placeId + '/' + i + '-' + Date.now() + '.' + ext,
+        filePath: p
+      })
+      .then((r) => (r && r.fileID) || null)
+      .catch((err) => {
+        console.warn('照片上传失败', (err && err.errMsg) || err);
+        return null;
+      });
+  });
+  return Promise.all(jobs).then((ids) => ids.filter(Boolean));
+}
+
 /** 发布/更新一条到公共库（云函数会校验只有作者能写） */
 function publish(place) {
   return call('upsert', { place: place }).then((r) => {
@@ -239,6 +268,7 @@ module.exports = {
   syncedAt,
   sync,
   whoami,
+  uploadPhotos,
   publish,
   unpublish,
   onChange,
