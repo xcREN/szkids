@@ -15,8 +15,8 @@
   display: flex;
   align-items: center;
   padding: 0 20rpx;
-  background: #EFEDE6;
-  border-radius: 999rpx;
+  background: var(--line-soft);
+  border-radius: var(--r-pill);
 }
 
 .bar__icon {
@@ -30,19 +30,19 @@
 }
 
 .bar__ph {
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .bar__clear {
   padding: 0 6rpx;
-  color: #9AA096;
+  color: var(--faint);
   font-size: 26rpx;
 }
 
 .bar__cancel {
   margin-left: 20rpx;
   font-size: 28rpx;
-  color: #555C53;
+  color: var(--sub);
 }
 
 /* ---------------- 初始态 ---------------- */
@@ -63,7 +63,7 @@
 
 .sec__action {
   font-size: 24rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .cats {
@@ -75,15 +75,15 @@
 .cat {
   margin: 0 16rpx 16rpx 0;
   padding: 14rpx 24rpx;
-  border-radius: 14rpx;
+  border-radius: var(--r);
   font-size: 25rpx;
-  color: #555C53;
-  background: #F1EFE8;
+  color: var(--sub);
+  background: var(--fill);
 }
 
 .cat--on {
-  color: #fff;
-  background: #4B7A5A;
+  color: var(--card);
+  background: var(--brand);
 }
 
 /* ---------------- 结果 ---------------- */
@@ -96,12 +96,12 @@
 
 .rhead__count {
   font-size: 26rpx;
-  color: #6C736B;
+  color: var(--sub);
 }
 
 .rhead__map {
   font-size: 26rpx;
-  color: #3A6248;
+  color: var(--brand-dark);
 }
 
 .ritem {

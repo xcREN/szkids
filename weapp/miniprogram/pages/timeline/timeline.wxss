@@ -14,16 +14,16 @@
 .hd__sub {
   margin-top: 6rpx;
   font-size: 25rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 /* ---------------- 探索度 ---------------- */
 .explore {
   margin-top: 24rpx;
   padding: 28rpx;
-  background: #fff;
-  border-radius: 24rpx;
-  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+  background: var(--card);
+  border-radius: var(--r-lg);
+  border: 1rpx solid var(--line);
 }
 
 .explore__row {
@@ -34,40 +34,40 @@
 .explore__num {
   font-size: 56rpx;
   font-weight: 600;
-  color: #3A6248;
+  color: var(--brand-dark);
   line-height: 1;
 }
 
 .explore__unit {
   margin-left: 10rpx;
   font-size: 26rpx;
-  color: #6C736B;
+  color: var(--sub);
 }
 
 .explore__pct {
   margin-left: auto;
   font-size: 25rpx;
-  color: #6C736B;
+  color: var(--sub);
 }
 
 .bar {
   margin-top: 20rpx;
   height: 14rpx;
-  border-radius: 999rpx;
-  background: #EFEDE6;
+  border-radius: var(--r-pill);
+  background: var(--line-soft);
   overflow: hidden;
 }
 
 .bar__fill {
   height: 14rpx;
-  border-radius: 999rpx;
-  background: #4B7A5A;
+  border-radius: var(--r-pill);
+  background: var(--brand);
 }
 
 .explore__note {
   margin-top: 12rpx;
   font-size: 21rpx;
-  color: #B9BCB2;
+  color: var(--faint);
 }
 
 /* ---------------- 地图 ---------------- */
@@ -75,7 +75,7 @@
   position: relative;
   margin-top: 24rpx;
   height: 460rpx;
-  border-radius: 24rpx;
+  border-radius: var(--r-lg);
   overflow: hidden;
 }
 
@@ -90,18 +90,18 @@
   bottom: 20rpx;
   display: flex;
   padding: 8rpx 18rpx;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   background: rgba(255, 255, 255, 0.92);
 }
 
 .legend__item {
   font-size: 21rpx;
-  color: #3A6248;
+  color: var(--brand-dark);
 }
 
 .legend__item--off {
   margin-left: 16rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 /* ---------------- 年份 + 统计 ---------------- */
@@ -113,24 +113,24 @@
 .year {
   margin-right: 14rpx;
   padding: 10rpx 24rpx;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 25rpx;
-  color: #555C53;
-  background: #F1EFE8;
+  color: var(--sub);
+  background: var(--fill);
 }
 
 .year--on {
-  color: #fff;
-  background: #4B7A5A;
+  color: var(--card);
+  background: var(--brand);
 }
 
 .stats {
   display: flex;
   flex-wrap: wrap;
-  background: #fff;
-  border-radius: 24rpx;
+  background: var(--card);
+  border-radius: var(--r-lg);
   padding: 20rpx 0;
-  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+  border: 1rpx solid var(--line);
 }
 
 .stat {
@@ -142,20 +142,20 @@
 .stat__value {
   font-size: 44rpx;
   font-weight: 600;
-  color: #3A6248;
+  color: var(--brand-dark);
   line-height: 1.2;
 }
 
 .stat__unit {
   font-size: 22rpx;
   margin-left: 4rpx;
-  color: #6C736B;
+  color: var(--sub);
 }
 
 .stat__label {
   margin-top: 6rpx;
   font-size: 24rpx;
-  color: #6C736B;
+  color: var(--sub);
 }
 
 .share {
@@ -163,10 +163,10 @@
   height: 88rpx;
   line-height: 88rpx;
   text-align: center;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 28rpx;
-  color: #3A6248;
-  background: #E6EDE6;
+  color: var(--brand-dark);
+  background: var(--brand-soft);
 }
 
 /* ---------------- 记录 ---------------- */
@@ -179,9 +179,9 @@
 .rec {
   padding: 28rpx 24rpx;
   margin-bottom: 20rpx;
-  background: #fff;
-  border-radius: 20rpx;
-  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+  background: var(--card);
+  border-radius: var(--r-lg);
+  border: 1rpx solid var(--line);
 }
 
 .rec__head {
@@ -192,7 +192,7 @@
 .rec__date {
   width: 150rpx;
   font-size: 24rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .rec__name {
@@ -210,20 +210,20 @@
 
 .rec__kid {
   font-size: 23rpx;
-  color: #6C736B;
+  color: var(--sub);
 }
 
 .rec__stars {
   margin-left: 14rpx;
   font-size: 22rpx;
-  color: #D9A441;
+  color: var(--gold);
   letter-spacing: 2rpx;
 }
 
 .rec__note {
   margin: 14rpx 0 0 150rpx;
   font-size: 26rpx;
-  color: #555C53;
+  color: var(--sub);
   line-height: 1.7;
 }
 
@@ -236,7 +236,7 @@
   width: 140rpx;
   height: 140rpx;
   margin-right: 12rpx;
-  border-radius: 12rpx;
+  border-radius: var(--r-sm);
 }
 
 .btn {
@@ -245,8 +245,8 @@
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 28rpx;
-  color: #fff;
-  background: #4B7A5A;
+  color: var(--card);
+  background: var(--brand);
 }

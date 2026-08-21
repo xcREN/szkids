@@ -1,15 +1,19 @@
 .pcard {
   position: relative;
-  background: #fff;
-  border-radius: 28rpx;
+  background: var(--card);
+  border-radius: var(--r-lg);
   padding: 32rpx 28rpx 28rpx;
-  box-shadow: 0 8rpx 32rpx rgba(45, 40, 32, 0.12);
 }
 
-/* 列表模式：更紧凑，阴影更轻 */
+/* 地图模式是真的浮在地图上，这时候才需要阴影 */
+.pcard--map {
+  box-shadow: var(--lift);
+}
+
+/* 列表模式在页面流里，1rpx 边框分层就够了 */
 .pcard--list {
   padding: 28rpx 24rpx;
-  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.06);
+  border: 1rpx solid var(--line);
 }
 
 .pcard__close {
@@ -20,7 +24,7 @@
   height: 48rpx;
   line-height: 48rpx;
   text-align: center;
-  color: #9AA096;
+  color: var(--faint);
   font-size: 28rpx;
 }
 
@@ -37,7 +41,7 @@
 .pcard__name {
   font-size: 36rpx;
   font-weight: 600;
-  color: #1E241F;
+  color: var(--text);
 }
 
 .pcard__score {
@@ -47,7 +51,7 @@
 }
 
 .pcard__stars {
-  color: #D9A441;
+  color: var(--gold);
   font-size: 24rpx;
   letter-spacing: 2rpx;
 }
@@ -55,13 +59,13 @@
 .pcard__scorenum {
   margin-left: 10rpx;
   font-size: 24rpx;
-  color: #6C736B;
+  color: var(--sub);
 }
 
 .pcard__district {
   margin-left: 10rpx;
   font-size: 24rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .pcard__age {
@@ -72,14 +76,14 @@
 
 .pcard__agelabel {
   font-size: 24rpx;
-  color: #6C736B;
+  color: var(--sub);
 }
 
 .pcard__ageval {
   margin-left: 14rpx;
   font-size: 30rpx;
   font-weight: 600;
-  color: #3A6248;
+  color: var(--brand-dark);
 }
 
 .pcard__tags {
@@ -98,7 +102,7 @@
   display: flex;
   flex-wrap: wrap;
   font-size: 26rpx;
-  color: #555C53;
+  color: var(--sub);
 }
 
 .pcard__fact {
@@ -119,15 +123,15 @@
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 28rpx;
-  color: #3A6248;
-  background: #E6EDE6;
+  color: var(--brand-dark);
+  background: var(--brand-soft);
 }
 
 .pcard__btn--primary {
-  color: #fff;
-  background: #4B7A5A;
+  color: var(--card);
+  background: var(--brand);
 }
 
 /* .chip 在 app.wxss 里定义过，组件内再写一份，
@@ -136,9 +140,9 @@
   display: inline-flex;
   align-items: center;
   padding: 8rpx 22rpx;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 24rpx;
-  color: #6C736B;
-  background: #EFEDE6;
+  color: var(--sub);
+  background: var(--line-soft);
   white-space: nowrap;
 }

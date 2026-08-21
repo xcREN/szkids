@@ -14,7 +14,7 @@
 .hd__sub {
   margin-top: 6rpx;
   font-size: 25rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .sec {
@@ -36,9 +36,9 @@
   align-items: center;
   padding: 28rpx 24rpx;
   margin-bottom: 14rpx;
-  background: #fff;
-  border-radius: 20rpx;
-  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+  background: var(--card);
+  border-radius: var(--r-lg);
+  border: 1rpx solid var(--line);
 }
 
 .topic__emoji {
@@ -52,13 +52,13 @@
 }
 
 .topic__arrow {
-  color: #B9BCB2;
+  color: var(--faint);
   font-size: 34rpx;
 }
 
 .topic__count {
   font-size: 24rpx;
-  color: #9AA096;
+  color: var(--faint);
   margin-right: 12rpx;
 }
 
@@ -68,9 +68,9 @@
   display: flex;
   align-items: center;
   padding: 0 24rpx;
-  background: #fff;
-  border-radius: 999rpx;
-  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.06);
+  background: var(--card);
+  border-radius: var(--r-pill);
+  border: 1rpx solid var(--line);
 }
 
 .search__icon {
@@ -80,5 +80,5 @@
 
 .search__ph {
   font-size: 27rpx;
-  color: #9AA096;
+  color: var(--faint);
 }

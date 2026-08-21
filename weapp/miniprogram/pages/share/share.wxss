@@ -5,7 +5,7 @@
 .tip {
   padding: 8rpx 8rpx 24rpx;
   font-size: 25rpx;
-  color: #6C736B;
+  color: var(--sub);
   text-align: center;
 }
 
@@ -22,8 +22,8 @@
   top: 0;
   width: 660rpx;
   height: 990rpx;
-  border-radius: 24rpx;
-  box-shadow: 0 8rpx 32rpx rgba(45, 40, 32, 0.12);
+  border-radius: var(--r-lg);
+  box-shadow: var(--lift);
 }
 
 .card--img {
@@ -38,7 +38,7 @@
   z-index: 3;
   text-align: center;
   font-size: 26rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .acts {
@@ -51,24 +51,24 @@
   height: 92rpx;
   line-height: 92rpx;
   text-align: center;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 29rpx;
 }
 
 .btn--primary {
-  color: #fff;
-  background: #4B7A5A;
+  color: var(--card);
+  background: var(--brand);
   margin-right: 20rpx;
 }
 
 .btn--ghost {
-  color: #3A6248;
-  background: #E6EDE6;
+  color: var(--brand-dark);
+  background: var(--brand-soft);
 }
 
 .foot {
   margin-top: 24rpx;
   text-align: center;
   font-size: 22rpx;
-  color: #B9BCB2;
+  color: var(--faint);
 }

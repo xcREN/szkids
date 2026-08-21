@@ -13,21 +13,55 @@
  * 地图 Marker 和 TabBar 图标的颜色在 tools/gen_assets.py 里，改完要重新生成。
  */
 page {
-  --brand: #4B7A5A;
-  --brand-dark: #3A6248;
-  --brand-soft: #E6EDE6;
-  --blue: #3F7F8C;      /* 分类·玩水海边 */
-  --clay: #B5714C;      /* 分类·文化室内，也是全局点缀色 */
-  --plum: #7E6A92;      /* 分类·游乐运动 */
-  --gold: #D9A441;      /* 星级 */
-  --bg: #F3F1EC;
+  /* ---- 品牌 ---- */
+  --brand: #4B7A5A;        /* 低饱和森林绿，主色 */
+  --brand-dark: #3A6248;   /* 强调、TabBar 选中 */
+  --brand-soft: #E6EDE6;   /* 次要按钮底、选中态浅底 */
+  --brand-mute: #9DBAA9;   /* 中间调绿，用在弱化的图标文字 */
+
+  /* ---- 分类色：地图 Marker 的视觉基础，四组，别扩 ----
+     这四个值和 data/categories.js 里每个分类的 color 是同一套；
+     wxss 里未必都用得到（--blue / --plum 目前只在 JS 侧用），
+     但改配色时必须一起改，还要跑一次 tools/gen_assets.py 重生成 Marker。 */
+  --blue: #3F7F8C;         /* 玩水、海边 */
+  --clay: #B5714C;         /* 文化室内，也是全局点缀色 */
+  --clay-dark: #96593A;
+  --clay-bg: #F7E9DE;
+  --plum: #7E6A92;         /* 游乐运动 */
+  --gold: #D9A441;         /* 星级 */
+
+  /* ---- 中性 ---- */
+  --bg: #F3F1EC;           /* 暖白底。户外强光下比纯白耐看 */
   --card: #FFFFFF;
-  --text: #1E241F;
-  --sub: #6C736B;
-  --faint: #9AA096;
-  --line: #E8E4DC;
-  --shadow: 0 8rpx 32rpx rgba(45, 40, 32, 0.10);
-  --radius: 24rpx;
+  --fill: #F0EEE8;         /* chip、输入框的底 */
+  --line: #E4E0D6;         /* 1rpx 边框——现在是分层的主力，代替阴影 */
+  --line-soft: #EFEDE6;    /* 更轻的分隔线 */
+
+  /* ---- 文字：比原来加深一档，提高对比度 ---- */
+  --text: #1B211C;
+  --sub: #55605A;
+  --faint: #8A9089;
+
+  /* ---- 状态 ---- */
+  --danger: #B4503F;
+  --danger-bg: #FBEAE7;
+  --warn: #8A5A2B;
+  --warn-bg: #FBF1E2;
+  --warn-line: #E0CFA8;
+
+  /* ---- 圆角：整体收紧一档 ---- */
+  --r-sm: 10rpx;
+  --r: 14rpx;
+  --r-lg: 18rpx;
+  --r-pill: 999rpx;
+  --radius: 18rpx;         /* 旧名，留着兼容 */
+
+  /* ---- 浮层 ----
+     只有真的浮在内容之上的东西（悬浮按钮、底部卡片、弹层）才用阴影；
+     普通卡片一律 1rpx 边框分层，这是这一版视觉收紧的核心。 */
+  --lift: 0 4rpx 16rpx rgba(27, 33, 28, 0.10);
+  --lift-up: 0 -4rpx 16rpx rgba(27, 33, 28, 0.08);
+  --shadow: var(--lift);   /* 旧名，留着兼容 */
 
   background: var(--bg);
   color: var(--text);
@@ -38,11 +72,11 @@ page {
 
 /* ---------- 通用小组件 ---------- */
 
-/* 卡片 */
+/* 卡片：1rpx 边框分层，不用阴影。阴影只留给真正浮起来的东西 */
 .card {
   background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  border-radius: var(--r-lg);
+  border: 1rpx solid var(--line);
 }
 
 /* 胶囊标签 */
@@ -50,16 +84,16 @@ page {
   display: inline-flex;
   align-items: center;
   padding: 8rpx 22rpx;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 24rpx;
   color: var(--sub);
-  background: #EFEDE6;
+  background: var(--line-soft);
   white-space: nowrap;
 }
 
 .chip--on {
   background: var(--brand);
-  color: #fff;
+  color: var(--card);
 }
 
 /* 次要说明文字 */

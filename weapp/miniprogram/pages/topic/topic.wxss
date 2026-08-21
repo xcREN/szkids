@@ -20,7 +20,7 @@
 .hd__desc {
   margin-top: 8rpx;
   font-size: 25rpx;
-  color: #6C736B;
+  color: var(--sub);
   line-height: 1.7;
 }
 
@@ -33,12 +33,12 @@
 
 .hd__count {
   font-size: 25rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .hd__map {
   font-size: 26rpx;
-  color: #3A6248;
+  color: var(--brand-dark);
 }
 
 .item {

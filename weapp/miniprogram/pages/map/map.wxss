@@ -34,12 +34,12 @@ page,
 .top__city {
   font-size: 32rpx;
   font-weight: 600;
-  color: #1E241F;
+  color: var(--text);
 }
 
 .top__weather {
   font-size: 24rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .search {
@@ -48,9 +48,9 @@ page,
   display: flex;
   align-items: center;
   padding: 0 24rpx;
-  background: #fff;
-  border-radius: 999rpx;
-  box-shadow: 0 6rpx 20rpx rgba(45, 40, 32, 0.10);
+  background: var(--card);
+  border-radius: var(--r-pill);
+  box-shadow: var(--lift);
 }
 
 .search__icon {
@@ -60,7 +60,7 @@ page,
 
 .search__ph {
   font-size: 27rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .chips {
@@ -79,16 +79,16 @@ page,
 
 .fchip {
   padding: 12rpx 26rpx;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 25rpx;
-  color: #555C53;
-  background: #fff;
-  box-shadow: 0 4rpx 14rpx rgba(45, 40, 32, 0.08);
+  color: var(--sub);
+  background: var(--card);
+  border: 1rpx solid var(--line);
 }
 
 .fchip--on {
-  background: #4B7A5A;
-  color: #fff;
+  background: var(--brand);
+  color: var(--card);
 }
 
 /* ---------------- 列表模式 ---------------- */
@@ -98,7 +98,7 @@ page,
   right: 0;
   bottom: 0;
   /* top 由 wxml 按状态栏高度和横幅有无算出来 */
-  background: #F3F1EC;
+  background: var(--bg);
   padding: 0 20rpx;
   box-sizing: border-box;
 }
@@ -106,7 +106,7 @@ page,
 .listview__count {
   padding: 20rpx 8rpx 12rpx;
   font-size: 24rpx;
-  color: #6C736B;
+  color: var(--sub);
 }
 
 .listview__item {
@@ -118,7 +118,7 @@ page,
   text-align: center;
   font-size: 26rpx;
   line-height: 1.7;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .listview__pad {
@@ -168,10 +168,10 @@ page,
   line-height: 84rpx;
   text-align: center;
   font-size: 36rpx;
-  color: #3A6248;
-  background: #fff;
+  color: var(--brand-dark);
+  background: var(--card);
   border-radius: 50%;
-  box-shadow: 0 6rpx 20rpx rgba(45, 40, 32, 0.16);
+  box-shadow: var(--lift);
 }
 
 /* ---------------- 今天去哪 ---------------- */
@@ -181,11 +181,11 @@ page,
   transform: translateX(-50%);
   bottom: 116rpx;
   padding: 18rpx 40rpx;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 28rpx;
-  color: #fff;
-  background: #4B7A5A;
-  box-shadow: 0 8rpx 24rpx rgba(58, 98, 72, 0.28);
+  color: var(--card);
+  background: var(--brand);
+  box-shadow: var(--lift);
 }
 
 .today--hide {
@@ -200,11 +200,11 @@ page,
   bottom: 32rpx;
   text-align: center;
   font-size: 24rpx;
-  color: #6C736B;
+  color: var(--sub);
 }
 
 .summary__tip {
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .sheet {
@@ -222,13 +222,13 @@ page,
   justify-content: space-between;
   padding: 12rpx 24rpx;
   background: rgba(58, 98, 72, 0.10);
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
 }
 
 .banner__text {
   flex: 1;
   font-size: 24rpx;
-  color: #3A6248;
+  color: var(--brand-dark);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -237,7 +237,7 @@ page,
 .banner__clear {
   margin-left: 16rpx;
   font-size: 23rpx;
-  color: #6C736B;
+  color: var(--sub);
 }
 
 /* ---------------- 搜索这片区域 ---------------- */
@@ -247,9 +247,9 @@ page,
   transform: translateX(-50%);
   top: 340rpx;
   padding: 14rpx 32rpx;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 25rpx;
-  color: #3A6248;
-  background: #fff;
-  box-shadow: 0 6rpx 20rpx rgba(45, 40, 32, 0.16);
+  color: var(--brand-dark);
+  background: var(--card);
+  box-shadow: var(--lift);
 }

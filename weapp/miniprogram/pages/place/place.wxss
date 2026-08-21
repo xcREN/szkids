@@ -27,16 +27,16 @@
 .hero__note {
   margin-top: 12rpx;
   font-size: 24rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 /* ---------- 区块 ---------- */
 .block {
   margin: 20rpx 24rpx;
   padding: 32rpx 28rpx;
-  background: #fff;
-  border-radius: 24rpx;
-  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.06);
+  background: var(--card);
+  border-radius: var(--r-lg);
+  border: 1rpx solid var(--line);
 }
 
 .title {
@@ -47,7 +47,7 @@
 .subtitle {
   margin-top: 6rpx;
   font-size: 25rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .score {
@@ -59,27 +59,27 @@
 .score__num {
   font-size: 56rpx;
   font-weight: 600;
-  color: #3A6248;
+  color: var(--brand-dark);
   line-height: 1;
 }
 
 .score__unit {
   margin-left: 6rpx;
   font-size: 26rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .score__label {
   margin-left: 16rpx;
   font-size: 26rpx;
-  color: #6C736B;
+  color: var(--sub);
 }
 
 .agebox {
   margin-top: 24rpx;
   padding: 20rpx 24rpx;
-  background: #E6EDE6;
-  border-radius: 16rpx;
+  background: var(--brand-soft);
+  border-radius: var(--r);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -87,22 +87,22 @@
 
 .agebox__label {
   font-size: 26rpx;
-  color: #555C53;
+  color: var(--sub);
 }
 
 .agebox__val {
   font-size: 32rpx;
   font-weight: 600;
-  color: #3A6248;
+  color: var(--brand-dark);
 }
 
 .visited {
   margin-top: 20rpx;
   padding: 14rpx 22rpx;
-  background: #F1EFE8;
-  border-radius: 14rpx;
+  background: var(--fill);
+  border-radius: var(--r);
   font-size: 24rpx;
-  color: #555C53;
+  color: var(--sub);
 }
 
 .tags {
@@ -123,7 +123,7 @@
 
 .reason {
   font-size: 27rpx;
-  color: #555C53;
+  color: var(--sub);
   line-height: 1.9;
 }
 
@@ -139,7 +139,7 @@
   align-items: center;
   padding: 10rpx 0;
   font-size: 26rpx;
-  color: #555C53;
+  color: var(--sub);
 }
 
 .fact__emoji {
@@ -153,22 +153,22 @@
   justify-content: space-between;
   padding: 10rpx 0;
   font-size: 27rpx;
-  color: #555C53;
+  color: var(--sub);
 }
 
 .row__stars {
-  color: #D9A441;
+  color: var(--gold);
   letter-spacing: 3rpx;
 }
 
 .row__stars--bad {
-  color: #B4503F;
+  color: var(--danger);
 }
 
 /* ---------- 地址 ---------- */
 .addr {
   font-size: 27rpx;
-  color: #555C53;
+  color: var(--sub);
 }
 
 .addr__actions {
@@ -183,42 +183,42 @@
 .tips {
   margin-top: 24rpx;
   padding: 18rpx 20rpx;
-  background: #F7F0E3;
-  border-radius: 14rpx;
+  background: var(--warn-bg);
+  border-radius: var(--r);
   font-size: 25rpx;
-  color: #8A6B3D;
+  color: var(--warn);
   line-height: 1.7;
 }
 
 .open {
   margin-top: 12rpx;
   padding: 16rpx 20rpx;
-  border-radius: 12rpx;
+  border-radius: var(--r-sm);
   font-size: 27rpx;
   line-height: 1.6;
-  color: #1E241F;
-  background: #F0EEE8;
+  color: var(--text);
+  background: var(--fill);
 }
 
 .open--unknown {
-  color: #8A5A2B;
-  background: #FBF1E2;
+  color: var(--warn);
+  background: var(--warn-bg);
 }
 
 .unverified {
   margin-top: 20rpx;
   padding: 14rpx 20rpx;
-  border-radius: 12rpx;
+  border-radius: var(--r-sm);
   font-size: 23rpx;
   line-height: 1.5;
-  color: #8A5A2B;
-  background: #FBF1E2;
+  color: var(--warn);
+  background: var(--warn-bg);
 }
 
 .meta {
   margin-top: 20rpx;
   font-size: 22rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 /* ---------- 按钮 ---------- */
@@ -227,24 +227,24 @@
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 28rpx;
 }
 
 .btn--ghost {
-  color: #3A6248;
-  background: #E6EDE6;
+  color: var(--brand-dark);
+  background: var(--brand-soft);
 }
 
 .btn--primary {
-  color: #fff;
-  background: #4B7A5A;
+  color: var(--card);
+  background: var(--brand);
 }
 
 /* 已收藏：底色加深一点，和未收藏区分开 */
 .btn--on {
-  color: #fff;
-  background: #7E9C86;
+  color: var(--card);
+  background: var(--brand-mute);
 }
 
 .bar {
@@ -254,8 +254,8 @@
   bottom: 0;
   display: flex;
   padding: 16rpx 24rpx calc(16rpx + env(safe-area-inset-bottom));
-  background: #fff;
-  box-shadow: 0 -4rpx 20rpx rgba(45, 40, 32, 0.08);
+  background: var(--card);
+  box-shadow: var(--lift-up);
 }
 
 .bar__btn {

@@ -10,15 +10,15 @@
 .date {
   margin-right: 14rpx;
   padding: 12rpx 26rpx;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 25rpx;
-  color: #555C53;
-  background: #F1EFE8;
+  color: var(--sub);
+  background: var(--fill);
 }
 
 .date--on {
-  color: #fff;
-  background: #4B7A5A;
+  color: var(--card);
+  background: var(--brand);
 }
 
 .dateText {
@@ -31,28 +31,28 @@
 .slot {
   margin-top: 20rpx;
   padding: 24rpx 24rpx 8rpx;
-  background: #fff;
-  border-radius: 20rpx;
-  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+  background: var(--card);
+  border-radius: var(--r-lg);
+  border: 1rpx solid var(--line);
 }
 
 .slot__label {
   font-size: 26rpx;
-  color: #3A6248;
+  color: var(--brand-dark);
   font-weight: 600;
 }
 
 .slot__empty {
   padding: 16rpx 0 20rpx;
   font-size: 24rpx;
-  color: #B9BCB2;
+  color: var(--faint);
 }
 
 .pitem {
   display: flex;
   align-items: center;
   padding: 20rpx 0;
-  border-bottom: 1rpx solid #EFEDE6;
+  border-bottom: 1rpx solid var(--line-soft);
 }
 
 .pitem:last-child {
@@ -70,23 +70,23 @@
 .pitem__meta {
   margin-top: 4rpx;
   font-size: 22rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .pitem__del {
   padding: 8rpx 20rpx;
   font-size: 23rpx;
-  color: #B4503F;
-  background: #F7ECE9;
-  border-radius: 999rpx;
+  color: var(--danger);
+  background: var(--danger-bg);
+  border-radius: var(--r-pill);
 }
 
 /* ---------------- 汇总 ---------------- */
 .sum {
   margin-top: 24rpx;
   padding: 24rpx;
-  background: #E6EDE6;
-  border-radius: 20rpx;
+  background: var(--brand-soft);
+  border-radius: var(--r-lg);
 }
 
 .sum__row {
@@ -96,27 +96,27 @@
 
 .sum__label {
   font-size: 23rpx;
-  color: #6C736B;
+  color: var(--sub);
   margin-right: 10rpx;
 }
 
 .sum__value {
   font-size: 32rpx;
   font-weight: 600;
-  color: #3A6248;
+  color: var(--brand-dark);
   margin-right: 28rpx;
 }
 
 .sum__note {
   margin-top: 8rpx;
   font-size: 21rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .sum__map {
   margin-top: 16rpx;
   font-size: 26rpx;
-  color: #3A6248;
+  color: var(--brand-dark);
 }
 
 /* ---------------- 收藏 ---------------- */
@@ -131,9 +131,9 @@
   align-items: center;
   padding: 24rpx;
   margin-bottom: 16rpx;
-  background: #fff;
-  border-radius: 20rpx;
-  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+  background: var(--card);
+  border-radius: var(--r-lg);
+  border: 1rpx solid var(--line);
 }
 
 .fav__main {
@@ -147,24 +147,24 @@
 .fav__meta {
   margin-top: 4rpx;
   font-size: 22rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .fav__add {
   padding: 12rpx 24rpx;
   font-size: 25rpx;
-  color: #fff;
-  background: #4B7A5A;
-  border-radius: 999rpx;
+  color: var(--card);
+  background: var(--brand);
+  border-radius: var(--r-pill);
 }
 
 .fav__empty {
   padding: 24rpx 8rpx;
   font-size: 25rpx;
-  color: #9AA096;
+  color: var(--faint);
   line-height: 1.8;
 }
 
 .link {
-  color: #3A6248;
+  color: var(--brand-dark);
 }

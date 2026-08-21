@@ -7,9 +7,9 @@
   display: flex;
   align-items: center;
   padding: 32rpx 28rpx;
-  background: #fff;
-  border-radius: 24rpx;
-  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+  background: var(--card);
+  border-radius: var(--r-lg);
+  border: 1rpx solid var(--line);
 }
 
 .avatar-btn {
@@ -29,14 +29,14 @@
   width: 112rpx;
   height: 112rpx;
   border-radius: 50%;
-  background: #E6EDE6;
+  background: var(--brand-soft);
 }
 
 .avatar--empty {
   line-height: 112rpx;
   text-align: center;
   font-size: 40rpx;
-  color: #4B7A5A;
+  color: var(--brand);
 }
 
 .profile__text {
@@ -50,14 +50,14 @@
 }
 
 .ph {
-  color: #9AA096;
+  color: var(--faint);
   font-weight: 400;
 }
 
 .profile__desc {
   margin-top: 6rpx;
   font-size: 22rpx;
-  color: #B9BCB2;
+  color: var(--faint);
 }
 
 /* ---------------- 孩子 ---------------- */
@@ -79,7 +79,7 @@
 
 .sec__action {
   font-size: 26rpx;
-  color: #3A6248;
+  color: var(--brand-dark);
 }
 
 .kids {
@@ -92,15 +92,15 @@
   width: 47%;
   margin: 0 3% 20rpx 0;
   padding: 24rpx;
-  background: #fff;
-  border-radius: 20rpx;
+  background: var(--card);
+  border-radius: var(--r-lg);
   border: 2rpx solid transparent;
-  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+  border: 1rpx solid var(--line);
 }
 
 .kid--on {
-  border-color: #4B7A5A;
-  background: #E6EDE6;
+  border-color: var(--brand);
+  background: var(--brand-soft);
 }
 
 .kid__row {
@@ -116,16 +116,16 @@
 .kid__badge {
   margin-left: 12rpx;
   padding: 2rpx 12rpx;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 20rpx;
-  color: #fff;
-  background: #4B7A5A;
+  color: var(--card);
+  background: var(--brand);
 }
 
 .kid__age {
   margin-top: 6rpx;
   font-size: 23rpx;
-  color: #6C736B;
+  color: var(--sub);
 }
 
 .kid__edit {
@@ -133,14 +133,14 @@
   right: 20rpx;
   bottom: 20rpx;
   font-size: 23rpx;
-  color: #3A6248;
+  color: var(--brand-dark);
 }
 
 .addcard {
   padding: 32rpx 28rpx;
-  background: #fff;
-  border-radius: 20rpx;
-  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+  background: var(--card);
+  border-radius: var(--r-lg);
+  border: 1rpx solid var(--line);
 }
 
 .addcard__title {
@@ -151,24 +151,24 @@
 .addcard__desc {
   margin-top: 8rpx;
   font-size: 23rpx;
-  color: #9AA096;
+  color: var(--faint);
   line-height: 1.7;
 }
 
 /* ---------------- 入口列表 ---------------- */
 .list {
   margin-top: 32rpx;
-  background: #fff;
-  border-radius: 24rpx;
+  background: var(--card);
+  border-radius: var(--r-lg);
   overflow: hidden;
-  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.05);
+  border: 1rpx solid var(--line);
 }
 
 .item {
   display: flex;
   align-items: center;
   padding: 28rpx 24rpx;
-  border-bottom: 1rpx solid #EFEDE6;
+  border-bottom: 1rpx solid var(--line-soft);
 }
 
 .item:last-child {
@@ -190,39 +190,39 @@
 
 .item__desc {
   font-size: 23rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .item__right {
   font-size: 25rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .item__phase {
   font-size: 22rpx;
-  color: #B9BCB2;
+  color: var(--faint);
 }
 
 /* ---------------- 联系方式 ---------------- */
 .contact {
   margin-top: 32rpx;
   padding: 28rpx 28rpx 12rpx;
-  background: #fff;
-  border-radius: 20rpx;
-  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.06);
+  background: var(--card);
+  border-radius: var(--r-lg);
+  border: 1rpx solid var(--line);
 }
 
 .contact__title {
   font-size: 27rpx;
   font-weight: 600;
-  color: #1E241F;
+  color: var(--text);
 }
 
 .contact__desc {
   margin-top: 8rpx;
   font-size: 23rpx;
   line-height: 1.5;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .contact__row {
@@ -230,35 +230,35 @@
   align-items: center;
   margin-top: 20rpx;
   padding: 18rpx 0;
-  border-top: 1rpx solid #EFEDE7;
+  border-top: 1rpx solid var(--line-soft);
 }
 
 .contact__label {
   flex: none;
   width: 80rpx;
   font-size: 25rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .contact__value {
   flex: 1;
   font-size: 28rpx;
-  color: #1E241F;
+  color: var(--text);
   letter-spacing: 0.5rpx;
 }
 
 .contact__act {
   flex: none;
   padding: 8rpx 24rpx;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 23rpx;
-  color: #3A6248;
-  background: #E6EDE6;
+  color: var(--brand-dark);
+  background: var(--brand-soft);
 }
 
 .foot {
   margin-top: 40rpx;
   text-align: center;
   font-size: 22rpx;
-  color: #B9BCB2;
+  color: var(--faint);
 }

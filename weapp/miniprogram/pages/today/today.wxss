@@ -1,5 +1,5 @@
 page {
-  background: #F3F1EC;
+  background: var(--bg);
 }
 
 .page {
@@ -9,9 +9,8 @@ page {
 /* ---------------- 天气 ---------------- */
 .hero {
   padding: 28rpx 28rpx 24rpx;
-  border-radius: 24rpx;
-  background: linear-gradient(160deg, #4B7A5A 0%, #3A6248 100%);
-  box-shadow: 0 8rpx 24rpx rgba(58, 98, 72, 0.22);
+  border-radius: var(--r-lg);
+  background: var(--brand-dark);
 }
 
 .hero__row {
@@ -23,7 +22,7 @@ page {
 .hero__weather {
   font-size: 38rpx;
   font-weight: 600;
-  color: #fff;
+  color: var(--card);
 }
 
 .hero__refresh {
@@ -60,19 +59,19 @@ page {
 .sec__title {
   font-size: 30rpx;
   font-weight: 600;
-  color: #1E241F;
+  color: var(--text);
 }
 
 .sec__more {
   font-size: 25rpx;
-  color: #3A6248;
+  color: var(--brand-dark);
 }
 
 .tip {
   padding: 40rpx 0;
   text-align: center;
   font-size: 26rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 /* ---------------- 候选卡片 ---------------- */
@@ -81,9 +80,9 @@ page {
   display: flex;
   margin-bottom: 20rpx;
   padding: 20rpx;
-  background: #fff;
-  border-radius: 20rpx;
-  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.08);
+  background: var(--card);
+  border-radius: var(--r-lg);
+  border: 1rpx solid var(--line);
 }
 
 .card__rank {
@@ -95,8 +94,8 @@ page {
   line-height: 40rpx;
   text-align: center;
   font-size: 22rpx;
-  color: #fff;
-  background: #4B7A5A;
+  color: var(--card);
+  background: var(--brand);
   border-radius: 0 999rpx 999rpx 0;
 }
 
@@ -104,8 +103,8 @@ page {
   flex: none;
   width: 180rpx;
   height: 180rpx;
-  border-radius: 16rpx;
-  background: #E6EDE6;
+  border-radius: var(--r);
+  background: var(--brand-soft);
 }
 
 .card__img--ph {
@@ -135,7 +134,7 @@ page {
   min-width: 0;
   font-size: 30rpx;
   font-weight: 600;
-  color: #1E241F;
+  color: var(--text);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -146,22 +145,22 @@ page {
   margin-left: 16rpx;
   padding: 0 8rpx;
   font-size: 34rpx;
-  color: #C9CEC6;
+  color: var(--faint);
 }
 
 .card__fav--on {
-  color: #B5714C;
+  color: var(--clay);
 }
 
 .card__meta {
   margin-top: 10rpx;
   font-size: 23rpx;
-  color: #6C736B;
+  color: var(--sub);
 }
 
 .card__meta--sub {
   margin-top: 4rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 /* ---------------- 推荐理由 ---------------- */
@@ -174,14 +173,14 @@ page {
 .reason {
   margin: 0 12rpx 8rpx 0;
   padding: 6rpx 16rpx;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 22rpx;
-  color: #3A6248;
+  color: var(--brand-dark);
   background: rgba(58, 98, 72, 0.10);
 }
 
 .reason--light {
-  color: #fff;
+  color: var(--card);
   background: rgba(255, 255, 255, 0.20);
 }
 
@@ -191,15 +190,15 @@ page {
   align-items: center;
   justify-content: center;
   height: 108rpx;
-  border-radius: 20rpx;
-  background: #fff;
-  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.08);
+  border-radius: var(--r-lg);
+  background: var(--card);
+  border: 1rpx solid var(--line);
   transition: transform 0.12s ease;
 }
 
 .dice--on {
   transform: scale(0.97);
-  background: #E6EDE6;
+  background: var(--brand-soft);
 }
 
 .dice__emoji {
@@ -210,30 +209,29 @@ page {
 .dice__text {
   font-size: 30rpx;
   font-weight: 600;
-  color: #3A6248;
+  color: var(--brand-dark);
 }
 
 .dice__hint {
   margin-top: 12rpx;
   text-align: center;
   font-size: 22rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .lucky {
   margin-top: 24rpx;
   padding: 28rpx;
-  border-radius: 20rpx;
-  background: linear-gradient(160deg, #B5714C 0%, #96593A 100%);
-  box-shadow: 0 8rpx 24rpx rgba(150, 89, 58, 0.24);
+  border-radius: var(--r-lg);
+  background: var(--clay-dark);
 }
 
 .lucky__tag {
   display: inline-block;
   padding: 4rpx 16rpx;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 21rpx;
-  color: #96593A;
+  color: var(--clay-dark);
   background: rgba(255, 255, 255, 0.90);
 }
 
@@ -241,7 +239,7 @@ page {
   margin-top: 14rpx;
   font-size: 36rpx;
   font-weight: 600;
-  color: #fff;
+  color: var(--card);
 }
 
 .lucky__meta {
@@ -255,5 +253,5 @@ page {
   margin-top: 40rpx;
   text-align: center;
   font-size: 21rpx;
-  color: #9AA096;
+  color: var(--faint);
 }

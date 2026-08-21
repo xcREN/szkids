@@ -1,5 +1,5 @@
 page {
-  background: #F3F1EC;
+  background: var(--bg);
 }
 
 .page {
@@ -9,15 +9,14 @@ page {
 /* ---------------- 说明 ---------------- */
 .intro {
   padding: 26rpx;
-  border-radius: 20rpx;
-  background: linear-gradient(160deg, #4B7A5A 0%, #3A6248 100%);
-  box-shadow: 0 8rpx 24rpx rgba(58, 98, 72, 0.20);
+  border-radius: var(--r-lg);
+  background: var(--brand-dark);
 }
 
 .intro__title {
   font-size: 30rpx;
   font-weight: 600;
-  color: #fff;
+  color: var(--card);
 }
 
 .intro__desc {
@@ -47,20 +46,20 @@ page {
 .sec__title {
   font-size: 29rpx;
   font-weight: 600;
-  color: #1E241F;
+  color: var(--text);
 }
 
 .sec__act {
   font-size: 25rpx;
-  color: #3A6248;
+  color: var(--brand-dark);
 }
 
 /* ---------------- 空状态 ---------------- */
 .empty {
   padding: 60rpx 40rpx;
   text-align: center;
-  background: #fff;
-  border-radius: 20rpx;
+  background: var(--card);
+  border-radius: var(--r-lg);
 }
 
 .empty__emoji {
@@ -70,14 +69,14 @@ page {
 .empty__title {
   margin-top: 16rpx;
   font-size: 28rpx;
-  color: #555C53;
+  color: var(--sub);
 }
 
 .empty__desc {
   margin-top: 10rpx;
   font-size: 23rpx;
   line-height: 1.7;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 /* ---------------- 列表项 ---------------- */
@@ -86,9 +85,9 @@ page {
   align-items: center;
   margin-bottom: 16rpx;
   padding: 22rpx;
-  background: #fff;
-  border-radius: 18rpx;
-  box-shadow: 0 4rpx 14rpx rgba(45, 40, 32, 0.06);
+  background: var(--card);
+  border-radius: var(--r-lg);
+  border: 1rpx solid var(--line);
 }
 
 .item__emoji {
@@ -98,8 +97,8 @@ page {
   line-height: 64rpx;
   text-align: center;
   font-size: 34rpx;
-  background: #F0EEE8;
-  border-radius: 16rpx;
+  background: var(--fill);
+  border-radius: var(--r);
 }
 
 .item__body {
@@ -116,7 +115,7 @@ page {
 .item__name {
   font-size: 28rpx;
   font-weight: 600;
-  color: #1E241F;
+  color: var(--text);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -126,36 +125,36 @@ page {
   flex: none;
   margin-left: 14rpx;
   padding: 3rpx 14rpx;
-  border-radius: 999rpx;
+  border-radius: var(--r-pill);
   font-size: 20rpx;
-  color: #6C736B;
-  background: #F0EEE8;
+  color: var(--sub);
+  background: var(--fill);
 }
 
 .tag--cloud {
-  color: #96593A;
-  background: #F7E9DE;
+  color: var(--clay-dark);
+  background: var(--clay-bg);
 }
 
 .item__meta {
   margin-top: 8rpx;
   font-size: 23rpx;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .item__ok {
-  color: #4B7A5A;
+  color: var(--brand);
 }
 
 .item__warn {
-  color: #B4503F;
+  color: var(--danger);
 }
 
 .item__arrow {
   flex: none;
   margin-left: 12rpx;
   font-size: 30rpx;
-  color: #C9CEC6;
+  color: var(--faint);
 }
 
 /* ---------------- 添加 ---------------- */
@@ -164,12 +163,11 @@ page {
   height: 96rpx;
   line-height: 96rpx;
   text-align: center;
-  border-radius: 18rpx;
+  border-radius: var(--r-lg);
   font-size: 29rpx;
   font-weight: 600;
-  color: #fff;
-  background: #4B7A5A;
-  box-shadow: 0 6rpx 18rpx rgba(58, 98, 72, 0.22);
+  color: var(--card);
+  background: var(--brand);
 }
 
 /* ---------------- 作者工具 ---------------- */
@@ -177,15 +175,15 @@ page {
 .setup {
   margin-top: 36rpx;
   padding: 24rpx;
-  background: #fff;
-  border-radius: 20rpx;
+  background: var(--card);
+  border-radius: var(--r-lg);
 }
 
 .tools__title,
 .setup__title {
   font-size: 27rpx;
   font-weight: 600;
-  color: #1E241F;
+  color: var(--text);
 }
 
 .tools__row {
@@ -193,11 +191,11 @@ page {
   justify-content: space-between;
   margin-top: 16rpx;
   font-size: 25rpx;
-  color: #555C53;
+  color: var(--sub);
 }
 
 .tools__v {
-  color: #1E241F;
+  color: var(--text);
   font-weight: 600;
 }
 
@@ -206,7 +204,7 @@ page {
   margin-top: 12rpx;
   font-size: 22rpx;
   line-height: 1.65;
-  color: #9AA096;
+  color: var(--faint);
 }
 
 .tools__btns {
@@ -223,10 +221,10 @@ page {
   height: 76rpx;
   line-height: 76rpx;
   text-align: center;
-  border-radius: 14rpx;
+  border-radius: var(--r);
   font-size: 25rpx;
-  color: #3A6248;
-  background: #E6EDE6;
+  color: var(--brand-dark);
+  background: var(--brand-soft);
 }
 
 .tbtn--full {
@@ -235,21 +233,21 @@ page {
 
 /* ---------------- 首次配置引导 ---------------- */
 .setup {
-  background: #FBF1E2;
+  background: var(--warn-bg);
 }
 
 .setup__desc {
-  color: #8A7A5E;
+  color: var(--warn);
 }
 
 .setup__id {
   margin-top: 14rpx;
   padding: 16rpx 18rpx;
-  background: #fff;
-  border-radius: 12rpx;
+  background: var(--card);
+  border-radius: var(--r-sm);
   font-size: 22rpx;
   line-height: 1.5;
-  color: #55503F;
+  color: var(--warn);
   word-break: break-all;
   font-family: ui-monospace, Consolas, monospace;
 }
@@ -259,6 +257,6 @@ page {
   margin-top: 40rpx;
   font-size: 21rpx;
   line-height: 1.7;
-  color: #B9BCB2;
+  color: var(--faint);
   text-align: center;
 }
