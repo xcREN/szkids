@@ -203,6 +203,59 @@
   color: #B9BCB2;
 }
 
+/* ---------------- 联系方式 ---------------- */
+.contact {
+  margin-top: 32rpx;
+  padding: 28rpx 28rpx 12rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(45, 40, 32, 0.06);
+}
+
+.contact__title {
+  font-size: 27rpx;
+  font-weight: 600;
+  color: #1E241F;
+}
+
+.contact__desc {
+  margin-top: 8rpx;
+  font-size: 23rpx;
+  line-height: 1.5;
+  color: #9AA096;
+}
+
+.contact__row {
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+  padding: 18rpx 0;
+  border-top: 1rpx solid #EFEDE7;
+}
+
+.contact__label {
+  flex: none;
+  width: 80rpx;
+  font-size: 25rpx;
+  color: #9AA096;
+}
+
+.contact__value {
+  flex: 1;
+  font-size: 28rpx;
+  color: #1E241F;
+  letter-spacing: 0.5rpx;
+}
+
+.contact__act {
+  flex: none;
+  padding: 8rpx 24rpx;
+  border-radius: 999rpx;
+  font-size: 23rpx;
+  color: #3A6248;
+  background: #E6EDE6;
+}
+
 .foot {
   margin-top: 40rpx;
   text-align: center;

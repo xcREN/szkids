@@ -8,6 +8,21 @@
 const store = require('../../utils/store.js');
 const { groupForAge, AGE_GROUPS } = require('../../data/categories.js');
 
+/**
+ * 联系方式。改这里一处就够，页面上两行都从这取。
+ *
+ * 为什么要放：`data/places.js` 里的开放时间、收费、预约规则都会变
+ * （README 第四节说的「lastVerifiedAt 是这类产品的生命线」），
+ * 光靠自己核实跟不上，得让用户能直接把错报给你。
+ *
+ * phoneText 只是分段显示，好认；拨号用的是 phone 那个纯数字串。
+ */
+const CONTACT = {
+  wechat: 'Atlas-Ren',
+  phone: '18926533343',
+  phoneText: '189 2653 3343'
+};
+
 Page({
   data: {
     profile: { avatarUrl: '', nickName: '' },
@@ -15,7 +30,8 @@ Page({
     favCount: 0,
     checkinCount: 0,
     planCount: 0,
-    version: 'v0.4 · Phase 4'
+    contact: CONTACT,
+    version: 'v1.0.1 · Phase 5'
   },
 
   onShow() {
@@ -100,6 +116,31 @@ Page({
 
   onPlan() {
     wx.navigateTo({ url: '/pages/plan/plan' });
+  },
+
+  /* ---------------- 联系方式 ---------------- */
+
+  /**
+   * 复制微信号。
+   * 不做「跳转加好友」——小程序没有这个能力，
+   * 复制到剪贴板再让用户自己去搜是唯一靠谱的做法。
+   */
+  onCopyWechat() {
+    wx.setClipboardData({
+      data: CONTACT.wechat,
+      success: () => {
+        wx.showToast({ title: '微信号已复制，去微信搜索添加', icon: 'none', duration: 2400 });
+      },
+      fail: () => wx.showToast({ title: '复制失败，微信号：' + CONTACT.wechat, icon: 'none' })
+    });
+  },
+
+  /** 拨打电话。用户取消拨号也会走 fail，不用提示 */
+  onCallPhone() {
+    wx.makePhoneCall({
+      phoneNumber: CONTACT.phone,
+      fail: () => {}
+    });
   },
 
   onClearData() {

@@ -76,5 +76,23 @@
     </view>
   </view>
 
+  <!-- 联系方式：地点数据要靠用户补充和纠错，得留个能找到人的口子 -->
+  <view class="contact">
+    <view class="contact__title">发现信息不对，或者想推荐一个地方？</view>
+    <view class="contact__desc">开放时间、收费和预约规则常变，欢迎随时告诉我。</view>
+
+    <view class="contact__row" bindtap="onCopyWechat">
+      <text class="contact__label">微信</text>
+      <text class="contact__value">{{contact.wechat}}</text>
+      <text class="contact__act">复制</text>
+    </view>
+
+    <view class="contact__row" bindtap="onCallPhone">
+      <text class="contact__label">电话</text>
+      <text class="contact__value">{{contact.phoneText}}</text>
+      <text class="contact__act">拨打</text>
+    </view>
+  </view>
+
   <view class="foot">深圳亲子地图 {{version}}</view>
 </view>
