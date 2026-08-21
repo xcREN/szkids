@@ -59,6 +59,18 @@ Page({
   },
 
   onLoad() {
+    /**
+     * 这三行必须在**任何 setData 之前**。
+     *
+     * setData 会触发首次渲染，渲染会创建 filter-panel 组件，
+     * 而组件的属性观察器会同步抛一次 change 事件 —— 回调 onFilterChange
+     * 里要读 this.decorated。放在 setData 后面初始化的话，那一次回调读到的是
+     * undefined，直接 TypeError（虽然不影响功能，但控制台一直挂着个红叉）。
+     */
+    this.allPlaces = placeUtil.getAll();
+    this.decorated = [];   // 加工后的全部地点
+    this.visible = [];     // 当前筛选命中的地点
+
     // 状态栏高度：兼容新旧基础库
     try {
       const info = wx.getWindowInfo ? wx.getWindowInfo() : wx.getSystemInfoSync();
@@ -66,9 +78,6 @@ Page({
     } catch (e) {
       // 取不到就用默认值，不影响功能
     }
-    this.allPlaces = placeUtil.getAll();
-    this.decorated = [];   // 加工后的全部地点
-    this.visible = [];     // 当前筛选命中的地点
     this.applyChildDefault(true);   // 原则二：先按孩子的年龄筛
     this.refresh();
   },

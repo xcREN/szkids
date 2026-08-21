@@ -84,6 +84,7 @@ function decorate(place, location) {
 
 /** 批量加工 */
 function decorateAll(list, location) {
+  if (!Array.isArray(list)) return [];
   return list.map((p) => decorate(p, location));
 }
 
@@ -92,6 +93,9 @@ function decorateAll(list, location) {
  * 任一条件为空即视为不限制。
  */
 function filter(list, f) {
+  // 页面在数据还没加工好时就调进来是常有的事（比如组件首次渲染抛的事件），
+  // 与其让调用方各自判空，不如在这里认下：没数据就是没结果
+  if (!Array.isArray(list)) return [];
   const cond = Object.assign(emptyFilters(), f || {});
   return list.filter((p) => {
     // 关键词：名称、区域、分类、标签任一命中
@@ -137,6 +141,7 @@ function filter(list, f) {
 
 /** 排序：'distance' 由近到远（没有定位时退化为按推荐分），'score' 按推荐分 */
 function sort(list, by) {
+  if (!Array.isArray(list)) return [];
   const arr = list.slice();
   if (by === 'distance' && arr.length && arr[0].distanceKm !== null) {
     return arr.sort((a, b) => a.distanceKm - b.distanceKm);
