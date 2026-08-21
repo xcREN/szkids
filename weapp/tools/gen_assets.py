@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-生成小程序图标资源：地图 Marker 大头针 + TabBar 图标。
+生成小程序图标资源：地图 Marker 大头针 + TabBar 图标 + 地图页悬浮按钮图标。
 
 配色跟 miniprogram/app.wxss 里的变量保持一致（2026 暖白自然色系）：
     森林绿 #4B7A5A  深绿 #3A6248  雾蓝 #3F7F8C
@@ -25,6 +25,7 @@ CLAY = "#B5714C"       # 文化室内
 PLUM = "#7E6A92"       # 游乐运动
 TAB_OFF = "#9AA096"    # TabBar 未选中
 TAB_ON = "#3A6248"     # TabBar 选中
+UI_ICON = "#3A6248"    # 地图页悬浮按钮里的图标
 
 # 分类 -> (emoji, 主题色)。颜色只有四组，保持统一视觉体系
 CATS = {
@@ -154,6 +155,51 @@ def _person(d, mode, c):
         d.arc(body, 180, 360, fill=c, width=STROKE)
 
 
+# ---------------------------------------------------------------- 悬浮按钮
+# 地图页右侧那两个圆按钮里的图标。
+#
+# 为什么不用 CSS 背景图或 SVG：
+#   小程序的 WXSS 里 background-image **不支持本地文件路径**（只能网络图或
+#   base64），而 SVG 的 data URI 在部分基础库上根本渲染不出来 —— 试过，
+#   结果是一个空白圆圈。所以老老实实生成 PNG，用 <image> 组件显示。
+
+def _icon_list(d, c):
+    """列表：三条横线 + 行首圆点，和「地图」区分得开"""
+    x0, x1 = N * 0.36, N * 0.86
+    dot_x, dot_r = N * 0.20, N * 0.055
+    for y in (N * 0.28, N * 0.5, N * 0.72):
+        d.line([(x0, y), (x1, y)], fill=c, width=STROKE)
+        d.ellipse([dot_x - dot_r, y - dot_r, dot_x + dot_r, y + dot_r], fill=c)
+
+
+def _icon_map(d, c):
+    """折叠地图：三折的梯形轮廓 + 两条折线"""
+    p = [(N * 0.14, N * 0.28), (N * 0.38, N * 0.18), (N * 0.62, N * 0.28),
+         (N * 0.86, N * 0.18), (N * 0.86, N * 0.74), (N * 0.62, N * 0.84),
+         (N * 0.38, N * 0.74), (N * 0.14, N * 0.84)]
+    d.line(p + [p[0]], fill=c, width=STROKE, joint="curve")
+    d.line([(N * 0.38, N * 0.18), (N * 0.38, N * 0.74)], fill=c, width=STROKE)
+    d.line([(N * 0.62, N * 0.28), (N * 0.62, N * 0.84)], fill=c, width=STROKE)
+
+
+def _icon_locate(d, c):
+    """准星：外圈 + 四向短刻度 + 中心实心点。比一个孤零零的圆更像「定位」"""
+    cx, cy, r = N * 0.5, N * 0.5, N * 0.28
+    d.ellipse([cx - r, cy - r, cx + r, cy + r], outline=c, width=STROKE)
+    t0, t1 = r * 1.18, r * 1.62
+    for dx, dy in ((0, -1), (0, 1), (-1, 0), (1, 0)):
+        d.line([(cx + dx * t0, cy + dy * t0), (cx + dx * t1, cy + dy * t1)],
+               fill=c, width=STROKE)
+    h = r * 0.34
+    d.ellipse([cx - h, cy - h, cx + h, cy + h], fill=c)
+
+
+def ui_icon(kind, out, color=UI_ICON):
+    im, d = _new()
+    {"list": _icon_list, "map": _icon_map, "locate": _icon_locate}[kind](d, color)
+    im.resize((72, 72), Image.LANCZOS).save(out)
+
+
 def tab_icon(kind, mode, color, out):
     im, d = _new()
     if kind == "map":
@@ -176,4 +222,10 @@ if __name__ == "__main__":
     for k in ("map", "discover", "timeline", "mine"):
         tab_icon(k, "line", TAB_OFF, os.path.join(ROOT, "tabbar", k + ".png"))
         tab_icon(k, "fill", TAB_ON, os.path.join(ROOT, "tabbar", k + "-active.png"))
-    print("生成完成：%d 个 marker（含未去过灰针），8 个 tabbar 图标" % (len(CATS) + 1))
+
+    os.makedirs(os.path.join(ROOT, "ui"), exist_ok=True)
+    for k in ("list", "map", "locate"):
+        ui_icon(k, os.path.join(ROOT, "ui", k + ".png"))
+
+    print("生成完成：%d 个 marker（含未去过灰针），8 个 tabbar 图标，3 个悬浮按钮图标"
+          % (len(CATS) + 1))
