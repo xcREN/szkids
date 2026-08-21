@@ -28,7 +28,11 @@
  *   tips          注意事项
  *   images        图片，留空时详情页用分类色占位
  *   source        数据来源
- *   lastVerifiedAt 最后核实时间（PRD 强调：开放时间/收费/预约会变）
+ *   compiledAt    资料整理时间
+ *   lastVerifiedAt 最后**逐条核实**时间。空字符串 = 还没核实过，
+ *                 详情页会据此提示用户「出发前再确认」。
+ *                 核实一条就把这条的日期填上，不要批量填。
+ *                 （PRD 强调：开放时间/收费/预约会变，这个字段是这类产品的生命线）
  *
  * 注意：当前经纬度、价格、预约规则均为整理值，上线前需要逐条核实。
  */
@@ -64,7 +68,7 @@ const PLACES = [
     reasons: ['大片草地和无动力游乐设施，适合跑跳攀爬。', '紧邻金沙湾海滩，可以顺路赶海。', '公园免费，适合半日亲子活动。'],
     tips: '几乎没有遮荫，夏天建议早上或傍晚去，务必带防晒和水。',
     images: ['/images/jinshawan-1.jpg', '/images/jinshawan-2.jpg', '/images/jinshawan-3.jpg'],
-    source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-shenzhenwan-park',
@@ -87,7 +91,7 @@ const PLACES = [
     description: '13 公里海滨长廊，深圳最适合亲子骑行的地方之一。',
     reasons: ['连续的平坦栈道，学骑车、推婴儿车都方便。', '秋冬能看到成群候鸟，是天然的自然课。', '免费开放，随时可以来。'],
     tips: '海边风大，注意防晒；停车场周末很早就满，建议地铁前往。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-talent-park',
@@ -110,7 +114,7 @@ const PLACES = [
     description: '深圳湾边的湖景公园，视野开阔，适合遛弯和拍照。',
     reasons: ['环湖步道平整，婴儿车全程无障碍。', '草坪可以野餐，傍晚风景很好。', '紧邻深圳湾，可以和骑行连成半天行程。'],
     tips: '遮荫少，正午暴晒；周末拍照人多。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-lianhuashan-park',
@@ -133,7 +137,7 @@ const PLACES = [
     description: '山顶大草坪是深圳最经典的放风筝地点。',
     reasons: ['缓坡步道，四五岁的孩子也能自己爬上山顶。', '山顶草坪开阔，放风筝、野餐都合适。', '林荫多，夏天比空旷公园凉快。'],
     tips: '上山路段推婴儿车较吃力；风筝在山顶就能买到。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-xiangmi-park',
@@ -156,7 +160,7 @@ const PLACES = [
     description: '市中心的植物主题公园，儿童活动区和沙池很受欢迎。',
     reasons: ['儿童游乐区分龄设计，小童大童都有得玩。', '有沙池和戏水区，夏天孩子最爱。', '树多、路平，推车逛一天不累。'],
     tips: '周末儿童区排队；戏水区开放时间随季节调整，去前先查。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-children-park-luohu',
@@ -179,7 +183,7 @@ const PLACES = [
     description: '专为儿童设计的免费公园，游乐设施密度高。',
     reasons: ['全部免费，设施按年龄分区，低龄孩子也玩得开。', '有戏水区和沙池，夏天可以泡半天。', '树荫充足，比空旷公园耐晒。'],
     tips: '停车位少，建议地铁；戏水区夏季开放，记得带换洗衣物。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-museum-history',
@@ -202,7 +206,7 @@ const PLACES = [
     description: '市民中心里的免费博物馆，讲深圳从渔村到城市的故事。',
     reasons: ['全程空调，下雨和高温天的稳定备选。', '复原场景和实物多，六岁以上能看进去。', '免费，需要提前网上预约。'],
     tips: '周一闭馆；公众号预约，热门时段要提前一两天。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-kids-library',
@@ -225,7 +229,7 @@ const PLACES = [
     description: '按年龄分区的儿童图书馆，低幼绘本区可以坐着看一下午。',
     reasons: ['分龄阅读区，零到两岁也有专门空间。', '常有故事会和手工活动。', '免费，雨天和高温天的首选。'],
     tips: '周末需公众号预约入馆；周一闭馆。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-science-museum',
@@ -248,7 +252,7 @@ const PLACES = [
     description: '大量可动手的互动展项，能待上大半天的室内科普场馆。',
     reasons: ['展项以动手操作为主，孩子不容易看腻。', '空间大、空调足，适合高温和雨天。', '基础展厅免费，但必须提前预约。'],
     tips: '门票放票即抢；从关内过去车程约一小时，建议安排整天。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-art-museum',
@@ -271,7 +275,7 @@ const PLACES = [
     description: '两馆合一，常设城市规划模型，孩子能找到自己家在哪。',
     reasons: ['巨型城市沙盘对孩子很有吸引力。', '当代艺术展轮换，每次去都不一样。', '免费、人少、有空调。'],
     tips: '周一闭馆；部分特展单独收费。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-safari-park',
@@ -294,7 +298,7 @@ const PLACES = [
     description: '深圳最经典的亲子目的地，动物种类多、有表演。',
     reasons: ['动物近距离观察，低龄孩子接受度最高的一类活动。', '园区有小火车和表演，节奏不会太累。', '园内餐饮和母婴设施齐全。'],
     tips: '票价高，建议官方渠道提前买；全程步行多，推车带上。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-guangming-farm',
@@ -317,7 +321,7 @@ const PLACES = [
     description: '可以喂动物、体验农事的城市农场，配套成熟。',
     reasons: ['喂羊喂兔子这类互动，三到六岁孩子最买账。', '场地开阔，有草坪可以野餐。', '停车免费，自驾友好。'],
     tips: '夏天暴晒，尽量上午去；园内农家餐厅周末要等位。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-honghu-park',
@@ -340,7 +344,7 @@ const PLACES = [
     description: '以荷花闻名的老公园，六七月是最佳观赏期。',
     reasons: ['夏天荷花成片，是很好的自然观察素材。', '步道平缓，适合低龄孩子慢慢逛。', '免费，交通方便。'],
     tips: '荷花季人多，早上光线和人流都更好。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-dashahe-greenway',
@@ -363,7 +367,7 @@ const PLACES = [
     description: '13.7 公里滨河绿道，骑行道和步道分开，很适合学骑车。',
     reasons: ['骑行道独立，孩子练车相对安全。', '沿河有多个下沉亲水平台。', '全程免费，随时可以来一段。'],
     tips: '沿线停车不方便，建议就近地铁站进入。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-tanglangshan',
@@ -386,7 +390,7 @@ const PLACES = [
     description: '关内最方便的登山点之一，适合当孩子的第一次正式徒步。',
     reasons: ['台阶路为主，六岁以上体力足够。', '山顶视野好，登顶有成就感。', '免费且有停车位。'],
     tips: '推不了婴儿车；夏天蚊虫多，带驱蚊水和足量的水。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-maluanshan',
@@ -410,7 +414,7 @@ const PLACES = [
     reasons: ['溪水清凉，是天然的玩水场。', '徒步线路多，可长可短。', '免费，停车方便。'],
     tips: '雨后山溪水量大，不要下水；山路湿滑，穿防滑鞋。',
     images: [], // 项目里的 photos/pingshan-*.jpg 未确认拍的是不是这里，先不挂
-    source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-jiaochangwei',
@@ -433,7 +437,7 @@ const PLACES = [
     description: '大鹏所城旁的沙滩，赶海和玩沙都合适。',
     reasons: ['沙滩坡度平缓，挖沙玩水安全度高。', '退潮能捡到贝壳小螃蟹。', '旁边就是大鹏所城，可以连成一天行程。'],
     tips: '夏季旺季停车贵且难；下海务必全程有大人跟着。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-dapeng-fortress',
@@ -456,7 +460,7 @@ const PLACES = [
     description: '六百年历史的明代所城，深圳「鹏城」名字的由来。',
     reasons: ['真实的古建筑群，比展板式的历史更直观。', '巷子不长，孩子逛得完。', '免费开放，和较场尾只隔几百米。'],
     tips: '古城内石板路窄，人多时看好孩子；部分将军府需单独买票。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-yangmeikeng',
@@ -479,7 +483,7 @@ const PLACES = [
     description: '深圳最美海滨骑行路线，沿途都是海景。',
     reasons: ['海边绿道平缓，双人自行车现场可租。', '礁石区能赶海观察潮间带生物。', '风景好，家长也愿意再来。'],
     tips: '节假日进入大鹏需预约通行；礁石湿滑，注意脚下。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-hongqiao-park',
@@ -502,7 +506,7 @@ const PLACES = [
     description: '架在山林之上的红色环形栈桥，走在树冠层里。',
     reasons: ['栈桥悬在半空，孩子会觉得很新鲜。', '路线是环形的，不用原路返回。', '免费，停车场也免费。'],
     tips: '全程约3公里且有坡，低龄孩子容易走不动；周末停车要早到。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-binhai-culture-park',
@@ -525,7 +529,7 @@ const PLACES = [
     description: '欢乐港湾旁的滨海公园，傍晚有灯光秀和摩天轮。',
     reasons: ['海边草坪开阔，适合放风筝和野餐。', '摩天轮和灯光秀让傍晚也有节目。', '商场紧邻公园，吃饭和洗手间都方便。'],
     tips: '摩天轮单独收费；海边风大，傍晚给孩子加件外套。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-fenghuangshan',
@@ -548,7 +552,7 @@ const PLACES = [
     description: '宝安最有代表性的登山点，山道成熟、林荫好。',
     reasons: ['台阶完整，是稳妥的入门登山线。', '树荫多，夏天比空旷公园凉快。', '免费且停车方便。'],
     tips: '不适合婴儿车；节假日山下停车场很早满。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-longcheng-park',
@@ -571,7 +575,7 @@ const PLACES = [
     description: '龙岗中心区的综合公园，草坪大、儿童设施多。',
     reasons: ['草坪允许搭帐篷，可以待上半天。', '儿童游乐区设施新，低龄友好。', '免费停车，自驾门槛低。'],
     tips: '周末草坪好位置要早去占；园内餐饮少，自己带吃的更省事。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-yuanboyuan',
@@ -594,7 +598,7 @@ const PLACES = [
     description: '俗称园博园，深圳最经典的免费搭帐篷草坪。',
     reasons: ['指定草坪可以搭帐篷，一待就是半天。', '园林造景丰富，逛起来不单调。', '免费，位置在市中心。'],
     tips: '周末露营区很挤，上午十点前到才有好位置。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-yantian-seaside-park',
@@ -617,7 +621,7 @@ const PLACES = [
     description: '19.5 公里的海边栈道，一路都是海景，走多久都可以。',
     reasons: ['栈道平坦连续，随时可以掉头回来。', '沿途有多个观景平台和驿站。', '免费开放，比海滩人少。'],
     tips: '正午暴晒且遮荫少；台风前后可能封闭，去前先查。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   },
   {
     id: 'sz-longhua-park',
@@ -640,7 +644,7 @@ const PLACES = [
     description: '深圳北站旁的城市公园，地铁直达，适合半天的短行程。',
     reasons: ['地铁出站就到，不用为停车发愁。', '有儿童活动区和大片草坪。', '周边商场多，吃饭方便。'],
     tips: '树荫集中在东侧，夏天沿树荫走；周末草坪人多。',
-    images: [], source: '编辑整理', lastVerifiedAt: '2026-08-21'
+    images: [], source: '编辑整理', lastVerifiedAt: '', compiledAt: '2026-08-21'
   }
 ];
 

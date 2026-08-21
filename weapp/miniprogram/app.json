@@ -12,8 +12,7 @@
     "pages/checkin/checkin",
     "pages/share/share",
     "pages/plan/plan",
-    "pages/place/place",
-    "pages/index/index"
+    "pages/place/place"
   ],
   "window": {
     "navigationBarBackgroundColor": "#FFFFFF",
@@ -62,6 +61,7 @@
   "requiredPrivateInfos": [
     "getFuzzyLocation"
   ],
+  "lazyCodeLoading": "requiredComponents",
   "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

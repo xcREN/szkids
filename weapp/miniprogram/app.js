@@ -9,25 +9,25 @@
 const geo = require('./utils/geo.js');
 
 /**
- * 用精确定位还是模糊定位。
+ * 定位一律走 wx.getFuzzyLocation（模糊定位），不用 wx.getLocation。
  *
- * **默认 false，也就是走 wx.getFuzzyLocation。**
+ * 精确定位那个接口要在 mp 后台单独申请，开通条件是「具备与实时地理位置
+ * 强相关的使用场景」——指导航、打车、跑腿这类。「推荐附近适合孩子的地方」
+ * 不符合，后台直接显示「类目未符合开通条件」，个人主体基本申请不下来。
+ * 而且 app.json 的 requiredPrivateInfos 里只要写了 getLocation，
+ * **提交审核会被直接拦下**，报「接口无权限」。
  *
- * `wx.getLocation` 需要在 mp 后台单独申请开通，而微信的开通条件是
- * 「具备与实时地理位置强相关的使用场景」——指的是导航、打车、跑腿这类，
- * 「推荐附近适合孩子的地方」不属于，个人主体基本申请不下来
- * （后台显示：类目未符合开通条件）。
- * app.json 里只要声明了 getLocation，**提交审核会被直接拦下**。
+ * 这里刻意连 `wx.getLocation` 这个字面量都不留：代码包里出现未获授权的
+ * 隐私接口名，本身就是审核风险，留个用不到的分支不值得。
  *
- * getFuzzyLocation 不需要申请，返回的经纬度精度到公里级。
- * 对这个产品够用：筛「附近 10km」、按距离排序、算大致车程都不受影响，
- * 受影响的只有「离你 800m」这种精确到百米的说法，所以模糊定位下
- * 距离文案会自动说得含糊一些（见 utils/geo.js 的 formatDistance）。
+ * 代价是经纬度只到公里级。筛「附近 10km」、按距离排序、算大致车程都不受
+ * 影响，受影响的只有「离你 800m」这种百米级说法 —— 所以距离和车程的文案
+ * 会自动说得含糊些，见 utils/geo.js 的 formatDistance / formatDriveMinutes。
  *
- * 哪天真的申请下来了 getLocation，把这里改成 true，
- * 同时把 app.json 的 requiredPrivateInfos 换回 getLocation 即可，别处不用动。
+ * 哪天真申请下来了：把下面的 wx.getFuzzyLocation 换成 wx.getLocation，
+ * fuzzy / locationFuzzy 两处改成 false，app.json 的 requiredPrivateInfos
+ * 换成 getLocation，别处不用动。
  */
-const PRECISE_LOCATION = false;
 
 App({
   globalData: {
@@ -68,12 +68,11 @@ App({
     if (this._locating && !force) return this._locating;
 
     this._locating = new Promise((resolve) => {
-      const api = PRECISE_LOCATION ? wx.getLocation : wx.getFuzzyLocation;
-      if (!api) {
+      if (!wx.getFuzzyLocation) {
         // 基础库太老，没有 getFuzzyLocation（2.25.0 才有）
         return resolve(this._useFallbackLocation('基础库不支持 getFuzzyLocation'));
       }
-      api({
+      wx.getFuzzyLocation({
         type: 'gcj02',
         success: (res) => {
           this.globalData.location = {
@@ -81,10 +80,10 @@ App({
             longitude: res.longitude,
             // 模糊定位精度只到公里级，页面据此把距离说得含糊一点，
             // 不要拿 3 公里的误差去显示「离你 800m」
-            fuzzy: !PRECISE_LOCATION
+            fuzzy: true
           };
           this.globalData.locatedOk = true;
-          this.globalData.locationFuzzy = !PRECISE_LOCATION;
+          this.globalData.locationFuzzy = true;
           resolve({ location: this.globalData.location, ok: true });
         },
         fail: (err) => {

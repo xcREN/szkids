@@ -81,7 +81,10 @@
     </view>
 
     <view wx:if="{{place.tips}}" class="tips">⚠️ {{place.tips}}</view>
-    <view class="meta">{{place.crowdText}} · 数据来源：{{place.source}} · 最后核实 {{place.lastVerifiedAt}}</view>
+    <view wx:if="{{!place.verified}}" class="unverified">
+      ⚠️ {{place.verifiedText}}
+    </view>
+    <view class="meta">{{place.crowdText}} · 数据来源：{{place.source}}<text wx:if="{{place.verified}}"> · {{place.verifiedText}}</text></view>
   </view>
 
   <!-- 底部操作条 -->

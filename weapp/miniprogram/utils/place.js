@@ -67,6 +67,16 @@ function decorate(place, location) {
     parkingText: PARKING_TEXT[place.parking] || '',
     crowdText: CROWD_TEXT[place.crowdLevel] || '',
     scoreText: place.recommendScore.toFixed(1),
+    /**
+     * 核实状态文案。
+     * lastVerifiedAt 为空 = 这条还没逐条核实过，就必须明说，
+     * 不能拿整理日期冒充核实日期 —— 用户按一个假的「最后核实」
+     * 开车带孩子过去，发现闭馆或涨价，这比不显示更糟。
+     */
+    verified: !!place.lastVerifiedAt,
+    verifiedText: place.lastVerifiedAt
+      ? '最后核实 ' + place.lastVerifiedAt
+      : '信息未逐条核实，出发前请再确认',
     /** 卡片上最多显示 3 个玩法标签 */
     topTags: (place.tags || []).slice(0, 3)
   });

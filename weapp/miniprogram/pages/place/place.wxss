@@ -190,6 +190,16 @@
   line-height: 1.7;
 }
 
+.unverified {
+  margin-top: 20rpx;
+  padding: 14rpx 20rpx;
+  border-radius: 12rpx;
+  font-size: 23rpx;
+  line-height: 1.5;
+  color: #8A5A2B;
+  background: #FBF1E2;
+}
+
 .meta {
   margin-top: 20rpx;
   font-size: 22rpx;

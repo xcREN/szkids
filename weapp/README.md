@@ -53,8 +53,12 @@
 **宁可说得含糊但可信**：误差本来就有几公里，还显示「离你 800m」，
 用户按这个数字决定去不去，到了发现不对，这比不显示更糟。
 
-哪天真申请下来了 `getLocation`，把 `app.js` 顶部的 `PRECISE_LOCATION` 改成 `true`，
-`app.json` 的 `requiredPrivateInfos` 换回 `getLocation`，别处不用动。
+代码里**刻意连 `wx.getLocation` 这个字面量都不留**（连用不到的三元分支也去掉了）：
+代码包里出现未获授权的隐私接口名，本身就是审核风险。
+
+哪天真申请下来了：`app.js` 里把 `wx.getFuzzyLocation` 换成 `wx.getLocation`、
+`fuzzy` / `locationFuzzy` 两处改成 `false`，`app.json` 的 `requiredPrivateInfos`
+换成 `getLocation`，别处不用动。
 
 ### 云开发
 
@@ -107,8 +111,9 @@ weapp/
 │       ├── plan/           周末计划
 │       ├── discover/       发现（本周推荐 + 专题入口）
 │       ├── timeline/       童年地图：点亮地图 + 成长统计 + 打卡记录
-│       ├── mine/           我的（入口占位，待 Phase 3）
-│       └── index/          旧的「周末活动召集」投票页，保留未删，不在 TabBar 里
+│       ├── mine/           我的：孩子、收藏、计划、打卡入口 + 联系方式
+│       └── index/          旧的「周末活动召集」投票页，**已从 app.json 摘掉**，
+│                          文件保留，见第九节
 │
 ├── cloudfunctions/vote/    旧投票页的云函数，保留
 ├── tools/gen_assets.py     重新生成 Marker / TabBar 图标（需要 Python + Pillow）
@@ -301,13 +306,28 @@ request 合法域名」里必须加 `https://api.open-meteo.com`。
 
 ## 四、数据的可信度（重要）
 
-`data/places.js` 里的经纬度、价格、预约规则、开放时间**都是整理值，没有逐条核实**，
-每条都带了 `source` 和 `lastVerifiedAt` 字段。上线前必须做两件事：
+`data/places.js` 里的经纬度、价格、预约规则、开放时间**都是整理值，一条都没有逐条核实过**。
 
-1. 用[腾讯位置服务坐标拾取器](https://lbs.qq.com/tool/getpoint/)逐个核对经纬度（gcj02，和小程序一致）；
-2. 核实收费、预约、闭馆日，并更新 `lastVerifiedAt`。
+所以 **26 条的 `lastVerifiedAt` 全部是空字符串**，另有 `compiledAt` 记录资料整理日期。
+详情页会据此显示一条明确的提示：
+
+> ⚠️ 信息未逐条核实，出发前请再确认
+
+**不要拿整理日期去填 `lastVerifiedAt`。** 之前 26 条统一写着 `2026-08-21`，
+详情页就显示成「最后核实 2026-08-21」—— 等于在对用户撒谎。用户按一个假的核实日期
+开车带孩子过去，发现闭馆或涨价，这比什么都不显示更糟。
+
+核实的正确做法是**一条一条来**：
+
+1. 用[腾讯位置服务坐标拾取器](https://lbs.qq.com/tool/getpoint/)核对经纬度（gcj02，和小程序一致）；
+2. 查官网或打电话核实收费、预约、闭馆日；
+3. **只把这一条**的 `lastVerifiedAt` 填上当天日期。
+
+填了的那条，详情页的警告会自动消失，换成「最后核实 2026-XX-XX」。
+逻辑在 `utils/place.js` 的 `decorate()` 里（`verified` / `verifiedText` 两个字段）。
 
 PRD 里强调过：开放时间、停车、收费、预约规则都会变，`last_verified_at` 是这类产品的生命线。
+一个撒谎的生命线不如没有。
 
 ---
 
@@ -399,3 +419,27 @@ Phase 1 ~ 5 的功能都齐了。往下走优先级最高的三件，都不是�
   觉得太灵敏或太迟钝就改这个数。拿不到重力感应的设备会自动降级成只能点按钮。
 
 按 PRD 的要求，**每个 Phase 完成后先测试再进入下一个**。
+
+---
+
+## 九、关于那个旧投票页（已从 app.json 摘掉）
+
+`pages/index/` 是最早那个「周末活动召集」投票页。**文件还在，但不再注册进小程序**，
+所以打不开，也不参与编译产物之外的任何逻辑。摘掉的四个理由：
+
+1. **本来就进不去** —— 全项目引用 `/pages/index/index` 的只有它自己
+   `onShareAppMessage` 里的分享路径，没有任何按钮或 `navigateTo` 指向它，是个死页面。
+2. **它是全项目唯一的 UGC** —— `index.js` 会 `wx.cloud.callFunction({name:'vote'})`
+   把用户填的名字和自定义文本写进云数据库，其他参与者能看到。
+   有 UGC 就得做「用户生成内容场景声明」，还得配内容审核机制。
+   摘掉之后，亲子地图这部分的用户数据（孩子、收藏、打卡、计划、头像昵称）
+   **全部只写本机 Storage，不出设备**，UGC 可以干脆声明「不包含」。
+3. **它是全项目唯一的云开发依赖** —— 这个项目其余部分零后端。
+4. **审核面** —— 审核员在一个「深圳亲子地图」里看到一个「周末活动投票」，
+   多半要问这是什么。无关功能只会增加被驳回的可能。
+
+`cloudfunctions/vote/`、`vote-worker/`、仓库根目录的 `index.html` 都保留着，
+那套投票功能作为独立的网页还能用（`启动网站.bat`），只是不再挂在小程序里。
+
+要恢复的话：把 `"pages/index/index"` 加回 `app.json` 的 `pages` 数组即可，
+但先想清楚上面第 2 条带来的合规成本。
