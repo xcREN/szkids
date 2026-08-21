@@ -46,26 +46,50 @@
     </view>
   </view>
 
+  <!-- ---------- 列表模式：同一套筛选结果，换个看法 ---------- -->
+  <scroll-view
+    wx:if="{{viewMode === 'list'}}"
+    class="listview"
+    style="top: {{statusBarHeight + (bannerText ? 182 : 150)}}px"
+    scroll-y="{{true}}"
+    enhanced="{{true}}"
+    show-scrollbar="{{false}}"
+  >
+    <view class="listview__count">符合条件的地点 {{total}} 个</view>
+    <view wx:for="{{listPlaces}}" wx:key="id" class="listview__item">
+      <place-card
+        place="{{item}}"
+        mode="list"
+        favorited="{{item.favorited}}"
+        bind:detail="onDetail"
+        bind:favorite="onFavorite"
+      />
+    </view>
+    <view wx:if="{{total === 0}}" class="listview__empty">没有符合条件的地点，试着少选几个条件</view>
+    <view class="listview__pad"></view>
+  </scroll-view>
+
   <!-- ---------- 搜索这片区域 ---------- -->
-  <view wx:if="{{canSearchRegion}}" class="region" bindtap="onSearchRegion">搜索这片区域</view>
+  <view wx:if="{{canSearchRegion && viewMode === 'map'}}" class="region" bindtap="onSearchRegion">搜索这片区域</view>
 
   <!-- ---------- 右侧悬浮按钮 ---------- -->
   <view class="fabs {{selected ? 'fabs--up' : ''}}">
-    <view class="fab" bindtap="onLocateTap">◎</view>
+    <view class="fab fab--text" bindtap="onToggleView">{{viewMode === 'map' ? '列表' : '地图'}}</view>
+    <view wx:if="{{viewMode === 'map'}}" class="fab" bindtap="onLocateTap">◎</view>
   </view>
 
   <!-- ---------- 今天去哪 ---------- -->
-  <view class="today {{selected ? 'today--hide' : ''}}" bindtap="onTodayTap">🎲 今天去哪？</view>
+  <view class="today {{selected || viewMode === 'list' ? 'today--hide' : ''}}" bindtap="onTodayTap">🎲 今天去哪？</view>
 
   <!-- ---------- 底部：结果数 / 地点卡片 ---------- -->
-  <view wx:if="{{!selected}}" class="summary">
+  <view wx:if="{{!selected && viewMode === 'map'}}" class="summary">
     <text wx:if="{{total > 0}}">符合条件的地点 {{total}} 个</text>
     <text wx:else>没有符合条件的地点，试着少选几个条件</text>
     <text wx:if="{{!locatedOk}}" class="summary__tip">（未定位，按深圳市中心估算距离）</text>
     <text wx:elif="{{locationFuzzy}}" class="summary__tip">（微信只提供模糊定位，距离是大致值）</text>
   </view>
 
-  <view wx:if="{{selected}}" class="sheet">
+  <view wx:if="{{selected && viewMode === 'map'}}" class="sheet">
     <place-card
       place="{{selected}}"
       mode="map"

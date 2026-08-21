@@ -65,6 +65,14 @@ function decorate(place, location) {
     priceText: place.free ? '免费' : '人均' + place.price + '元',
     durationText: '建议' + place.duration + '小时',
     parkingText: PARKING_TEXT[place.parking] || '',
+    /**
+     * 开放时间和电话。没收录就明说 ——「今天开不开门」是决定去不去的第一个问题，
+     * 拿不准的话宁可让用户自己打个电话，也别让他带着孩子扑空。
+     */
+    hasOpening: !!place.openingHours,
+    openingText: place.openingHours || '未收录，出发前请先确认',
+    hasPhone: !!place.phone,
+    phoneText: place.phone || '',
     crowdText: CROWD_TEXT[place.crowdLevel] || '',
     scoreText: place.recommendScore.toFixed(1),
     /**

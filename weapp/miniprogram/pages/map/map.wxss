@@ -91,6 +91,40 @@ page,
   color: #fff;
 }
 
+/* ---------------- 列表模式 ---------------- */
+.listview {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* top 由 wxml 按状态栏高度和横幅有无算出来 */
+  background: #F3F1EC;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.listview__count {
+  padding: 20rpx 8rpx 12rpx;
+  font-size: 24rpx;
+  color: #6C736B;
+}
+
+.listview__item {
+  margin-bottom: 16rpx;
+}
+
+.listview__empty {
+  padding: 80rpx 40rpx;
+  text-align: center;
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: #9AA096;
+}
+
+.listview__pad {
+  height: 40rpx;
+}
+
 /* ---------------- 悬浮按钮 ---------------- */
 .fabs {
   position: absolute;
@@ -101,6 +135,15 @@ page,
 
 .fabs--up {
   bottom: 520rpx;
+}
+
+.fabs .fab + .fab {
+  margin-top: 16rpx;
+}
+
+.fab--text {
+  font-size: 25rpx;
+  font-weight: 600;
 }
 
 .fab {

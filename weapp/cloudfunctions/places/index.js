@@ -40,6 +40,7 @@ const ADMIN_OPENID = process.env.ADMIN_OPENID || '';
 /** 只允许这些字段进公共库，多余的一律丢掉，防止客户端塞脏数据 */
 const FIELDS = [
   'id', 'name', 'city', 'district', 'latitude', 'longitude', 'address',
+  'openingHours', 'phone',
   'category', 'tags', 'ageMin', 'ageMax', 'ageRatings',
   'indoor', 'outdoor', 'price', 'free', 'parking', 'freeParking',
   'toilet', 'babyRoom', 'stroller', 'camping', 'picnic', 'cycling',

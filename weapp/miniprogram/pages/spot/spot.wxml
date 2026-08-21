@@ -49,6 +49,18 @@
       <text class="f__k">地址</text>
       <input class="f__in" value="{{d.address}}" data-k="address" bindinput="onInput" placeholder="福田区农园路" />
     </view>
+
+    <view class="f f--col">
+      <text class="f__k">开放时间</text>
+      <input class="f__in f__in--full" value="{{d.openingHours}}" data-k="openingHours" bindinput="onInput"
+             placeholder="09:00-17:30，周一闭馆" />
+      <view class="sec__desc">现场门口就写着，抄下来。不填的话详情页会写「未收录，出发前请先确认」。</view>
+    </view>
+
+    <view class="f">
+      <text class="f__k">咨询电话</text>
+      <input class="f__in" type="number" value="{{d.phone}}" data-k="phone" bindinput="onInput" placeholder="可不填" />
+    </view>
   </view>
 
   <!-- ---------- 现场看得到的 ---------- -->

@@ -53,6 +53,14 @@ Page({
     canSearchRegion: false, // 拖动地图后出现「搜索这片区域」
     regionLocked: false,    // 是否已限定在某个可视范围内
 
+    /**
+     * 'map' | 'list'。同一套筛选结果换个看法：
+     * 地图回答「我附近有什么」，列表回答「这几个里挑哪个」。
+     * 筛选状态是共用的，切视图不会丢条件。
+     */
+    viewMode: 'map',
+    listPlaces: [],        // 只在列表模式下填，见 applyFilters
+
     // 结果
     total: 0,
     selected: null         // 当前选中的地点（决定底部卡片是否显示）
@@ -194,11 +202,21 @@ Page({
       };
     });
 
-    this.setData({
+    const patch = {
       markers: markers,
       total: list.length,
       selected: stillThere ? this.data.selected : null
-    });
+    };
+    // 列表模式才把结果推到视图层。地点多起来之后这个数组不小，
+    // 地图模式下推它纯属浪费一次 setData
+    if (this.data.viewMode === 'list') patch.listPlaces = list;
+    this.setData(patch);
+  },
+
+  /** 地图 / 列表来回切 */
+  onToggleView() {
+    const next = this.data.viewMode === 'map' ? 'list' : 'map';
+    this.setData({ viewMode: next, selected: null }, () => this.applyFilters());
   },
 
   /** 把筛选条件同步到顶部 chip 和横幅的显示状态 */

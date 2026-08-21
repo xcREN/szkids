@@ -110,6 +110,8 @@ function blank() {
     latitude: null,
     longitude: null,
     address: '',
+    openingHours: '',
+    phone: '',
     category: 'park',
     tags: [],
     ageMin: 3,
@@ -176,6 +178,8 @@ function toPlace(d) {
     latitude: d.latitude,
     longitude: d.longitude,
     address: d.address || '',
+    openingHours: d.openingHours || '',
+    phone: d.phone || '',
     category: d.category,
     tags: d.tags || [],
     ageMin: d.ageMin,
@@ -254,6 +258,7 @@ function toCode(d) {
   L.push("    city: '深圳', district: '" + esc(p.district) + "',");
   L.push('    latitude: ' + p.latitude + ', longitude: ' + p.longitude + ',');
   L.push("    address: '" + esc(p.address) + "',");
+  L.push("    openingHours: '" + esc(p.openingHours) + "', phone: '" + esc(p.phone) + "',");
   L.push("    category: '" + p.category + "', tags: " + arr(p.tags) + ',');
   L.push('    ageMin: ' + p.ageMin + ', ageMax: ' + p.ageMax + ',');
   L.push('    ageRatings: { ' + AGE_GROUPS.map((g) => "'" + g + "': " + p.ageRatings[g]).join(', ') + ' },');

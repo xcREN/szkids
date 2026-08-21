@@ -71,6 +71,17 @@
     </view>
   </view>
 
+  <!-- 开放时间与联系：决定「今天能不能去」的第一个问题 -->
+  <view class="block">
+    <view class="h2">开放时间</view>
+    <view class="open {{place.hasOpening ? '' : 'open--unknown'}}">
+      {{place.hasOpening ? '🕒' : '⚠️'}} {{place.openingText}}
+    </view>
+    <view wx:if="{{place.hasPhone}}" class="addr__actions">
+      <view class="btn btn--ghost" bindtap="onCall">📞 打电话确认 {{place.phoneText}}</view>
+    </view>
+  </view>
+
   <!-- 地址与提醒 -->
   <view class="block">
     <view class="h2">地址</view>

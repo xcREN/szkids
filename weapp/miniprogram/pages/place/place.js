@@ -112,6 +112,17 @@ Page({
     wx.setClipboardData({ data: this.data.place.address });
   },
 
+  /**
+   * 打电话确认。
+   * 开放时间这类信息最容易过期，与其让用户信一个可能不准的数字，
+   * 不如给他一条能当场问清楚的路。没录电话时按钮根本不显示。
+   */
+  onCall() {
+    const phone = this.data.place && this.data.place.phone;
+    if (!phone) return;
+    wx.makePhoneCall({ phoneNumber: phone, fail: () => {} });
+  },
+
   onFavorite() {
     ui.toggleFavorite(this.data.place.id, (on) => this.setData({ favorited: on }));
   },
