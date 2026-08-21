@@ -183,7 +183,10 @@ function whoami(force) {
   if (!force) {
     try {
       const c = wx.getStorageSync(WHOAMI_KEY);
-      if (c && c.openid) return Promise.resolve(c);
+      // 只认「已配置」的缓存。旧版本可能存过 configured: false 的结果，
+      // 那种一律当没缓存重新问 —— 否则作者配好 ADMIN_OPENID 之后，
+      // 客户端会永远拿着那份旧结果，引导块不消失、发布按钮不出现。
+      if (c && c.openid && c.configured) return Promise.resolve(c);
     } catch (e) {
       // 忽略，走网络
     }
