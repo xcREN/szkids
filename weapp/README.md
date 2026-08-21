@@ -56,6 +56,27 @@
 代码里**刻意连 `wx.getLocation` 这个字面量都不留**（连用不到的三元分支也去掉了）：
 代码包里出现未获授权的隐私接口名，本身就是审核风险。
 
+### 但 `permission` 里仍然要留 `scope.userLocation`
+
+这两个字段是**两回事**，别搞混：
+
+| 字段 | 作用 |
+|---|---|
+| `requiredPrivateInfos` | 声明你**调用**哪些隐私接口。写了 `getLocation` 会直接卡住提交审核 |
+| `permission` | 只是**授权弹窗的说明文案**。声明了不等于调用 |
+
+`<map show-location="{{true}}">`（地图上那个「我在这」的蓝点）要求
+`permission` 里有 `scope.userLocation`，**没有会直接报错**：
+
+> 需要在 app.json 中声明 permission scope.userLocation 字段
+
+`scope.userFuzzyLocation` 不能替代它。所以现在两个 scope 都留着，
+而 `requiredPrivateInfos` 里只有 `getFuzzyLocation` —— 这个组合是对的。
+
+万一哪天审核对 `scope.userLocation` 也有意见，退路是把两处 `<map>` 的
+`show-location` 关掉（`pages/map/map.wxml` 和 `pages/spot/spot.wxml`），
+只损失那个蓝点，地图和选点都照常用。
+
 哪天真申请下来了：`app.js` 里把 `wx.getFuzzyLocation` 换成 `wx.getLocation`、
 `fuzzy` / `locationFuzzy` 两处改成 `false`，`app.json` 的 `requiredPrivateInfos`
 换成 `getLocation`，别处不用动。
