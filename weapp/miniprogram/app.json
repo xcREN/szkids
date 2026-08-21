@@ -55,12 +55,12 @@
     ]
   },
   "permission": {
-    "scope.userLocation": {
-      "desc": "用于计算地点与你的距离，推荐附近适合孩子的去处"
+    "scope.userFuzzyLocation": {
+      "desc": "用于计算地点与你的大致距离，推荐附近适合孩子的去处"
     }
   },
   "requiredPrivateInfos": [
-    "getLocation"
+    "getFuzzyLocation"
   ],
   "style": "v2",
   "sitemapLocation": "sitemap.json"

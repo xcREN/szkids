@@ -25,9 +25,21 @@ function distanceKm(from, to) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-/** 距离显示文案：1 公里内用米 */
-function formatDistance(km) {
+/**
+ * 距离显示文案：1 公里内用米。
+ *
+ * @param {number} km
+ * @param {boolean} fuzzy 是不是模糊定位（wx.getFuzzyLocation，精度只到公里级）。
+ *   是的话就别把距离说得那么准 —— 误差本身就有几公里，
+ *   还显示「离你 800m」等于骗人，用户按这个数字决定去不去，到了发现不对。
+ *   宁可说得含糊但可信。
+ */
+function formatDistance(km, fuzzy) {
   if (km === null || km === undefined) return '';
+  if (fuzzy) {
+    if (km < 3) return '3km内';
+    return Math.round(km) + 'km左右';
+  }
   if (km < 1) return Math.round(km * 100) * 10 + 'm';
   return km.toFixed(1) + 'km';
 }
@@ -44,12 +56,17 @@ function estimateDriveMinutes(km) {
   return Math.max(5, Math.round((roadKm / speed) * 60));
 }
 
-/** 车程文案：超过 60 分钟显示成「1小时10分」 */
-function formatDriveMinutes(min) {
+/**
+ * 车程文案：超过 60 分钟显示成「1小时10分」。
+ * @param {number} min
+ * @param {boolean} fuzzy 模糊定位时取整到 5 分钟，理由同 formatDistance
+ */
+function formatDriveMinutes(min, fuzzy) {
   if (!min) return '';
-  if (min < 60) return '约' + min + '分钟';
-  const h = Math.floor(min / 60);
-  const m = min % 60;
+  const v = fuzzy ? Math.max(5, Math.round(min / 5) * 5) : min;
+  if (v < 60) return '约' + v + '分钟';
+  const h = Math.floor(v / 60);
+  const m = v % 60;
   return '约' + h + '小时' + (m ? m + '分' : '');
 }
 

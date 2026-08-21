@@ -36,6 +36,7 @@ Page({
     // 顶部
     city: '深圳',
     locatedOk: false,
+    locationFuzzy: true,   // 微信只给模糊定位时，底部要说明距离是大致值
     statusBarHeight: 20,   // 自定义导航栏，需要自己避开状态栏和右上角胶囊
     weatherLine: '天气加载中…',   // 顶栏那一行，由 utils/weather.js 拼好
 
@@ -128,6 +129,7 @@ Page({
       this.decorated = store.markFavorites(placeUtil.decorateAll(this.allPlaces, location));
       this.setData({
         locatedOk: ok,
+        locationFuzzy: !!app.globalData.locationFuzzy,
         latitude: location.latitude,
         longitude: location.longitude
       });

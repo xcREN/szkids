@@ -49,14 +49,18 @@ function decorate(place, location) {
   const cat = CATEGORY_MAP[place.category] || {};
   const km = location ? geo.distanceKm(location, place) : null;
   const driveMin = geo.estimateDriveMinutes(km);
+  // 模糊定位（wx.getFuzzyLocation）时，app.js 会在 location 上打这个标记，
+  // 距离和车程的文案跟着说得含糊一点，别给出做不到的精度
+  const fuzzy = !!(location && location.fuzzy);
   return Object.assign({}, place, {
     categoryLabel: cat.label || '',
     categoryEmoji: cat.emoji || '📍',
     categoryColor: cat.color || '#4B7A5A',
     markerIcon: '/images/markers/' + place.category + '.png',
     distanceKm: km,
-    distanceText: geo.formatDistance(km),
-    driveText: geo.formatDriveMinutes(driveMin),
+    distanceFuzzy: fuzzy,
+    distanceText: geo.formatDistance(km, fuzzy),
+    driveText: geo.formatDriveMinutes(driveMin, fuzzy),
     ageText: place.ageMin + '-' + place.ageMax + '岁',
     priceText: place.free ? '免费' : '人均' + place.price + '元',
     durationText: '建议' + place.duration + '小时',
